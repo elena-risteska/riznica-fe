@@ -1,6 +1,12 @@
 import { Typography } from "@mui/material";
+import Navbar from "../components/layout/Navbar";
 
 const About = () => {
-  return <Typography variant="h2">About Page</Typography>;
+  return (
+    <>
+      <Navbar />
+      <Typography variant="h2">About Page</Typography>
+    </>
+  );
 };
 export default About;
