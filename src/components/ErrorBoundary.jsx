@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { styles } from "./styles";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import PrimaryButton from "./ui/buttons/PrimaryButton";
@@ -21,14 +21,7 @@ export default class ErrorBoundary extends Component {
   render() {
     if (this.state.hasError) {
       return (
-        <Box
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
-          height="100vh"
-          textAlign="center"
-        >
+        <Box sx={styles.errorBox}>
           <ErrorOutlineIcon color="info" sx={styles.errorIcon} />
           <Typography variant="h4" gutterBottom>
             Упс! Нешто тргна наопаку.

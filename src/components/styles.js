@@ -7,4 +7,12 @@ export const styles = {
     width: "10%",
     borderRadius: "1rem",
   },
+  errorBox: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "100vh",
+    textAlign: "center",
+  },
 };
