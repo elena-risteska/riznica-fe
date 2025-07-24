@@ -29,7 +29,7 @@ export const styles = {
     },
   },
   footer: {
-    position: "fixed",
+    position: "sticky",
     bottom: 0,
     left: 0,
     right: 0,
@@ -50,5 +50,15 @@ export const styles = {
     px: 1,
     backgroundColor: "white",
     position: "sticky",
+  },
+  banner: {
+    width: "100%",
+    px: 8,
+    py: 6,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexWrap: "wrap",
+    gap: 20,
   },
 };
