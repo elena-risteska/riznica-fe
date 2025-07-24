@@ -10,7 +10,7 @@ const Navbar = () => {
   const navItems = routes.filter((route) => route.showInNav);
 
   return (
-    <AppBar position="sticky" color="white" elevation={5} component="nav">
+    <AppBar elevation={5} component="nav" sx={styles.navbar}>
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
         <Typography sx={styles.riznica} variant="h6">
           Ризница

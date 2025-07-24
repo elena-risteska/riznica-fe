@@ -4,7 +4,7 @@ export const styles = {
     mb: 2,
   },
   reloadButton: {
-    width: "10%",
+    width: "20%",
     borderRadius: "1rem",
   },
   errorBox: {
