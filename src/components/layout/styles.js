@@ -1,32 +1,60 @@
 export const styles = {
+  toolbar: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    px: 3,
+    py: { xs: 1, sm: 2 },
+  },
   riznica: {
-    flexBasis: "20%",
+    flexGrow: 1,
+    minWidth: 0,
     textAlign: "left",
     fontWeight: "bold",
     color: "black",
   },
   menu: {
-    flexGrow: 1,
-    display: "flex",
+    flexGrow: 2,
+    minWidth: 0,
+    display: { xs: "none", sm: "flex" },
     justifyContent: "center",
     gap: 4,
+    "@media (max-width:1024px)": {
+      gap: 2,
+      "& > *": {
+        px: 1.5,
+      },
+    },
+    "@media (max-width:768px)": {
+      gap: 1,
+      "& > *": {
+        px: 1,
+        fontSize: "0.8rem",
+      },
+    },
   },
   login: {
-    flexBasis: "20%",
+    flexGrow: 1,
+    minWidth: 0,
     display: "flex",
     justifyContent: "flex-end",
     alignItems: "center",
   },
   socialMedia: {
     color: "#fff",
-    backgroundColor: "rgba(255, 255, 255, 0.15)",
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
     borderRadius: "50%",
     transition: "all 0.3s ease",
     mx: 1,
+    mb: {
+      xs: 1,
+      sm: 0,
+    },
     "&:hover": {
-      backgroundColor: "rgba(255, 255, 255, 0.3)",
+      backgroundColor: "rgba(255, 255, 255, 0.2)",
       transform: "scale(1.1)",
     },
+    justifyContent: { xs: "center", sm: "flex-start" },
   },
   footer: {
     position: "sticky",
@@ -44,6 +72,7 @@ export const styles = {
     alignItems: "center",
     flexWrap: "wrap",
     color: "white",
+    flexDirection: { xs: "column", sm: "row" },
   },
   navbar: {
     borderRadius: "0 0 30px 30px",
@@ -53,12 +82,39 @@ export const styles = {
   },
   banner: {
     width: "100%",
-    px: 8,
-    py: 6,
+    px: {
+      xs: 4,
+      sm: 8,
+    },
+    py: {
+      xs: 3,
+      sm: 6,
+    },
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     flexWrap: "wrap",
-    gap: 20,
+    gap: {
+      xs: 2,
+      sm: 20,
+    },
+    flexDirection: {
+      xs: "column",
+      sm: "row",
+    },
+    textAlign: {
+      xs: "center",
+      sm: "left",
+    },
+  },
+  list: {
+    display: "flex",
+    flexDirection: "column",
+    px: 10,
+  },
+  menuIcon: {
+    display: { xs: "block", sm: "none" },
+    position: "absolute",
+    right: 16,
   },
 };

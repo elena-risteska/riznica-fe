@@ -9,7 +9,10 @@ const Banner = () => {
       <Typography variant="h5">Стани дел од ризницата</Typography>
       <PrimaryButton
         sx={{
-          width: "15%",
+          width: {
+            xs: "50%",
+            sm: "20%",
+          },
           borderRadius: 4,
           py: 1,
         }}
