@@ -15,12 +15,4 @@ export const styles = {
     height: "100vh",
     textAlign: "center",
   },
-  chevrons: {
-    color: "info.main",
-    transition: "transform 0.2s ease, background-color 0.2s ease",
-    "&:hover": {
-      backgroundColor: "info.dark",
-      transform: "scale(1)",
-    },
-  },
 };
