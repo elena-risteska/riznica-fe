@@ -32,18 +32,27 @@ const CommentCard = ({
       elevation={3}
       onClick={handleCardClick}
       sx={{
-        border: 2,
+        border: 3,
         borderColor: "info.main",
         borderRadius: 3,
         p: 2,
+        my: 1,
         display: "flex",
+        flex: 1,
+        height: "100%",
         gap: 2,
         alignItems: "flex-start",
         cursor: loading ? "default" : "pointer",
         userSelect: "none",
-        "&:hover": {
-          boxShadow: loading ? "none" : 6,
-        },
+        transition: "all 0.2s ease-in-out",
+        transform: loading ? "none" : "scale(1)",
+        "&:hover": loading
+          ? {}
+          : {
+              boxShadow: 6,
+              backgroundColor: "info.lighter",
+              transform: "scale(1.01)",
+            },
       }}
     >
       <Box

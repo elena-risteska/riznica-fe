@@ -1,0 +1,58 @@
+{
+  "comments": [
+    {
+      "photo": null,
+      "firstName": "Елена",
+      "lastName": "Ристеска",
+      "username": "elena.r",
+      "comment": "Охрид е магично место, особено за време на лето!",
+      "post": "/posts/1",
+      "user": "/users/elena.r"
+    },
+    {
+      "photo": null,
+      "firstName": "Марко",
+      "lastName": "Илиев",
+      "username": "marko.i",
+      "comment": "Маврово е одлично за скијање, дефинитивно вреди да се посети во зима.",
+      "post": "/posts/2",
+      "user": "/users/marko.i"
+    },
+    {
+      "photo": null,
+      "firstName": "Ивана",
+      "lastName": "Трајкова",
+      "username": "ivana.t",
+      "comment": "Преспанското Езеро е потценето – мирно, убаво и совршено за релакс.",
+      "post": "/posts/3",
+      "user": "/users/ivana.t"
+    },
+    {
+      "photo": null,
+      "firstName": "Борис",
+      "lastName": "Наумов",
+      "username": "boris.n",
+      "comment": "Смоларскиот водопад е прекрасно место за прошетка во природа.",
+      "post": "/posts/4",
+      "user": "/users/boris.n"
+    },
+    {
+      "photo": null,
+      "firstName": "Ана",
+      "lastName": "Димитрова",
+      "username": "ana.d",
+      "comment": "Крушево има неверојатна енергија и панорамски погледи!",
+      "post": "/posts/5",
+      "user": "/users/ana.d"
+    },
+    {
+      "photo": null,
+      "firstName": "Филип",
+      "lastName": "Георгиев",
+      "username": "filip.g",
+      "comment": "Канео во Охрид е најубавото место за фотографија на зајдисонце.",
+      "post": "/posts/6",
+      "user": "/users/filip.g"
+    }
+  ]
+}
