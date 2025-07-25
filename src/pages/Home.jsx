@@ -4,6 +4,7 @@ import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
 import Banner from "../components/layout/Banner";
 import SearchBar from "../components/ui/SearchBar";
+import DefaultLayout from "../layouts/DefaultLayout";
 
 const Home = () => {
   const [search, setSearch] = useState("");
@@ -13,15 +14,15 @@ const Home = () => {
   };
   return (
     <>
-      <Navbar />
-      <Typography variant="h2">Home Page</Typography>
-      <SearchBar
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        onSubmit={handleSearch}
-      />
-      <Banner />
-      <Footer />
+      <DefaultLayout>
+        <Typography variant="h2">Home Page</Typography>
+        <SearchBar
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          onSubmit={handleSearch}
+        />
+        <Banner />
+      </DefaultLayout>
     </>
   );
 };
