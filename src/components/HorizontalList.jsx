@@ -2,7 +2,12 @@ import { useRef, useState, useEffect } from "react";
 import { Box, IconButton, useTheme } from "@mui/material";
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 
-const HorizontalList = ({ items = [], renderItem, visibleCount = 4 }) => {
+const HorizontalList = ({
+  items = [],
+  renderItem,
+  visibleItems = 4,
+  cardType = "photo",
+}) => {
   const theme = useTheme();
 
   const containerRef = useRef(null);
@@ -14,8 +19,8 @@ const HorizontalList = ({ items = [], renderItem, visibleCount = 4 }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const gapPx = 16;
-  const totalGapsPx = gapPx * (visibleCount - 1);
-  const itemWidthCalc = `calc((100% - ${totalGapsPx}px) / ${visibleCount})`;
+  const totalGapsPx = gapPx * (visibleItems - 1);
+  const itemWidthCalc = `calc((100% - ${totalGapsPx}px) / ${visibleItems})`;
 
   useEffect(() => {
     if (!cardsRefs.current) return;
@@ -26,9 +31,14 @@ const HorizontalList = ({ items = [], renderItem, visibleCount = 4 }) => {
         if (h > tallest) tallest = h;
       }
     });
+
+    if (cardType === "comment") {
+      tallest = Math.max(tallest, 150);
+    }
+
     setMaxHeight(tallest);
     checkScroll();
-  }, [items]);
+  }, [items, cardType]);
 
   const checkScroll = () => {
     if (!containerRef.current) return;
@@ -67,14 +77,14 @@ const HorizontalList = ({ items = [], renderItem, visibleCount = 4 }) => {
           behavior: "smooth",
         });
       }
-    }, 3000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, [canScrollRight, isHovered]);
 
   const scrollAmount = () => {
     if (!containerRef.current) return 0;
-    return containerRef.current.clientWidth / visibleCount + gapPx;
+    return containerRef.current.clientWidth / visibleItems + gapPx;
   };
 
   const scrollLeft = () => {
@@ -130,7 +140,7 @@ const HorizontalList = ({ items = [], renderItem, visibleCount = 4 }) => {
           scrollBehavior: "smooth",
           flexGrow: 1,
           scrollSnapType: "x mandatory",
-          minHeight: maxHeight || 250,
+          minHeight: maxHeight || (cardType === "comment" ? 150 : 400),
           py: 4,
           "&::-webkit-scrollbar": { display: "none" },
           "-ms-overflow-style": "none",
@@ -145,18 +155,19 @@ const HorizontalList = ({ items = [], renderItem, visibleCount = 4 }) => {
               flex: `0 0 ${itemWidthCalc}`,
               scrollSnapAlign: "start",
               boxSizing: "border-box",
-              height: maxHeight || "auto",
+              height: cardType === "photo" ? maxHeight || "auto" : "auto",
               display: "flex",
               flexDirection: "column",
               justifyContent: "flex-start",
               px: 1,
-              paddingBottom: maxHeight
-                ? `${
-                    maxHeight -
-                    (cardsRefs.current[index]?.getBoundingClientRect().height ||
-                      0)
-                  }px`
-                : 0,
+              paddingBottom:
+                cardType === "photo" && maxHeight
+                  ? `${
+                      maxHeight -
+                      (cardsRefs.current[index]?.getBoundingClientRect()
+                        .height || 0)
+                    }px`
+                  : 0,
               transition: "padding-bottom 0.3s",
             }}
           >
