@@ -1,6 +1,6 @@
 import { Avatar, Box, Paper, Skeleton, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import avatar from "../../../../public/avatar-fallback.png";
+import avatar from "../../../assets/images/avatar-fallback.svg";
 
 const CommentCard = ({
   photo,
@@ -35,12 +35,12 @@ const CommentCard = ({
         border: 3,
         borderColor: "info.main",
         borderRadius: 3,
-        p: 2,
+        p: { xs: 1.5, sm: 2 },
         my: 1,
         display: "flex",
         flex: 1,
+        flexDirection: { xs: "column", sm: "row" },
         height: "100%",
-        gap: 2,
         alignItems: "flex-start",
         cursor: loading ? "default" : "pointer",
         userSelect: "none",
@@ -56,7 +56,13 @@ const CommentCard = ({
       }}
     >
       <Box
-        sx={{ minWidth: 56, cursor: loading ? "default" : "pointer" }}
+        sx={{
+          minWidth: 56,
+          mr: { sm: 2, xs: 0 },
+          mb: { xs: 1, sm: 0 },
+          alignSelf: { xs: "center", sm: "flex-start" },
+          cursor: loading ? "default" : "pointer",
+        }}
         onClick={handleUserClick}
       >
         {loading ? (
@@ -83,10 +89,15 @@ const CommentCard = ({
               variant="subtitle1"
               fontWeight={600}
               onClick={handleUserClick}
-              sx={{ cursor: "pointer", display: "inline-block" }}
+              sx={{
+                cursor: "pointer",
+                display: "inline-block",
+                fontSize: { xs: "1rem", sm: "1.1rem" },
+              }}
             >
               {firstName} {lastName}
             </Typography>
+
             <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
               @{username}
             </Typography>

@@ -5,7 +5,7 @@ import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 const HorizontalList = ({
   items = [],
   renderItem,
-  visibleItems = 4,
+  visibleItems,
   cardType = "photo",
 }) => {
   const theme = useTheme();

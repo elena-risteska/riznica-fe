@@ -8,7 +8,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { styles } from "./styles";
-import fallback from "../../../../public/image-fallback.svg";
+import fallback from "../../../assets/images/image-fallback.svg";
 
 const PhotoCard = ({ image, title, description, to }) => {
   const navigate = useNavigate();
@@ -33,6 +33,7 @@ const PhotoCard = ({ image, title, description, to }) => {
         alt={title}
         onLoad={() => setImgLoaded(true)}
         sx={{
+          width: "100%",
           objectFit: "cover",
           display: imgLoaded ? "block" : "none",
         }}

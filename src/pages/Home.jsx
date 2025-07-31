@@ -1,17 +1,19 @@
 import { Typography } from "@mui/material";
 import { useState, useEffect } from "react";
+import useVisibleItems from "../hooks/useVisibleItems";
 import Banner from "../components/layout/Banner";
 import SearchBar from "../components/ui/SearchBar";
 import DefaultLayout from "../layouts/DefaultLayout";
 import CommentCard from "../components/ui/cards/CommentCard";
 import HorizontalList from "../components/HorizontalList";
 import PhotoCard from "../components/ui/cards/PhotoCard";
-import photo from "../../public/avatar.svg";
 
 const Home = () => {
   const [search, setSearch] = useState("");
   const [comments, setComments] = useState([]);
   const [locations, setLocations] = useState([]);
+
+  const visibleItems = useVisibleItems();
 
   useEffect(() => {
     fetch("/mock-data.json")
@@ -40,13 +42,13 @@ const Home = () => {
       />
       <HorizontalList
         items={locations}
-        visibleItems={4}
+        visibleItems={visibleItems}
         cardType="photo"
         renderItem={(item) => <PhotoCard {...item} />}
       />
       <HorizontalList
         items={comments}
-        visibleItems={4}
+        visibleItems={visibleItems}
         cardType="comment"
         renderItem={(item) => <CommentCard {...item} />}
       />
