@@ -7,10 +7,11 @@ const HorizontalList = ({ items = [], renderItem, visibleCount = 4 }) => {
 
   const containerRef = useRef(null);
   const cardsRefs = useRef([]);
-  const [maxHeight, setMaxHeight] = useState(0);
 
+  const [maxHeight, setMaxHeight] = useState(0);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+  const [isHovered, setIsHovered] = useState(false);
 
   const gapPx = 16;
   const totalGapsPx = gapPx * (visibleCount - 1);
@@ -48,6 +49,28 @@ const HorizontalList = ({ items = [], renderItem, visibleCount = 4 }) => {
       window.removeEventListener("resize", checkScroll);
     };
   }, []);
+
+  useEffect(() => {
+    if (isHovered) return;
+
+    const interval = setInterval(() => {
+      if (!containerRef.current) return;
+
+      if (canScrollRight) {
+        containerRef.current.scrollBy({
+          left: scrollAmount(),
+          behavior: "smooth",
+        });
+      } else {
+        containerRef.current.scrollTo({
+          left: 0,
+          behavior: "smooth",
+        });
+      }
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [canScrollRight, isHovered]);
 
   const scrollAmount = () => {
     if (!containerRef.current) return 0;
@@ -98,6 +121,8 @@ const HorizontalList = ({ items = [], renderItem, visibleCount = 4 }) => {
 
       <Box
         ref={containerRef}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
         sx={{
           display: "flex",
           gap: `${gapPx}px`,
