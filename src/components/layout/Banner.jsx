@@ -8,14 +8,7 @@ const Banner = () => {
     <Box sx={styles.banner}>
       <Typography variant="h5">Стани дел од ризницата</Typography>
       <PrimaryButton
-        sx={{
-          width: {
-            xs: "50%",
-            sm: "20%",
-          },
-          borderRadius: 4,
-          py: 1,
-        }}
+        sx={styles.primaryInBanner}
         component={RouterLink}
         to="/login"
       >

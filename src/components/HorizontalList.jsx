@@ -1,6 +1,18 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import { Box, IconButton, useTheme } from "@mui/material";
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
+import { chevrons, scrollContainer, cardWrapper } from "./styles";
+import {
+  getItemWidthCalc,
+  scrollLeft,
+  scrollRight,
+  checkScroll as performCheckScroll,
+} from "../utils/utilities";
+import {
+  useMaxHeightEffect,
+  useScrollCheckEffect,
+  useAutoScrollEffect,
+} from "../utils/horizontalListEffects";
 
 const HorizontalList = ({
   items = [],
@@ -9,6 +21,7 @@ const HorizontalList = ({
   cardType = "photo",
 }) => {
   const theme = useTheme();
+  const gapPx = 16;
 
   const containerRef = useRef(null);
   const cardsRefs = useRef([]);
@@ -18,112 +31,34 @@ const HorizontalList = ({
   const [canScrollRight, setCanScrollRight] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
 
-  const gapPx = 16;
-  const totalGapsPx = gapPx * (visibleItems - 1);
-  const itemWidthCalc = `calc((100% - ${totalGapsPx}px) / ${visibleItems})`;
+  const itemWidthCalc = getItemWidthCalc(gapPx, visibleItems);
 
-  useEffect(() => {
-    if (!cardsRefs.current) return;
-    let tallest = 0;
-    cardsRefs.current.forEach((card) => {
-      if (card) {
-        const h = card.getBoundingClientRect().height;
-        if (h > tallest) tallest = h;
-      }
-    });
+  const checkScroll = () =>
+    performCheckScroll(containerRef, setCanScrollLeft, setCanScrollRight);
 
-    if (cardType === "comment") {
-      tallest = Math.max(tallest, 150);
-    }
+  const handleScrollLeft = () =>
+    scrollLeft(containerRef, visibleItems, gapPx, canScrollLeft);
 
-    setMaxHeight(tallest);
-    checkScroll();
-  }, [items, cardType]);
+  const handleScrollRight = () =>
+    scrollRight(containerRef, visibleItems, gapPx, canScrollRight);
 
-  const checkScroll = () => {
-    if (!containerRef.current) return;
-    const { scrollLeft, scrollWidth, clientWidth } = containerRef.current;
-    setCanScrollLeft(scrollLeft > 0);
-    setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 1);
-  };
+  useMaxHeightEffect(cardsRefs, cardType, items, setMaxHeight, checkScroll);
 
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
+  useScrollCheckEffect(containerRef, checkScroll);
 
-    checkScroll();
-    el.addEventListener("scroll", checkScroll);
-    window.addEventListener("resize", checkScroll);
-    return () => {
-      el.removeEventListener("scroll", checkScroll);
-      window.removeEventListener("resize", checkScroll);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (isHovered) return;
-
-    const interval = setInterval(() => {
-      if (!containerRef.current) return;
-
-      if (canScrollRight) {
-        containerRef.current.scrollBy({
-          left: scrollAmount(),
-          behavior: "smooth",
-        });
-      } else {
-        containerRef.current.scrollTo({
-          left: 0,
-          behavior: "smooth",
-        });
-      }
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, [canScrollRight, isHovered]);
-
-  const scrollAmount = () => {
-    if (!containerRef.current) return 0;
-    return containerRef.current.clientWidth / visibleItems + gapPx;
-  };
-
-  const scrollLeft = () => {
-    if (!containerRef.current || !canScrollLeft) return;
-    containerRef.current.scrollBy({
-      left: -scrollAmount(),
-      behavior: "smooth",
-    });
-  };
-
-  const scrollRight = () => {
-    if (!containerRef.current || !canScrollRight) return;
-    containerRef.current.scrollBy({ left: scrollAmount(), behavior: "smooth" });
-  };
-
-  const chevronButtonSx = (disabled) => ({
-    bgcolor: disabled ? theme.palette.action.disabledBackground : "transparent",
-    color: disabled ? theme.palette.action.disabled : theme.palette.info.main,
-    borderRadius: "50%",
-    boxShadow: disabled ? "none" : "0 2px 8px rgba(0,0,0,0.15)",
-    transition:
-      "background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease",
-    cursor: disabled ? "default" : "pointer",
-    pointerEvents: disabled ? "none" : "auto",
-    "&:hover": disabled
-      ? {}
-      : {
-          bgcolor: theme.palette.info.main,
-          color: theme.palette.info.contrastText,
-          transform: "scale(1)",
-          boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
-        },
-  });
+  useAutoScrollEffect(
+    containerRef,
+    visibleItems,
+    gapPx,
+    canScrollRight,
+    isHovered
+  );
 
   return (
     <Box display="flex" alignItems="center" width="100%" gap={1}>
       <IconButton
-        onClick={scrollLeft}
-        sx={chevronButtonSx(!canScrollLeft)}
+        onClick={handleScrollLeft}
+        sx={chevrons(theme, !canScrollLeft)}
         disabled={!canScrollLeft}
       >
         <ChevronLeft sx={{ fontSize: 26 }} />
@@ -133,43 +68,19 @@ const HorizontalList = ({
         ref={containerRef}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        sx={{
-          display: "flex",
-          gap: `${gapPx}px`,
-          overflowX: "auto",
-          scrollBehavior: "smooth",
-          flexGrow: 1,
-          scrollSnapType: "x mandatory",
-          minHeight: maxHeight || (cardType === "comment" ? 150 : 400),
-          py: 4,
-          "&::-webkit-scrollbar": { display: "none" },
-          "-ms-overflow-style": "none",
-          "scrollbar-width": "none",
-        }}
+        sx={scrollContainer(gapPx, maxHeight, cardType)}
       >
         {items.map((item, index) => (
           <Box
             key={index}
             ref={(el) => (cardsRefs.current[index] = el)}
-            sx={{
-              flex: `0 0 ${itemWidthCalc}`,
-              scrollSnapAlign: "start",
-              boxSizing: "border-box",
-              height: cardType === "photo" ? maxHeight || "auto" : "auto",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "flex-start",
-              px: 1,
-              paddingBottom:
-                cardType === "photo" && maxHeight
-                  ? `${
-                      maxHeight -
-                      (cardsRefs.current[index]?.getBoundingClientRect()
-                        .height || 0)
-                    }px`
-                  : 0,
-              transition: "padding-bottom 0.3s",
-            }}
+            sx={cardWrapper(
+              index,
+              itemWidthCalc,
+              maxHeight,
+              cardType,
+              cardsRefs
+            )}
           >
             {renderItem(item)}
           </Box>
@@ -177,8 +88,8 @@ const HorizontalList = ({
       </Box>
 
       <IconButton
-        onClick={scrollRight}
-        sx={chevronButtonSx(!canScrollRight)}
+        onClick={handleScrollRight}
+        sx={chevrons(theme, !canScrollRight)}
         disabled={!canScrollRight}
       >
         <ChevronRight sx={{ fontSize: 26 }} />

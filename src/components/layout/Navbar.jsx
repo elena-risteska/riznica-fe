@@ -18,8 +18,10 @@ import TextButton from "../ui/buttons/TextButton";
 const Navbar = () => {
   const { pathname } = useLocation();
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const toggleDrawer = () => setDrawerOpen((prev) => !prev);
+
   const navItems = routes.filter((route) => route.showInNav);
+
+  const toggleDrawer = () => setDrawerOpen((prev) => !prev);
 
   return (
     <>
@@ -44,13 +46,7 @@ const Navbar = () => {
           </Box>
           <Box sx={styles.login}>
             <PrimaryButton
-              sx={{
-                display: { xs: "none", sm: "flex" },
-                width: "100px",
-                borderRadius: "1rem",
-                py: 1,
-                px: 3,
-              }}
+              sx={styles.primaryInNavbar}
               component={RouterLink}
               to="/login"
             >
@@ -67,14 +63,7 @@ const Navbar = () => {
         anchor="top"
         open={drawerOpen}
         onClose={toggleDrawer}
-        PaperProps={{
-          sx: {
-            backgroundColor: "white",
-            borderBottomLeftRadius: 30,
-            borderBottomRightRadius: 30,
-            py: 2,
-          },
-        }}
+        sx={styles.drawer}
       >
         <List sx={styles.list}>
           {navItems.map(({ path, label }) => (

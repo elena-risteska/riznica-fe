@@ -16,7 +16,7 @@ export const styles = {
   menu: {
     flexGrow: 2,
     minWidth: 0,
-    display: { xs: "none", sm: "flex" },
+    display: { xs: "none", md: "flex" },
     justifyContent: "center",
     gap: 4,
     "@media (max-width:1024px)": {
@@ -113,8 +113,29 @@ export const styles = {
     px: 10,
   },
   menuIcon: {
-    display: { xs: "block", sm: "none" },
+    display: { xs: "block", md: "none" },
     position: "absolute",
     right: 16,
+  },
+  primaryInBanner: {
+    width: {
+      xs: "50%",
+      sm: "20%",
+    },
+    borderRadius: 4,
+    py: 1,
+  },
+  primaryInNavbar: {
+    display: { xs: "none", md: "flex" },
+    width: "100px",
+    borderRadius: "1rem",
+    py: 1,
+    px: 3,
+  },
+  drawer: {
+    backgroundColor: "white",
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
+    py: 2,
   },
 };
