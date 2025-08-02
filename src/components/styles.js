@@ -21,6 +21,7 @@ const styles = {
 };
 
 const chevrons = (theme, disabled) => ({
+  display: { xs: "none", sm: "flex" },
   bgcolor: disabled ? theme.palette.action.disabledBackground : "transparent",
   color: disabled ? theme.palette.action.disabled : theme.palette.primary.main,
   borderRadius: "50%",

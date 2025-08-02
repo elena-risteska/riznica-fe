@@ -85,7 +85,7 @@ export const styles = {
       xs: 4,
       sm: 8,
     },
-    py: {
+    pb: {
       xs: 3,
       sm: 6,
     },

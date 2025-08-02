@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import useVisibleItems from "../hooks/useVisibleItems";
 import Banner from "../components/layout/Banner";
 import DefaultLayout from "../layouts/DefaultLayout";
-import CommentCard from "../components/ui/cards/CommentCard";
-import HorizontalList from "../components/HorizontalList";
+import CommentsHome from "../components/pages/CommentsHome";
 import HeaderHome from "../components/pages/HeaderHome";
 import LocationsHome from "../components/pages/LocationsHome";
 
@@ -30,12 +29,7 @@ const Home = () => {
     <DefaultLayout>
       <HeaderHome />
       <LocationsHome locations={locations} visibleItems={visibleItems} />
-      <HorizontalList
-        items={comments}
-        visibleItems={visibleItems}
-        cardType="comment"
-        renderItem={(item) => <CommentCard {...item} />}
-      />
+      <CommentsHome comments={comments} visibleItems={visibleItems} />
       <Banner />
     </DefaultLayout>
   );
