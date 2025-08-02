@@ -1,6 +1,7 @@
+import "leaflet/dist/leaflet.css";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { ThemeProvider, CssBaseline } from "@mui/material";
+import { ThemeProvider, CssBaseline, GlobalStyles } from "@mui/material";
 import { BrowserRouter } from "react-router-dom";
 import theme from "../src/assets/theme.js";
 import App from "./App.jsx";
@@ -10,6 +11,25 @@ createRoot(document.getElementById("root")).render(
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <CssBaseline />
+        <GlobalStyles
+          styles={{
+            "*::-webkit-scrollbar": {
+              width: "10px",
+              height: "10px",
+            },
+            "*::-webkit-scrollbar-thumb": {
+              backgroundColor: theme.palette.primary.main,
+              borderRadius: "10px",
+            },
+            "*::-webkit-scrollbar-track": {
+              backgroundColor: "#f0f0f0",
+            },
+            "*": {
+              scrollbarWidth: "thin",
+              scrollbarColor: `${theme.palette.primary.main} #f0f0f0`, // firefox
+            },
+          }}
+        />
         <App />
       </ThemeProvider>
     </BrowserRouter>

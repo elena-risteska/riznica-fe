@@ -1,3 +1,5 @@
+import L from "leaflet";
+
 const styles = {
   errorIcon: {
     fontSize: 60,
@@ -15,6 +17,7 @@ const styles = {
     height: "100vh",
     textAlign: "center",
   },
+  map: { height: "400px", borderRadius: 10, overflow: "hidden", boxShadow: 3 },
 };
 
 const chevrons = (theme, disabled) => ({
@@ -68,4 +71,19 @@ const cardWrapper = (index, itemWidthCalc, maxHeight, cardType, cardsRefs) => {
     transition: "padding-bottom 0.3s",
   };
 };
-export { styles, chevrons, scrollContainer, cardWrapper };
+
+const svgIcon = encodeURIComponent(`
+  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="48" viewBox="0 0 32 48" fill="#B12C00">
+    <path d="M16 0C7.163 0 0 7.163 0 16c0 12 16 32 16 32s16-20 16-32c0-8.837-7.163-16-16-16zM16 24a8 8 0 110-16 8 8 0 010 16z"/>
+  </svg>
+`);
+
+const primaryColorIcon = new L.Icon({
+  iconUrl: `data:image/svg+xml,${svgIcon}`,
+  iconSize: [32, 48],
+  iconAnchor: [16, 48],
+  popupAnchor: [0, -48],
+  shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+});
+
+export { styles, chevrons, scrollContainer, cardWrapper, primaryColorIcon };
