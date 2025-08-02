@@ -1,16 +1,14 @@
-import { Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 import useVisibleItems from "../hooks/useVisibleItems";
 import Banner from "../components/layout/Banner";
-import SearchBar from "../components/ui/SearchBar";
 import DefaultLayout from "../layouts/DefaultLayout";
 import CommentCard from "../components/ui/cards/CommentCard";
 import HorizontalList from "../components/HorizontalList";
 import PhotoCard from "../components/ui/cards/PhotoCard";
 import Map from "../components/Map";
+import HeaderHome from "../components/pages/HeaderHome";
 
 const Home = () => {
-  const [search, setSearch] = useState("");
   const [comments, setComments] = useState([]);
   const [locations, setLocations] = useState([]);
 
@@ -42,18 +40,9 @@ const Home = () => {
       });
   }, []);
 
-  const handleSearch = () => {
-    console.log("Searching for:", search);
-  };
-
   return (
     <DefaultLayout>
-      <Typography variant="h2">Home Page</Typography>
-      <SearchBar
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        onSubmit={handleSearch}
-      />
+      <HeaderHome />
       <Map markerData={markers} />
       <HorizontalList
         items={locations}

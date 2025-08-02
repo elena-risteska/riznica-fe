@@ -57,7 +57,6 @@ export const styles = {
     justifyContent: { xs: "center", sm: "flex-start" },
   },
   footer: {
-    position: "sticky",
     bottom: 0,
     left: 0,
     right: 0,
