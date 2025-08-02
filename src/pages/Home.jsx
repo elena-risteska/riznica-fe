@@ -4,26 +4,12 @@ import Banner from "../components/layout/Banner";
 import DefaultLayout from "../layouts/DefaultLayout";
 import CommentCard from "../components/ui/cards/CommentCard";
 import HorizontalList from "../components/HorizontalList";
-import PhotoCard from "../components/ui/cards/PhotoCard";
-import Map from "../components/Map";
 import HeaderHome from "../components/pages/HeaderHome";
+import LocationsHome from "../components/pages/LocationsHome";
 
 const Home = () => {
-  const [comments, setComments] = useState([]);
   const [locations, setLocations] = useState([]);
-
-  const markers = [
-    {
-      position: [41.9981, 21.4254],
-      text: "Skopje Center",
-      redirectTo: "/details",
-    },
-    {
-      position: [41.995, 21.43],
-      text: "Old Bazaar",
-      redirectTo: "/details",
-    },
-  ];
+  const [comments, setComments] = useState([]);
 
   const visibleItems = useVisibleItems();
 
@@ -43,13 +29,7 @@ const Home = () => {
   return (
     <DefaultLayout>
       <HeaderHome />
-      <Map markerData={markers} />
-      <HorizontalList
-        items={locations}
-        visibleItems={visibleItems}
-        cardType="photo"
-        renderItem={(item) => <PhotoCard {...item} />}
-      />
+      <LocationsHome locations={locations} visibleItems={visibleItems} />
       <HorizontalList
         items={comments}
         visibleItems={visibleItems}

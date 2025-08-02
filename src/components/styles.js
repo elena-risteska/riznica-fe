@@ -22,7 +22,7 @@ const styles = {
 
 const chevrons = (theme, disabled) => ({
   bgcolor: disabled ? theme.palette.action.disabledBackground : "transparent",
-  color: disabled ? theme.palette.action.disabled : theme.palette.info.main,
+  color: disabled ? theme.palette.action.disabled : theme.palette.primary.main,
   borderRadius: "50%",
   boxShadow: disabled ? "none" : "0 2px 8px rgba(0,0,0,0.15)",
   transition:
@@ -32,8 +32,8 @@ const chevrons = (theme, disabled) => ({
   "&:hover": disabled
     ? {}
     : {
-        bgcolor: theme.palette.info.main,
-        color: theme.palette.info.contrastText,
+        bgcolor: theme.palette.primary.main,
+        color: "white",
         transform: "scale(1)",
         boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
       },

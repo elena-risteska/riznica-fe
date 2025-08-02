@@ -6,7 +6,7 @@ const DefaultLayout = ({ children }) => {
   return (
     <Box display="flex" flexDirection="column" minHeight="100vh">
       <Navbar />
-      <Box component="main" flex={1} pt={8} px={6}>
+      <Box component="main" flex={1} pt={8} px={{ xs: 4, sm: 6 }}>
         {children}
       </Box>
       <Footer />

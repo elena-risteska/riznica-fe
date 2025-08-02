@@ -40,8 +40,8 @@ const photoStyle = (imgLoaded) => ({
 });
 
 const commentStyle = (loading) => ({
-  border: 3,
-  borderColor: "info.main",
+  border: 2,
+  borderColor: "primary.main",
   borderRadius: 3,
   p: { xs: 1.5, sm: 2 },
   my: 1,

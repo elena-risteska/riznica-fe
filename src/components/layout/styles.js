@@ -118,7 +118,7 @@ export const styles = {
   },
   primaryInBanner: {
     width: {
-      xs: "50%",
+      xs: "60%",
       sm: "20%",
     },
     borderRadius: 4,
