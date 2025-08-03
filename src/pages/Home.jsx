@@ -5,6 +5,7 @@ import DefaultLayout from "../layouts/DefaultLayout";
 import CommentsHome from "../components/pages/CommentsHome";
 import HeaderHome from "../components/pages/HeaderHome";
 import LocationsHome from "../components/pages/LocationsHome";
+import MapHome from "../components/pages/MapHome";
 
 const Home = () => {
   const [locations, setLocations] = useState([]);
@@ -29,6 +30,7 @@ const Home = () => {
     <DefaultLayout>
       <HeaderHome />
       <LocationsHome locations={locations} visibleItems={visibleItems} />
+      <MapHome />
       <CommentsHome comments={comments} visibleItems={visibleItems} />
       <Banner />
     </DefaultLayout>

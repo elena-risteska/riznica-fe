@@ -11,20 +11,21 @@ const styles = {
     height: "auto",
     objectFit: "fill",
     py: { xs: 0, sm: 5 },
+    px: { xs: 0, sm: 7 },
   },
   locationsHome: {
     display: "flex",
-    flexDirection: { xs: "column", sm: "row" },
+    flexDirection: { xs: "column", md: "row" },
     justifyContent: { xs: "center", md: "space-between" },
     alignItems: { xs: "center", md: "flex-start" },
     px: { xs: 0, sm: 7.5 },
     mt: 8,
   },
   secondaryHome: {
-    width: { xs: "80%", sm: "25%", lg: "10%" },
+    width: { xs: "80%", sm: "25%", lg: "15%" },
     borderRadius: 4,
     border: 3,
-    mt: { xs: 2, sm: 0 },
+    mt: { xs: 2, md: 0 },
   },
 };
 
