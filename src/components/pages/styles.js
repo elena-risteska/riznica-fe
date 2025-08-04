@@ -27,6 +27,32 @@ const styles = {
     border: 3,
     mt: { xs: 2, md: 0 },
   },
+  mapHome: {
+    display: "flex",
+    flexDirection: { xs: "column", md: "row" },
+    width: "100%",
+    px: { xs: 1, md: 7 },
+    pt: 8,
+    gap: 4,
+  },
+  mapText: {
+    display: "flex",
+    flexDirection: "column",
+    width: { xs: "100", md: "50%" },
+    justifyContent: "space-evenly",
+  },
+  secondaryMap: {
+    width: { xs: "80%", sm: "40%", lg: "25%" },
+    borderRadius: 4,
+    border: 3,
+    mt: { xs: 2, sm: 0 },
+    mx: { xs: "auto", md: 0 },
+  },
+  mapLegend: {
+    width: { xs: "100", md: "50%" },
+    height: "auto",
+    borderRadius: 10,
+  },
 };
 
 export default styles;

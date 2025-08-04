@@ -6,10 +6,12 @@ import CommentsHome from "../components/pages/CommentsHome";
 import HeaderHome from "../components/pages/HeaderHome";
 import LocationsHome from "../components/pages/LocationsHome";
 import MapHome from "../components/pages/MapHome";
+import ActivitiesHome from "../components/pages/ActivitiesHome";
 
 const Home = () => {
   const [locations, setLocations] = useState([]);
   const [comments, setComments] = useState([]);
+  const [activities, setActivities] = useState([]);
 
   const visibleItems = useVisibleItems();
 
@@ -20,6 +22,7 @@ const Home = () => {
         console.log("Fetched data:", data);
         setComments(data.comments);
         setLocations(data.locations);
+        setActivities(data.activities);
       })
       .catch((err) => {
         console.error("Failed to load data:", err);
@@ -31,7 +34,8 @@ const Home = () => {
       <HeaderHome />
       <LocationsHome locations={locations} visibleItems={visibleItems} />
       <MapHome />
-      <CommentsHome comments={comments} visibleItems={visibleItems} />
+      <ActivitiesHome activities={activities} visibleItems={4} />
+      <CommentsHome comments={comments} visibleItems={3} />
       <Banner />
     </DefaultLayout>
   );

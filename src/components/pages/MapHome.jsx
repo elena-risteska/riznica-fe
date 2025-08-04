@@ -6,24 +6,8 @@ import map from "../../assets/images/legend.webp";
 
 const MapHome = () => {
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: { xs: "column", md: "row" },
-        width: "100%",
-        px: { xs: 1, md: 7 },
-        py: 8,
-        gap: 4,
-      }}
-    >
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          width: { xs: "100", md: "50%" },
-          justifyContent: "space-evenly",
-        }}
-      >
+    <Box sx={styles.mapHome}>
+      <Box sx={styles.mapText}>
         <Typography variant="h4" mb={{ xs: 3, md: 0 }}>
           Мапа
         </Typography>
@@ -47,25 +31,12 @@ const MapHome = () => {
         <SecondaryButton
           component={RouterLink}
           to="/map"
-          sx={{
-            width: { xs: "80%", sm: "40%", lg: "25%" },
-            borderRadius: 4,
-            border: 3,
-            mt: { xs: 2, sm: 0 },
-            mx: { xs: "auto", md: 0 },
-          }}
+          sx={styles.secondaryMap}
         >
           Види мапа
         </SecondaryButton>
       </Box>
-      <Box
-        component="img"
-        src={map}
-        alt="Map"
-        width={{ xs: "100", md: "50%" }}
-        height="auto"
-        borderRadius={10}
-      />
+      <Box component="img" src={map} alt="Map" sx={styles.mapLegend} />
     </Box>
   );
 };

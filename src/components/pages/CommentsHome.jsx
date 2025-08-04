@@ -10,7 +10,7 @@ const CommentsHome = ({ comments, visibleItems }) => {
       </Typography>
       <HorizontalList
         items={comments}
-        visibleItems={3}
+        visibleItems={visibleItems}
         cardType="comment"
         renderItem={(item) => <CommentCard {...item} />}
       />
