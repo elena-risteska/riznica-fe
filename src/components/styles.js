@@ -18,6 +18,20 @@ const styles = {
     textAlign: "center",
   },
   map: { height: "400px", borderRadius: 10, overflow: "hidden", boxShadow: 3 },
+  scroller: {
+    display: "flex",
+    flexDirection: { xs: "column", md: "row" },
+    justifyContent: { xs: "center", md: "space-between" },
+    alignItems: { xs: "center", md: "flex-start" },
+    px: { xs: 0, sm: 7.5 },
+    mt: 8,
+  },
+  secondary: {
+    width: { xs: "80%", sm: "25%", lg: "15%" },
+    borderRadius: 4,
+    border: 3,
+    mt: { xs: 2, md: 0 },
+  },
 };
 
 const chevrons = (theme, disabled) => ({

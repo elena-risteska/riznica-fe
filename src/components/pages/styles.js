@@ -13,27 +13,13 @@ const styles = {
     py: { xs: 0, sm: 5 },
     px: { xs: 0, sm: 7 },
   },
-  locationsHome: {
-    display: "flex",
-    flexDirection: { xs: "column", md: "row" },
-    justifyContent: { xs: "center", md: "space-between" },
-    alignItems: { xs: "center", md: "flex-start" },
-    px: { xs: 0, sm: 7.5 },
-    mt: 8,
-  },
-  secondaryHome: {
-    width: { xs: "80%", sm: "25%", lg: "15%" },
-    borderRadius: 4,
-    border: 3,
-    mt: { xs: 2, md: 0 },
-  },
   mapHome: {
     display: "flex",
     flexDirection: { xs: "column", md: "row" },
     width: "100%",
     px: { xs: 1, md: 7 },
-    pt: 8,
     gap: 4,
+    my: 12,
   },
   mapText: {
     display: "flex",

@@ -3,9 +3,10 @@ import React from "react";
 export const importHome = () => import("../pages/Home");
 export const importAbout = () => import("../pages/About");
 export const importNotFound = () => import("../pages/NotFound");
+export const importLocations = () => import("../pages/Locations");
 
 const LazyHome = React.lazy(importHome);
-const LazyLocations = React.lazy(importHome);
+const LazyLocations = React.lazy(importLocations);
 const LazyActivities = React.lazy(importHome);
 const LazyMap = React.lazy(importHome);
 const LazyAbout = React.lazy(importAbout);
@@ -24,7 +25,7 @@ export const routes = [
     element: LazyLocations,
     label: "Локации",
     showInNav: true,
-    preload: importHome,
+    preload: importLocations,
   },
   {
     path: "/activities",

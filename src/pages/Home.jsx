@@ -4,9 +4,8 @@ import Banner from "../components/layout/Banner";
 import DefaultLayout from "../layouts/DefaultLayout";
 import CommentsHome from "../components/pages/home/CommentsHome";
 import HeaderHome from "../components/pages/home/HeaderHome";
-import LocationsHome from "../components/pages/home/LocationsHome";
+import ScrollerSegment from "../components/ScrollerSegment";
 import MapHome from "../components/pages/home/MapHome";
-import ActivitiesHome from "../components/pages/home/ActivitiesHome";
 
 const Home = () => {
   const [locations, setLocations] = useState([]);
@@ -32,9 +31,19 @@ const Home = () => {
   return (
     <DefaultLayout>
       <HeaderHome />
-      <LocationsHome locations={locations} visibleItems={visibleItems} />
+      <ScrollerSegment
+        items={locations}
+        visibleItems={visibleItems}
+        title="Необични локации"
+        to="/locations"
+      />
       <MapHome />
-      <ActivitiesHome activities={activities} visibleItems={4} />
+      <ScrollerSegment
+        items={activities}
+        visibleItems={4}
+        title="Адреналински активности"
+        to="/activities"
+      />
       <CommentsHome comments={comments} visibleItems={3} />
       <Banner />
     </DefaultLayout>
