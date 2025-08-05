@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Box, Typography } from "@mui/material";
-import styles from "./styles";
-import SearchBar from "../ui/SearchBar";
-import map from "../../assets/images/karta.png";
+import styles from "../styles";
+import SearchBar from "../../ui/SearchBar";
+import map from "../../../assets/images/karta.png";
 
 const handleSearch = () => {
   console.log("Searching for:", search);

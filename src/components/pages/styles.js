@@ -53,6 +53,36 @@ const styles = {
     height: "auto",
     borderRadius: 10,
   },
+  textColumnBox: {
+    display: "flex",
+    flexDirection: { xs: "column", md: "row" },
+    width: "100%",
+    justifyContent: "space-evenly",
+    mt: { xs: 5, md: 10 },
+    alignItems: "center",
+    gap: 5,
+  },
+  imageMiddle: {
+    width: { xs: "250px", md: "400px" },
+    height: "auto",
+    borderRadius: 10,
+  },
+  contactFormBox: {
+    display: "flex",
+    flexDirection: { xs: "column", md: "row" },
+    width: "100%",
+    mt: { xs: 8, md: 15 },
+    mb: 8,
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    gap: 8,
+  },
+  imageForm: {
+    width: { xs: "300px", md: "600px" },
+    height: "auto",
+    borderRadius: 10,
+    order: { xs: 1, md: 2 },
+  },
 };
 
 export default styles;

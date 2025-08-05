@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
-import HorizontalList from "../HorizontalList";
-import CommentCard from "../ui/cards/CommentCard";
+import HorizontalList from "../../HorizontalList";
+import CommentCard from "../../ui/cards/CommentCard";
 
 const CommentsHome = ({ comments, visibleItems }) => {
   return (

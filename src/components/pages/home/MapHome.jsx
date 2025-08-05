@@ -1,8 +1,8 @@
 import { Box, Typography, Stack } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
-import styles from "./styles";
-import SecondaryButton from "../ui/buttons/SecondaryButton";
-import map from "../../assets/images/legend.webp";
+import styles from "../styles";
+import SecondaryButton from "../../ui/buttons/SecondaryButton";
+import map from "../../../assets/images/legend.webp";
 
 const MapHome = () => {
   return (

@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 import useVisibleItems from "../hooks/useVisibleItems";
 import Banner from "../components/layout/Banner";
 import DefaultLayout from "../layouts/DefaultLayout";
-import CommentsHome from "../components/pages/CommentsHome";
-import HeaderHome from "../components/pages/HeaderHome";
-import LocationsHome from "../components/pages/LocationsHome";
-import MapHome from "../components/pages/MapHome";
-import ActivitiesHome from "../components/pages/ActivitiesHome";
+import CommentsHome from "../components/pages/home/CommentsHome";
+import HeaderHome from "../components/pages/home/HeaderHome";
+import LocationsHome from "../components/pages/home/LocationsHome";
+import MapHome from "../components/pages/home/MapHome";
+import ActivitiesHome from "../components/pages/home/ActivitiesHome";
 
 const Home = () => {
   const [locations, setLocations] = useState([]);

@@ -14,6 +14,13 @@ const styles = {
     borderRadius: 4,
     color: "white",
   },
+  submitAlert: {
+    width: "100%",
+    borderRadius: 3,
+    backgroundColor: (theme) => theme.palette.primary.main,
+    color: (theme) => theme.palette.primary.contrastText,
+    boxShadow: 3,
+  },
 };
 
 export default styles;

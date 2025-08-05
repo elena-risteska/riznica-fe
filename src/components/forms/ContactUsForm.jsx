@@ -1,6 +1,15 @@
 import { useState } from "react";
-import { Box, TextField, Typography, Snackbar, Alert } from "@mui/material";
+import {
+  Box,
+  TextField,
+  Typography,
+  Snackbar,
+  Alert,
+  CircularProgress,
+} from "@mui/material";
 import { validateForm } from "../../utils/validateForm";
+import { useContactFormHandler } from "../../hooks/useContactFormHandler";
+import contactFormFields from "../../config/contactFormFields";
 import PrimaryButton from "../ui/buttons/PrimaryButton";
 import styles from "./styles";
 
@@ -8,24 +17,14 @@ const ContactUsForm = ({ formData, setFormData, onSubmit }) => {
   const [errors, setErrors] = useState({});
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-    setErrors((prev) => ({ ...prev, [name]: "" }));
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const validationErrors = validateForm(formData);
-
-    if (Object.keys(validationErrors).length === 0) {
-      onSubmit?.(formData);
-      setFormData({ fullName: "", email: "", message: "" });
-      setErrors({});
-      setOpenSnackbar(true);
-    } else {
-      setErrors(validationErrors);
-    }
-  };
+  const { handleChange, handleSubmit, isSubmitting } = useContactFormHandler({
+    formData,
+    setFormData,
+    setErrors,
+    onSubmit,
+    validateForm,
+    setOpenSnackbar,
+  });
 
   return (
     <>
@@ -33,47 +32,42 @@ const ContactUsForm = ({ formData, setFormData, onSubmit }) => {
         <Typography variant="h4" gutterBottom textAlign="left" mb={4}>
           Испрати ни предлог локација
         </Typography>
-        <TextField
-          label="Име и презиме"
-          name="fullName"
-          fullWidth
-          size="small"
-          value={formData.fullName}
-          onChange={handleChange}
-          error={!!errors.fullName}
-          helperText={errors.fullName || " "}
-          sx={styles.formField}
-        />
-        <TextField
-          label="Електронска пошта"
-          name="email"
-          type="email"
-          fullWidth
-          size="small"
-          value={formData.email}
-          onChange={handleChange}
-          error={!!errors.email}
-          helperText={errors.email || " "}
-          sx={styles.formField}
-        />
-        <Box mb={3}>
-          <TextField
-            label="Напиши што мислиш дека треба да додадеме"
-            name="message"
-            multiline
-            rows={4}
-            fullWidth
-            value={formData.message}
-            onChange={handleChange}
-            error={!!errors.message}
-            helperText={errors.message || " "}
-            sx={styles.formField}
-          />
-        </Box>
+        {contactFormFields.map(
+          ({ name, label, type, size, multiline, rows, boxMargin }) => {
+            const textField = (
+              <TextField
+                key={name}
+                name={name}
+                label={label}
+                type={type}
+                fullWidth
+                size={size}
+                multiline={multiline}
+                rows={rows}
+                value={formData[name]}
+                onChange={handleChange}
+                error={!!errors[name]}
+                helperText={errors[name] || " "}
+                sx={styles.formField}
+              />
+            );
 
+            return boxMargin ? (
+              <Box key={name} mb={3}>
+                {textField}
+              </Box>
+            ) : (
+              textField
+            );
+          }
+        )}
         <Box sx={{ display: "flex", justifyContent: "center" }}>
           <PrimaryButton type="submit" color="primary" sx={styles.submitButton}>
-            Испрати
+            {isSubmitting ? (
+              <CircularProgress size={20} color="inherit" />
+            ) : (
+              "Испрати"
+            )}
           </PrimaryButton>
         </Box>
       </Box>
@@ -86,13 +80,7 @@ const ContactUsForm = ({ formData, setFormData, onSubmit }) => {
         <Alert
           onClose={() => setOpenSnackbar(false)}
           severity="success"
-          sx={{
-            width: "100%",
-            borderRadius: 3,
-            backgroundColor: (theme) => theme.palette.primary.main,
-            color: (theme) => theme.palette.primary.contrastText,
-            boxShadow: 3,
-          }}
+          sx={styles.submitAlert}
           variant="filled"
         >
           Предлогот е успешно испратен!
