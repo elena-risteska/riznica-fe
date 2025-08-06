@@ -6,18 +6,18 @@ import styles from "./styles";
 const handleSearch = () => {
   console.log("Searching for:", search);
 };
-const HeaderLocations = () => {
+const HeaderLocations = ({ title, subtitle, reverse }) => {
   const [search, setSearch] = useState("");
 
   return (
     <Box sx={styles.header}>
-      <Box sx={styles.text}>
-        <Typography variant="h2">Локации</Typography>
+      <Box sx={styles.text(reverse)}>
+        <Typography variant="h2">{title}</Typography>
         <Typography variant="h6" color="text.secondary">
-          Пребарувај низ бројноста локации и погледни што се крие во оваа земја
+          {subtitle}
         </Typography>
       </Box>
-      <Box sx={styles.searchBar}>
+      <Box sx={styles.searchBar(reverse)}>
         <SearchBar
           value={search}
           onChange={(e) => setSearch(e.target.value)}

@@ -40,7 +40,11 @@ const Locations = () => {
 
   return (
     <DefaultLayout>
-      <HeaderLocations />
+      <HeaderLocations
+        title="Локации"
+        subtitle="Пребарувај низ бројноста атракции и погледни што се крие во оваа земја"
+        reverse={true}
+      />
       {locations.map(({ title, to, key }) => (
         <ScrollerSegment
           key={to}

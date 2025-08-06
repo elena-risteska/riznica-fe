@@ -4,10 +4,11 @@ export const importHome = () => import("../pages/Home");
 export const importAbout = () => import("../pages/About");
 export const importNotFound = () => import("../pages/NotFound");
 export const importLocations = () => import("../pages/Locations");
+export const importActivities = () => import("../pages/Activities");
 
 const LazyHome = React.lazy(importHome);
 const LazyLocations = React.lazy(importLocations);
-const LazyActivities = React.lazy(importHome);
+const LazyActivities = React.lazy(importActivities);
 const LazyMap = React.lazy(importHome);
 const LazyAbout = React.lazy(importAbout);
 const LazyNotFound = React.lazy(importNotFound);
@@ -32,7 +33,7 @@ export const routes = [
     element: LazyActivities,
     label: "Активности",
     showInNav: true,
-    preload: importHome,
+    preload: importActivities,
   },
   {
     path: "/map",
