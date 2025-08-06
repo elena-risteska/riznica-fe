@@ -17,7 +17,7 @@ const Activities = ({}) => {
       />
       <ActivitiesSegment
         title="Планинарење"
-        subtitle="Приближно 80% од територијата на Македонија е покриена со планини и ридови."
+        subtitle="Приближно 80% од територијата на Македонија е покриена со планини и ридови"
         to="/hiking"
         reverse={false}
         photo1={hiking}
@@ -25,7 +25,7 @@ const Activities = ({}) => {
       />
       <ActivitiesSegment
         title="Велосипедизам"
-        subtitle="Планинскиот велосипедизам е одлична можност да ги истражиш дивините."
+        subtitle="Планинскиот велосипедизам е одлична можност да ги истражиш дивините"
         to="/mtb"
         reverse={true}
         photo1={mtb}

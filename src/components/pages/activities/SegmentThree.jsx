@@ -26,12 +26,7 @@ const SegmentThree = () => {
           <Box component="img" src={photo2} alt="Activity" sx={styles.photo3} />
           <Box sx={styles.text3} justifyContent="flex-start">
             <Typography variant="h4">Јавање коњи</Typography>
-            <Typography
-              variant="h6"
-              align="right"
-              fontWeight={700}
-              color="text.secondary"
-            >
+            <Typography variant="h6" fontWeight={700} color="text.secondary">
               Експедиција што не треба да ја пропуштиш
             </Typography>
             <SecondaryButton

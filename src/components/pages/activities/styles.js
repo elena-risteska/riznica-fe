@@ -16,7 +16,7 @@ const styles = {
   text: (reverse) => ({
     display: "flex",
     flexDirection: "column",
-    width: { xs: "50%", md: "20%" },
+    width: { xs: "80%", md: "20%" },
     justifyContent: "space-evenly",
     alignItems: { xs: "center", md: reverse ? "flex-end" : "flex-start" },
     textAlign: { xs: "center", md: reverse ? "right" : "left" },
@@ -46,7 +46,7 @@ const styles = {
     alignItems: { xs: "center", md: "flex-start" },
   },
   button2: {
-    width: "40%",
+    width: { xs: "60%", md: "50%" },
     borderRadius: 4,
     border: 3,
     mt: 6,
