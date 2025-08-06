@@ -1,11 +1,16 @@
 import { Box, Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import SecondaryButton from "../../ui/buttons/SecondaryButton";
-import photo from "../../../assets/images/hiking.avif";
-import photo2 from "../../../assets/images/hiking2.jpg";
 import styles from "./styles";
 
-const ActivitiesSegment = ({ title, subtitle, to, reverse }) => {
+const ActivitiesSegment = ({
+  title,
+  subtitle,
+  to,
+  reverse,
+  photo1,
+  photo2,
+}) => {
   return (
     <Box sx={styles.row}>
       <Box sx={styles.text(reverse)}>
@@ -19,7 +24,7 @@ const ActivitiesSegment = ({ title, subtitle, to, reverse }) => {
       </Box>
       <Box
         component="img"
-        src={photo}
+        src={photo1}
         alt="Activity"
         sx={styles.photo(reverse)}
       />
