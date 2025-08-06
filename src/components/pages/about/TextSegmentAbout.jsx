@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import aboutPageText from "../../../config/aboutPageText";
 import styles from "../styles";
-import photo from "../../../assets/images/babuna1.jpg";
+import photo from "../../../assets/images/about.jpg";
 
 const TextSegmentAbout = () => {
   return (

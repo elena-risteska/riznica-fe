@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import { useState } from "react";
 import styles from "../styles";
 import ContactUsForm from "../../forms/ContactUsForm";
-import photo from "../../../assets/images/atv.jpg";
+import photo from "../../../assets/images/about2.webp";
 
 const ContactFormAbout = () => {
   const [formData, setFormData] = useState({
