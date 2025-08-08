@@ -40,7 +40,7 @@ const LoginForm = ({ onSubmit, formData, setFormData }) => {
             value={formData[name]}
             onChange={handleChange}
             fullWidth
-            required
+            // required
             disabled={loading}
             sx={loginFields(Boolean(errors[name]))}
             error={Boolean(errors[name])}

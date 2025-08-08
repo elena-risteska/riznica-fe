@@ -7,9 +7,9 @@ export const validateForm = (formData) => {
 
   if ("email" in formData) {
     if (!formData.email?.trim()) {
-      errors.email = "Внесете е-пошта";
+      errors.email = "Внесете електронска пошта";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      errors.email = "Невалидна е-пошта";
+      errors.email = "Невалидна електронска пошта";
     }
   }
 

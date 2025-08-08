@@ -3,6 +3,7 @@ import React from "react";
 export const importHome = () => import("../pages/Home");
 export const importAbout = () => import("../pages/About");
 export const importLogin = () => import("../pages/Login");
+export const importRegister = () => import("../pages/Register");
 export const importNotFound = () => import("../pages/NotFound");
 export const importLocations = () => import("../pages/Locations");
 export const importActivities = () => import("../pages/Activities");
@@ -13,6 +14,7 @@ const LazyActivities = React.lazy(importActivities);
 const LazyMap = React.lazy(importHome);
 const LazyAbout = React.lazy(importAbout);
 const LazyLogin = React.lazy(importLogin);
+const LazyRegister = React.lazy(importRegister);
 const LazyNotFound = React.lazy(importNotFound);
 
 export const routes = [
@@ -56,6 +58,12 @@ export const routes = [
     element: LazyLogin,
     showInNav: false,
     preload: importLogin,
+  },
+  {
+    path: "/register",
+    element: LazyRegister,
+    showInNav: false,
+    preload: importRegister,
   },
   {
     path: "*",
