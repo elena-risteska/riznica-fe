@@ -89,6 +89,12 @@ const styles = {
     backgroundColor: "white",
     mb: 2,
   },
+  rememberMe: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    pb: 4,
+  },
 };
 
 export default styles;

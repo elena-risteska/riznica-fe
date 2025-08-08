@@ -47,14 +47,7 @@ const LoginForm = ({ onSubmit, formData, setFormData }) => {
             helperText={errors[name] || " "}
           />
         ))}
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            pb: 4,
-          }}
-        >
+        <Box sx={styles.rememberMe}>
           <FormControlLabel
             control={
               <Checkbox
@@ -67,12 +60,17 @@ const LoginForm = ({ onSubmit, formData, setFormData }) => {
               />
             }
             label={
-              <Typography sx={{ color: "white", fontSize: 14 }}>
+              <Typography sx={{ color: "white", fontSize: { xs: 12, md: 15 } }}>
                 Запамти ме
               </Typography>
             }
           />
-          <Link href="/forgot-password" underline="hover" color="#ffffff">
+          <Link
+            href="/forgot-password"
+            underline="hover"
+            color="#ffffff"
+            fontSize={{ xs: 12, md: 15 }}
+          >
             Ја заборави лозинката?
           </Link>
         </Box>
@@ -83,7 +81,7 @@ const LoginForm = ({ onSubmit, formData, setFormData }) => {
             "Најави се"
           )}
         </PrimaryButton>
-        <Typography variant="body2" textAlign="center" color="white">
+        <Typography variant="body1" textAlign="center" color="white">
           Не си дел од ризницата?
           <Link href="/register" underline="always" color="#ffffff" ml={1}>
             Регистрирај се

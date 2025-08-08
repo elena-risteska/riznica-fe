@@ -12,6 +12,13 @@ const styles = {
     width: { xs: "80%", sm: "25%", lg: "15%" },
     borderRadius: "1rem",
   },
+  loginLayout: {
+    display: "flex",
+    flexDirection: "row",
+    width: "100%",
+    height: "100vh",
+    justifyContent: "space-between",
+  },
 };
 
 export default styles;
