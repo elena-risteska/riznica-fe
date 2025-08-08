@@ -1,32 +1,28 @@
-import { Box, TextField, Typography, Link, Stack } from "@mui/material";
-import { useState } from "react";
+import {
+  Box,
+  TextField,
+  Typography,
+  Link,
+  Stack,
+  CircularProgress,
+  Checkbox,
+  FormControlLabel,
+} from "@mui/material";
+import styles, { loginFields } from "./styles";
 import PrimaryButton from "../ui/buttons/PrimaryButton";
-import styles from "./styles";
-import { validateForm } from "../../utils/validateForm";
+import useLoginFormHandler from "../../hooks/useLoginFormHandler";
+
+const fields = [
+  { name: "email", label: "Електронска пошта", type: "email" },
+  { name: "password", label: "Лозинка", type: "password" },
+];
 
 const LoginForm = ({ onSubmit, formData, setFormData }) => {
-  const [errors, setErrors] = useState({});
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-    setErrors((prev) => ({ ...prev, [name]: undefined }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const { email, password } = formData;
-    const validationErrors = validateForm({ email, password });
-
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      return;
-    }
-
-    if (onSubmit) {
-      onSubmit(formData);
-    }
-  };
+  const { errors, loading, handleChange, handleSubmit } = useLoginFormHandler({
+    onSubmit,
+    formData,
+    setFormData,
+  });
 
   return (
     <Box
@@ -34,38 +30,58 @@ const LoginForm = ({ onSubmit, formData, setFormData }) => {
       onSubmit={handleSubmit}
       sx={{ width: "100%", maxWidth: "400px" }}
     >
-      <Stack spacing={2}>
-        <TextField
-          label="Електронска пошта"
-          name="email"
-          type="email"
-          value={formData.email}
-          onChange={handleChange}
-          fullWidth
-          required
-          sx={styles.loginFields}
-          error={Boolean(errors.email)}
-          helperText={errors.email}
-        />
-        <TextField
-          label="Лозинка"
-          name="password"
-          type="password"
-          value={formData.password}
-          onChange={handleChange}
-          fullWidth
-          required
-          sx={styles.loginFields}
-          error={Boolean(errors.password)}
-          helperText={errors.password}
-        />
-        <Box textAlign="right" pb={4}>
+      <Stack>
+        {fields.map(({ name, label, type }) => (
+          <TextField
+            key={name}
+            label={label}
+            name={name}
+            type={type}
+            value={formData[name]}
+            onChange={handleChange}
+            fullWidth
+            required
+            disabled={loading}
+            sx={loginFields(Boolean(errors[name]))}
+            error={Boolean(errors[name])}
+            helperText={errors[name] || " "}
+          />
+        ))}
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            pb: 4,
+          }}
+        >
+          <FormControlLabel
+            control={
+              <Checkbox
+                name="rememberMe"
+                checked={!!formData.rememberMe}
+                onChange={handleChange}
+                color="white"
+                sx={{ color: "white" }}
+                disabled={loading}
+              />
+            }
+            label={
+              <Typography sx={{ color: "white", fontSize: 14 }}>
+                Запамти ме
+              </Typography>
+            }
+          />
           <Link href="/forgot-password" underline="hover" color="#ffffff">
             Ја заборави лозинката?
           </Link>
         </Box>
-        <PrimaryButton type="submit" sx={styles.submitLogin}>
-          Најави се
+        <PrimaryButton type="submit" sx={styles.submitLogin} disabled={loading}>
+          {loading ? (
+            <CircularProgress size={24} color="#ffffff" />
+          ) : (
+            "Најави се"
+          )}
         </PrimaryButton>
         <Typography variant="body2" textAlign="center" color="white">
           Не си дел од ризницата?

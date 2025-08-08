@@ -51,7 +51,6 @@ const ContactUsForm = ({ formData, setFormData, onSubmit }) => {
                 sx={styles.formField}
               />
             );
-
             return boxMargin ? (
               <Box key={name} mb={3}>
                 {textField}

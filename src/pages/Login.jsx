@@ -6,6 +6,7 @@ const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
+    rememberMe: false,
   });
 
   const handleSubmit = async (data) => {
