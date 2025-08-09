@@ -161,6 +161,27 @@ const styles = {
     fontWeight: "bold",
     mb: "2px",
   },
+  forgotPasswordField: {
+    "& .MuiOutlinedInput-root": {
+      borderRadius: 4,
+      "& fieldset": { borderColor: "black" },
+      "&:hover fieldset": { borderColor: "black" },
+      "&.Mui-focused fieldset": { borderColor: "black" },
+    },
+    "& .MuiInputLabel-root": {
+      color: "text.secondary",
+    },
+    "& .MuiInputLabel-root.Mui-focused": {
+      color: "black",
+    },
+    "& .MuiFormHelperText-root": {
+      minHeight: {
+        xs: "14px",
+        sm: "16px",
+        md: "18px",
+      },
+    },
+  },
 };
 
 export default styles;
