@@ -18,7 +18,6 @@ const useLoginFormHandler = ({ onSubmit, formData, setFormData }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const validationErrors = validateForm(formData);
 
     if (Object.keys(validationErrors).length > 0) {
@@ -38,8 +37,6 @@ const useLoginFormHandler = ({ onSubmit, formData, setFormData }) => {
     } catch (err) {
       console.error("Submission error:", err);
       return false;
-    } finally {
-      setLoading(false);
     }
   };
 

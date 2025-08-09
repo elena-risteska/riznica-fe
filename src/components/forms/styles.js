@@ -58,6 +58,59 @@ export const loginFields = (hasError) => ({
   }),
 });
 
+export const registerFields = (hasError) => ({
+  "& .MuiOutlinedInput-root": {
+    borderRadius: 4,
+    "&.Mui-focused fieldset": {
+      borderColor: "white",
+    },
+    "&:hover fieldset": {
+      borderColor: "white",
+    },
+  },
+  "& input:-webkit-autofill": {
+    WebkitBoxShadow: "0 0 0 100px #fff inset",
+    WebkitTextFillColor: "inherit",
+    caretColor: "inherit",
+  },
+  "& input:-webkit-autofill:focus": {
+    WebkitBoxShadow: "0 0 0 100px #fff inset",
+  },
+  input: { color: "white" },
+  label: { color: "white" },
+  "& .MuiFormHelperText-root": {
+    minHeight: {
+      xs: "14px",
+      sm: "16px",
+      md: "18px",
+    },
+  },
+  "& label.Mui-focused": {
+    color: "white",
+  },
+  "& fieldset": {
+    borderColor: "white",
+  },
+  "& .MuiInputLabel-root.Mui-error": {
+    color: "white",
+  },
+  "& .MuiOutlinedInput-root.Mui-error .MuiOutlinedInput-notchedOutline": {
+    borderColor: "white",
+  },
+  "& .MuiFormHelperText-root.Mui-error": {
+    color: "white",
+  },
+  "& input:-webkit-autofill": {
+    WebkitBoxShadow: "0 0 0 1000px transparent inset !important",
+    boxShadow: "0 0 0 1000px transparent inset !important",
+    WebkitTextFillColor: "white !important  ",
+    transition: "background-color 5000s ease-in-out 0s",
+  },
+  ...(hasError && {
+    animation: `${shake} 0.3s ease-in-out`,
+  }),
+});
+
 const styles = {
   formField: {
     "& .MuiOutlinedInput-root": { borderRadius: 3 },
@@ -94,6 +147,19 @@ const styles = {
     alignItems: "center",
     justifyContent: "space-between",
     pb: 4,
+  },
+  submitRegister: {
+    mt: 3,
+    width: "100%",
+    borderRadius: 4,
+    backgroundColor: "white",
+    color: "primary.main",
+  },
+  header: {
+    color: "white",
+    textAlign: "center",
+    fontWeight: "bold",
+    mb: "2px",
   },
 };
 
