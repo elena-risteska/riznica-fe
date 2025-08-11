@@ -6,6 +6,7 @@ import {
   Snackbar,
   Alert,
   CircularProgress,
+  InputAdornment,
 } from "@mui/material";
 import { validateForm } from "../../utils/validateForm";
 import { useContactFormHandler } from "../../hooks/useContactFormHandler";
@@ -33,7 +34,7 @@ const ContactUsForm = ({ formData, setFormData, onSubmit }) => {
           Испрати ни предлог локација
         </Typography>
         {contactFormFields.map(
-          ({ name, label, type, size, multiline, rows, boxMargin }) => {
+          ({ name, label, type, size, multiline, rows, boxMargin, icon }) => {
             const textField = (
               <TextField
                 key={name}
@@ -41,7 +42,6 @@ const ContactUsForm = ({ formData, setFormData, onSubmit }) => {
                 label={label}
                 type={type}
                 fullWidth
-                size={size}
                 multiline={multiline}
                 rows={rows}
                 value={formData[name]}
@@ -49,8 +49,14 @@ const ContactUsForm = ({ formData, setFormData, onSubmit }) => {
                 error={!!errors[name]}
                 helperText={errors[name] || " "}
                 sx={styles.formField}
+                InputProps={{
+                  startAdornment: icon ? (
+                    <InputAdornment position="start">{icon}</InputAdornment>
+                  ) : null,
+                }}
               />
             );
+
             return boxMargin ? (
               <Box key={name} mb={3}>
                 {textField}

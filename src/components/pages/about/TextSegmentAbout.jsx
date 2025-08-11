@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Stack } from "@mui/material";
 import aboutPageText from "../../../config/aboutPageText";
 import styles from "../styles";
 import photo from "../../../assets/images/about.jpg";
@@ -12,12 +12,17 @@ const TextSegmentAbout = () => {
       >
         {aboutPageText.leftText}
       </Typography>
-      <Box
-        component="img"
-        src={photo}
-        alt="Vodopadot na Babuna"
-        sx={styles.imageMiddle}
-      />
+      <Stack>
+        <Box
+          component="img"
+          src={photo}
+          alt="Vodopadot na Babuna"
+          sx={styles.imageMiddle}
+        />
+        <Typography variant="subtitle1" sx={styles.subtitle}>
+          Езеро Младост
+        </Typography>
+      </Stack>
       <Typography
         variant="body1"
         sx={{ lineHeight: 3, width: { xs: "100%", md: "30%" } }}

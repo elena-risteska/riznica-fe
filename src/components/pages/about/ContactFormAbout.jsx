@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useState } from "react";
 import styles from "../styles";
 import ContactUsForm from "../../forms/ContactUsForm";
@@ -27,7 +27,12 @@ const ContactFormAbout = () => {
           onSubmit={handleSubmit}
         />
       </Box>
-      <Box component="img" src={photo} alt="ATV" sx={styles.imageForm} />
+      <Box>
+        <Box component="img" src={photo} alt="ATV" sx={styles.imageForm} />
+        <Typography variant="subtitle1" align="center" sx={styles.subtitle}>
+          Црква „Св. Јован Канео“ - Охрид
+        </Typography>
+      </Box>
     </Box>
   );
 };

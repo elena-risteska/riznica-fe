@@ -49,7 +49,7 @@ const styles = {
     gap: 5,
   },
   imageMiddle: {
-    width: { xs: "250px", md: "400px" },
+    width: { xs: "250px", sm: "400px" },
     height: "auto",
     borderRadius: 10,
   },
@@ -64,10 +64,18 @@ const styles = {
     gap: 8,
   },
   imageForm: {
-    width: { xs: "300px", md: "600px" },
+    width: { xs: "300px", sm: "500px", md: "600px" },
     height: "auto",
     borderRadius: 10,
     order: { xs: 1, md: 2 },
+  },
+  subtitle: {
+    display: "flex",
+    justifyContent: "center",
+    mt: 1,
+    color: "text.secondary",
+    fontStyle: "italic",
+    letterSpacing: 2,
   },
 };
 
