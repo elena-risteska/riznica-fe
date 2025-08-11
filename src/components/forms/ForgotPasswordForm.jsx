@@ -45,7 +45,7 @@ const ForgotPasswordForm = ({ onSubmit }) => {
       <Typography variant="h4" fontWeight="bold" gutterBottom align="center">
         Ја заборави лозинката?
       </Typography>
-      <Typography variant="body2" color="text.secondary" mb={6}>
+      <Typography variant="body2" color="text.secondary" mb={6} align="center">
         Внеси електронска пошта на која ќе биде испратен код
       </Typography>
       <TextField

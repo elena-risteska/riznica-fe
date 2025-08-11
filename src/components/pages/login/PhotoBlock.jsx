@@ -5,9 +5,14 @@ import styles from "./styles";
 const PhotoBlock = () => {
   return (
     <Box sx={styles.photoBox}>
-      <Box sx={{ textAlign: "center" }}>
+      <Box>
         <Box component="img" src={photo} alt="login photo" sx={styles.photo} />
-        <Typography variant="subtitle1" sx={styles.subtitle}>
+        <Typography
+          display={{ xs: "none", md: "flex" }}
+          variant="subtitle1"
+          justifyContent="center"
+          sx={styles.subtitle}
+        >
           Станечки водопад
         </Typography>
       </Box>

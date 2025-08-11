@@ -51,11 +51,11 @@ const RecoverAccountForm = ({ formData, setFormData, onSubmit }) => {
     }
   };
   return (
-    <Box component="form" onSubmit={handleSubmit} p={4}>
+    <Box component="form" onSubmit={handleSubmit}>
       <Typography variant="h4" fontWeight="bold" gutterBottom align="center">
         Пристигна код?
       </Typography>
-      <Typography variant="body2" color="text.secondary" mb={6}>
+      <Typography variant="body2" color="text.secondary" mb={6} align="center">
         Внеси го кодот кој го доби и напиши нова лозинка
       </Typography>
       <Stack direction="column" spacing={2}>

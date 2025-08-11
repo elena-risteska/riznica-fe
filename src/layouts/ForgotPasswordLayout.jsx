@@ -8,14 +8,19 @@ const ForgotPasswordLayout = ({ children }) => {
     <>
       <BackButton />
       <Box sx={styles.fullScreen}>
-        <Box sx={{ textAlign: "center" }}>
+        <Box>
           <Box
             component="img"
             src={photo}
             alt="login photo"
             sx={styles.photoBox}
           />
-          <Typography variant="subtitle1" sx={styles.subtitle}>
+          <Typography
+            display={{ xs: "none", md: "flex" }}
+            justifyContent="center"
+            variant="subtitle1"
+            sx={styles.subtitle}
+          >
             Водопад кај село Ореше
           </Typography>
         </Box>
