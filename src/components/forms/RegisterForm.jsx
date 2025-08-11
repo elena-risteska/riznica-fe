@@ -5,13 +5,19 @@ import {
   Link,
   Stack,
   CircularProgress,
+  InputAdornment,
+  IconButton,
 } from "@mui/material";
 import { useRegisterFormHandler } from "../../hooks/useRegisterFormHandler";
 import { registerFormFields } from "../../config/registerFormFields";
-import PrimaryButton from "../ui/buttons/PrimaryButton";
+import { useState } from "react";
 import styles, { registerFields } from "./styles";
+import PrimaryButton from "../ui/buttons/PrimaryButton";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 const RegisterForm = ({ onSubmit, formData, setFormData }) => {
+  const [showPassword, setShowPassword] = useState(false);
   const { errors, loading, handleChange, handleSubmit } =
     useRegisterFormHandler(formData, setFormData, onSubmit);
 
@@ -24,20 +30,44 @@ const RegisterForm = ({ onSubmit, formData, setFormData }) => {
         Внеси ги податоците за да се регистрираш
       </Typography>
       <Stack>
-        {registerFormFields.map((field) => (
-          <TextField
-            key={field.name}
-            label={field.label}
-            name={field.name}
-            type={field.type}
-            value={formData[field.name]}
-            onChange={handleChange}
-            error={!!errors[field.name]}
-            helperText={errors[field.name] || " "}
-            fullWidth
-            sx={registerFields(!!errors[field.name])}
-          />
-        ))}
+        {registerFormFields.map((field) => {
+          const isPassword = field.name === "password";
+          return (
+            <TextField
+              key={field.name}
+              label={field.label}
+              name={field.name}
+              type={
+                isPassword ? (showPassword ? "text" : "password") : field.type
+              }
+              value={formData[field.name]}
+              onChange={handleChange}
+              error={!!errors[field.name]}
+              helperText={errors[field.name] || " "}
+              fullWidth
+              sx={registerFields(!!errors[field.name])}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">{field.icon}</InputAdornment>
+                ),
+                endAdornment: isPassword && (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={() => setShowPassword((prev) => !prev)}
+                      edge="end"
+                    >
+                      {showPassword ? (
+                        <Visibility sx={{ color: "white" }} />
+                      ) : (
+                        <VisibilityOff sx={{ color: "white" }} />
+                      )}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+          );
+        })}
       </Stack>
 
       <PrimaryButton

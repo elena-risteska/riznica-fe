@@ -5,16 +5,23 @@ import {
   Link,
   Stack,
   CircularProgress,
+  InputAdornment,
+  IconButton,
 } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { validateForm } from "../../utils/validateForm";
 import PrimaryButton from "../ui/buttons/PrimaryButton";
 import styles from "./styles";
+import KeyIcon from "@mui/icons-material/Key";
+import LockIcon from "@mui/icons-material/Lock";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 const RecoverAccountForm = ({ formData, setFormData, onSubmit }) => {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -62,17 +69,42 @@ const RecoverAccountForm = ({ formData, setFormData, onSubmit }) => {
           helperText={errors.code || " "}
           fullWidth
           sx={styles.forgotPasswordField}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <KeyIcon color="info" />
+              </InputAdornment>
+            ),
+          }}
         />
         <TextField
           name="password"
           label="Нова лозинка"
-          type="password"
+          type={showPassword ? "text" : "password"}
           value={formData.password}
           onChange={handleChange}
           error={!!errors.password}
           helperText={errors.password || " "}
           fullWidth
           sx={styles.forgotPasswordField}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <LockIcon color="info" />
+              </InputAdornment>
+            ),
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  onClick={() => setShowPassword((prev) => !prev)}
+                  edge="end"
+                  color="info"
+                >
+                  {showPassword ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
         />
       </Stack>
       <Stack direction="column" spacing={2} mt={3}>

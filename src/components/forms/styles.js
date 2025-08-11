@@ -181,6 +181,12 @@ const styles = {
         md: "18px",
       },
     },
+    "& input:-webkit-autofill": {
+      WebkitBoxShadow: "0 0 0 1000px transparent inset !important",
+      boxShadow: "0 0 0 1000px transparent inset !important",
+      WebkitTextFillColor: "black !important",
+      transition: "background-color 5000s ease-in-out 0s",
+    },
   },
 };
 

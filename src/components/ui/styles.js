@@ -5,6 +5,13 @@ const styles = {
     justifyContent: "center",
     height: "100vh",
   },
+  backButton: {
+    position: "fixed",
+    top: 16,
+    left: 16,
+    zIndex: 1000,
+    width: "auto",
+  },
 };
 
 const search = (sx = {}) => ({

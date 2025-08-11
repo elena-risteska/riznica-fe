@@ -2,6 +2,7 @@ import { Box } from "@mui/material";
 import { useState } from "react";
 import styles from "./styles";
 import RegisterForm from "../components/forms/RegisterForm";
+import BackButton from "../components/ui/buttons/BackButton";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -20,15 +21,18 @@ const Register = () => {
     }
   };
   return (
-    <Box sx={styles.registerLayout}>
-      <Box sx={styles.circle}>
-        <RegisterForm
-          formData={formData}
-          setFormData={setFormData}
-          onSubmit={handleSubmit}
-        />
+    <>
+      <BackButton />
+      <Box sx={styles.registerLayout}>
+        <Box sx={styles.circle}>
+          <RegisterForm
+            formData={formData}
+            setFormData={setFormData}
+            onSubmit={handleSubmit}
+          />
+        </Box>
       </Box>
-    </Box>
+    </>
   );
 };
 export default Register;

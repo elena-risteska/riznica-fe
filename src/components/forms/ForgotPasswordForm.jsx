@@ -5,9 +5,11 @@ import {
   Link,
   Stack,
   CircularProgress,
+  InputAdornment,
 } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import EmailIcon from "@mui/icons-material/Email";
 import PrimaryButton from "../ui/buttons/PrimaryButton";
 import styles from "./styles";
 
@@ -55,6 +57,13 @@ const ForgotPasswordForm = ({ onSubmit }) => {
         helperText={error || " "}
         fullWidth
         sx={styles.forgotPasswordField}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <EmailIcon color="info" />
+            </InputAdornment>
+          ),
+        }}
       />
       <Stack direction="column" spacing={2} mt={3}>
         <PrimaryButton

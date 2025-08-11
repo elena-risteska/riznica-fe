@@ -7,14 +7,31 @@ import {
   CircularProgress,
   Checkbox,
   FormControlLabel,
+  InputAdornment,
+  IconButton,
 } from "@mui/material";
+import { useState } from "react";
 import styles, { loginFields } from "./styles";
 import PrimaryButton from "../ui/buttons/PrimaryButton";
 import useLoginFormHandler from "../../hooks/useLoginFormHandler";
+import EmailIcon from "@mui/icons-material/Email";
+import LockIcon from "@mui/icons-material/Lock";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 const fields = [
-  { name: "email", label: "Електронска пошта", type: "email" },
-  { name: "password", label: "Лозинка", type: "password" },
+  {
+    name: "email",
+    label: "Електронска пошта",
+    type: "email",
+    icon: <EmailIcon sx={{ color: "white" }} />,
+  },
+  {
+    name: "password",
+    label: "Лозинка",
+    type: "password",
+    icon: <LockIcon sx={{ color: "white" }} />,
+  },
 ];
 
 const LoginForm = ({ onSubmit, formData, setFormData }) => {
@@ -23,6 +40,7 @@ const LoginForm = ({ onSubmit, formData, setFormData }) => {
     formData,
     setFormData,
   });
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <Box
@@ -31,22 +49,47 @@ const LoginForm = ({ onSubmit, formData, setFormData }) => {
       sx={{ width: "100%", maxWidth: "400px" }}
     >
       <Stack>
-        {fields.map(({ name, label, type }) => (
-          <TextField
-            key={name}
-            label={label}
-            name={name}
-            type={type}
-            value={formData[name]}
-            onChange={handleChange}
-            fullWidth
-            // required
-            disabled={loading}
-            sx={loginFields(Boolean(errors[name]))}
-            error={Boolean(errors[name])}
-            helperText={errors[name] || " "}
-          />
-        ))}
+        {fields.map(({ name, label, type, icon }) => {
+          const isPassword = name === "password";
+          return (
+            <TextField
+              key={name}
+              label={label}
+              name={name}
+              type={isPassword && showPassword ? "text" : type}
+              value={formData[name]}
+              onChange={handleChange}
+              fullWidth
+              // required
+              disabled={loading}
+              sx={loginFields(Boolean(errors[name]))}
+              error={Boolean(errors[name])}
+              helperText={errors[name] || " "}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">{icon}</InputAdornment>
+                ),
+                ...(isPassword && {
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={() => setShowPassword((prev) => !prev)}
+                        edge="end"
+                        sx={{ color: "white" }}
+                      >
+                        {showPassword ? (
+                          <Visibility sx={{ color: "white" }} />
+                        ) : (
+                          <VisibilityOff sx={{ color: "white" }} />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }),
+              }}
+            />
+          );
+        })}
         <Box sx={styles.rememberMe}>
           <FormControlLabel
             control={

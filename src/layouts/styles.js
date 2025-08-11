@@ -27,5 +27,11 @@ const styles = {
     alignItems: "center",
     width: "30%",
   },
+  subtitle: {
+    mt: 1,
+    color: "text.secondary",
+    fontStyle: "italic",
+    letterSpacing: 2,
+  },
 };
 export default styles;

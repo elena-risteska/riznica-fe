@@ -18,5 +18,11 @@ const styles = {
   heading: { textAlign: "center", mb: 1, color: "white" },
   text: { textAlign: "center", mb: 10, color: "white" },
   photo: { width: "400px", height: "auto", borderRadius: 10 },
+  subtitle: {
+    mt: 1,
+    color: "text.secondary",
+    fontStyle: "italic",
+    letterSpacing: 2,
+  },
 };
 export default styles;
