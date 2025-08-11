@@ -47,7 +47,7 @@ const ForgotPasswordForm = ({ onSubmit }) => {
         Внеси електронска пошта на која ќе биде испратен код
       </Typography>
       <TextField
-        label="Email"
+        label="Електронска пошта"
         type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
