@@ -33,6 +33,14 @@ export const validateForm = (formData) => {
     }
   }
 
+  if ("code" in formData) {
+    if (!formData.code?.trim()) {
+      errors.code = "Внеси го кодот";
+    } else if (!/^\d{6}$/.test(formData.code)) {
+      errors.code = "Кодот мора да содржи точно 6 цифри";
+    }
+  }
+
   if ("message" in formData && !formData.message?.trim()) {
     errors.message = "Внеси порака";
   }

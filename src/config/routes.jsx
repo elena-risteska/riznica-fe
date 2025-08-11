@@ -5,6 +5,7 @@ export const importAbout = () => import("../pages/About");
 export const importLogin = () => import("../pages/Login");
 export const importRegister = () => import("../pages/Register");
 export const importForgotPassword = () => import("../pages/ForgotPassword");
+export const importRecoverAccount = () => import("../pages/RecoverAccount");
 export const importNotFound = () => import("../pages/NotFound");
 export const importLocations = () => import("../pages/Locations");
 export const importActivities = () => import("../pages/Activities");
@@ -17,6 +18,7 @@ const LazyAbout = React.lazy(importAbout);
 const LazyLogin = React.lazy(importLogin);
 const LazyRegister = React.lazy(importRegister);
 const LazyForgotPassword = React.lazy(importForgotPassword);
+const LazyRecoverAccount = React.lazy(importRecoverAccount);
 const LazyNotFound = React.lazy(importNotFound);
 
 export const routes = [
@@ -72,6 +74,12 @@ export const routes = [
     element: LazyForgotPassword,
     showInNav: false,
     preload: importForgotPassword,
+  },
+  {
+    path: "/recover-account",
+    element: LazyRecoverAccount,
+    showInNav: false,
+    preload: importRecoverAccount,
   },
   {
     path: "*",
