@@ -7,11 +7,17 @@ export const importRegister = () => import("../pages/Register");
 export const importForgotPassword = () => import("../pages/ForgotPassword");
 export const importRecoverAccount = () => import("../pages/RecoverAccount");
 export const importNotFound = () => import("../pages/NotFound");
-export const importLocations = () => import("../pages/Locations");
+export const importLocations = () => import("../pages/locations/Locations");
+export const importLocationCategory = () =>
+  import("../pages/locations/LocationCategory");
+export const importLocationDetail = () =>
+  import("../pages/locations/LocationDetail");
 export const importActivities = () => import("../pages/Activities");
 
 const LazyHome = React.lazy(importHome);
 const LazyLocations = React.lazy(importLocations);
+const LazyLocationCategory = React.lazy(importLocationCategory);
+const LazyLocationDetail = React.lazy(importLocationDetail);
 const LazyActivities = React.lazy(importActivities);
 const LazyMap = React.lazy(importHome);
 const LazyAbout = React.lazy(importAbout);
@@ -35,6 +41,18 @@ export const routes = [
     label: "Локации",
     showInNav: true,
     preload: importLocations,
+  },
+  {
+    path: "/locations/:category",
+    element: LazyLocationCategory,
+    showInNav: false,
+    preload: importLocationCategory,
+  },
+  {
+    path: "/locations/:category/:detail",
+    element: LazyLocationDetail,
+    showInNav: false,
+    preload: importLocationDetail,
   },
   {
     path: "/activities",

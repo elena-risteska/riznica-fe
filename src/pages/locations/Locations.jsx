@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import DefaultLayout from "../layouts/DefaultLayout";
-import useVisibleItems from "../hooks/useVisibleItems";
-import ScrollerSegment from "../components/ScrollerSegment";
-import HeaderLocations from "../components/pages/locations/HeaderLocations";
-import locations from "../config/locations";
+import DefaultLayout from "../../layouts/DefaultLayout";
+import useVisibleItems from "../../hooks/useVisibleItems";
+import ScrollerSegment from "../../components/ScrollerSegment";
+import HeaderLocations from "../../components/pages/locations/HeaderLocations";
+import locations from "../../config/locations";
 
 const Locations = () => {
   const [waterfalls, setWaterfalls] = useState([]);
