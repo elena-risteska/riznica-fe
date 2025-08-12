@@ -1,27 +1,27 @@
 const locations = [
   {
     title: "Водопади и извори",
-    to: "/waterfalls",
+    to: "/locations/waterfalls",
     key: "waterfalls",
   },
   {
     title: "Археолошки локалитети",
-    to: "/archeology",
+    to: "/locations/archeology",
     key: "archeology",
   },
   {
     title: "Пештери и карпести формации",
-    to: "/caves",
+    to: "/locations/caves",
     key: "caves",
   },
   {
     title: "Кањони и клисури",
-    to: "/canyons",
+    to: "/locations/canyons",
     key: "canyons",
   },
   {
     title: "Културно-историски знаменитости",
-    to: "/landmarks",
+    to: "/locations/landmarks",
     key: "landmarks",
   },
 ];

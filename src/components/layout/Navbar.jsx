@@ -23,6 +23,13 @@ const Navbar = () => {
 
   const toggleDrawer = () => setDrawerOpen((prev) => !prev);
 
+  const isActiveRoute = (path) => {
+    if (path === "/") {
+      return pathname === "/";
+    }
+    return pathname === path || pathname.startsWith(path + "/");
+  };
+
   return (
     <>
       <AppBar elevation={5} component="nav" sx={styles.navbar}>
@@ -36,7 +43,7 @@ const Navbar = () => {
                 key={path}
                 component={RouterLink}
                 to={path}
-                isActive={pathname === path}
+                isActive={isActiveRoute(path)}
                 onMouseEnter={preload}
                 sx={{ borderRadius: "1rem" }}
               >
@@ -71,7 +78,7 @@ const Navbar = () => {
               key={path}
               component={RouterLink}
               to={path}
-              isActive={pathname === path}
+              isActive={isActiveRoute(path)}
               onClick={toggleDrawer}
               sx={{ borderRadius: "1rem" }}
             >
