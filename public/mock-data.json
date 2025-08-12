@@ -60,49 +60,49 @@
       "image": null,
       "title": "Водно",
       "description": "Популарна излетничка дестинација во близина на Скопје.",
-      "to": "/vodno"
+      "to": "/locations/waterfalls/vodno"
     },
     {
       "image": null,
       "title": "Охридско Езеро",
       "description": "Најстарото и најдлабоко езеро на Балканот, познато по својата природна убавина и историја.",
-      "to": "/ohrid"
+      "to": "/locations/archeology/ohrid"
     },
     {
       "image": null,
       "title": "Галичник",
       "description": "Село познато по традиционалната Галичка свадба и архитектура.",
-      "to": "/galicnik"
+      "to": "/locations/caves/galicnik"
     },
     {
       "image": null,
       "title": "Маврово",
       "description": "Национален парк и ски-центар со прекрасно езеро и планински пејзажи.",
-      "to": "/mavrovo"
+      "to": "/locations/canyons/mavrovo"
     },
     {
       "image": null,
       "title": "Кокино",
       "description": "Мегалитска опсерваторија стара над 3.800 години.",
-      "to": "/kokino"
+      "to": "/locations/landmarks/kokino"
     },
     {
       "image": null,
       "title": "Крушево",
       "description": "Највисоко поставениот град во Македонија, со богата историја и традиција.",
-      "to": "/krusevo"
+      "to": "/locations/waterfalls/krushevo"
     },
     {
       "image": null,
       "title": "Шар Планина",
       "description": "Планински венец познат по своите езера, пасишта и разновиден животински свет.",
-      "to": "/sar-planina"
+      "to": "/locations/archeology/sar-planina"
     },
     {
       "image": null,
       "title": "Берово",
       "description": "Мал град во источна Македонија, познат по свежиот воздух и природните убавини.",
-      "to": "/berovo"
+      "to": "/locations/canyons/berovo"
     }
   ],
   "activities": [
@@ -110,37 +110,37 @@
       "image": null,
       "title": "Планинарење",
       "description": "Истражи планини како Шар Планина, Баба Планина и Јакупица со маркирани планинарски патеки.",
-      "to": "/hiking"
+      "to": "/activities/hiking"
     },
     {
       "image": null,
       "title": "Кајакарење",
       "description": "Уживај во кајакарење низ кањонот Матка или по езера, како Охридско и Преспанско.",
-      "to": "/kayaking"
+      "to": "/activities/kayaking"
     },
     {
       "image": null,
       "title": "Параглајдерство",
       "description": "Летај над Крушево или Водно и доживеј адреналин и неверојатни панорами.",
-      "to": "/paragliding"
+      "to": "/activities/paragliding"
     },
     {
       "image": null,
       "title": "Скијање и Сноубординг",
       "description": "Зимски авантури во ски-центрите Маврово, Попова Шапка и Пелистер.",
-      "to": "/skiing"
+      "to": "/activities/skiing"
     },
     {
       "image": null,
       "title": "Велосипедизам",
       "description": "Откриј ја Македонија на две тркала — со патеки низ Галичица, Пониква и Водно.",
-      "to": "/biking"
+      "to": "/activities/mtb"
     },
     {
       "image": null,
       "title": "Кампување",
       "description": "Преспиј под отворено небо во националните паркови Галичица, Маврово и Пелистер.",
-      "to": "/camping"
+      "to": "/activities/camping"
     }
   ]
 }

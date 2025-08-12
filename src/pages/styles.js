@@ -54,6 +54,7 @@ const styles = {
       "100%": { transform: "scale(1)" },
     },
   },
+  cardsGrid: { display: "flex", justifyContent: "center", my: 8, px: 2 },
 };
 
 export default styles;

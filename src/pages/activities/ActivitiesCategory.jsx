@@ -7,8 +7,8 @@ import DefaultLayout from "../../layouts/DefaultLayout";
 import PhotoCard from "../../components/ui/cards/PhotoCard";
 import styles from "../styles";
 
-const LocationCategory = () => {
-  const [waterfalls, setWaterfalls] = useState([]);
+const ActivitiesCategory = () => {
+  const [hiking, setHiking] = useState([]);
   const { category } = useParams();
   const title = translations[category] || category;
   const subtitle = subtitles[category] || category;
@@ -18,7 +18,7 @@ const LocationCategory = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log("Fetched data:", data);
-        setWaterfalls(data.locations);
+        setHiking(data.locations);
       })
       .catch((err) => {
         console.error("Failed to load data:", err);
@@ -27,10 +27,10 @@ const LocationCategory = () => {
 
   return (
     <DefaultLayout breadcrumbs={true}>
-      <HeaderLocations title={title} subtitle={subtitle} reverse={true} />
+      <HeaderLocations title={title} subtitle={subtitle} reverse={false} />
       <Box sx={styles.cardsGrid}>
         <Grid container spacing={6} justifyContent="center">
-          {waterfalls.map((item) => (
+          {hiking.map((item) => (
             <Grid
               key={item.id}
               item
@@ -53,4 +53,4 @@ const LocationCategory = () => {
   );
 };
 
-export default LocationCategory;
+export default ActivitiesCategory;

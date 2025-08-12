@@ -12,13 +12,19 @@ export const importLocationCategory = () =>
   import("../pages/locations/LocationCategory");
 export const importLocationDetail = () =>
   import("../pages/locations/LocationDetail");
-export const importActivities = () => import("../pages/Activities");
+export const importActivities = () => import("../pages/activities/Activities");
+export const importActivitiesCategory = () =>
+  import("../pages/activities/ActivitiesCategory");
+export const importActivitiesDetail = () =>
+  import("../pages/activities/ActivitiesDetail");
 
 const LazyHome = React.lazy(importHome);
 const LazyLocations = React.lazy(importLocations);
 const LazyLocationCategory = React.lazy(importLocationCategory);
 const LazyLocationDetail = React.lazy(importLocationDetail);
 const LazyActivities = React.lazy(importActivities);
+const LazyActivitiesCategory = React.lazy(importActivitiesCategory);
+const LazyActivitiesDetail = React.lazy(importActivitiesDetail);
 const LazyMap = React.lazy(importHome);
 const LazyAbout = React.lazy(importAbout);
 const LazyLogin = React.lazy(importLogin);
@@ -49,7 +55,7 @@ export const routes = [
     preload: importLocationCategory,
   },
   {
-    path: "/locations/:category/:detail",
+    path: "/locations/:category/:details",
     element: LazyLocationDetail,
     showInNav: false,
     preload: importLocationDetail,
@@ -60,6 +66,18 @@ export const routes = [
     label: "Активности",
     showInNav: true,
     preload: importActivities,
+  },
+  {
+    path: "/activities/:category",
+    element: LazyActivitiesCategory,
+    showInNav: false,
+    preload: importActivitiesCategory,
+  },
+  {
+    path: "/activities/:category/:details",
+    element: LazyActivitiesDetail,
+    showInNav: false,
+    preload: importActivitiesDetail,
   },
   {
     path: "/map",

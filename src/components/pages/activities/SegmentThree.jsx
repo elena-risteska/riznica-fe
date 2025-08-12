@@ -12,11 +12,15 @@ const SegmentThree = () => {
       <Box sx={styles.column}>
         <Box component="img" src={photo1} alt="Activity" sx={styles.photo2} />
         <Box sx={styles.text2}>
-          <Typography variant="h3">Скијање</Typography>
+          <Typography variant="h3">Скијање и сноубординг</Typography>
           <Typography variant="h6" color="text.secondary">
             Искуси го зимскиот дух на планините
           </Typography>
-          <SecondaryButton component={RouterLink} to="/ski" sx={styles.button2}>
+          <SecondaryButton
+            component={RouterLink}
+            to="/activities/skiing"
+            sx={styles.button2}
+          >
             Види повеќе
           </SecondaryButton>
         </Box>
@@ -31,7 +35,7 @@ const SegmentThree = () => {
             </Typography>
             <SecondaryButton
               component={RouterLink}
-              to="/horse-riding"
+              to="/activities/horses"
               sx={styles.button2}
             >
               Види повеќе
@@ -47,7 +51,7 @@ const SegmentThree = () => {
             </Typography>
             <SecondaryButton
               component={RouterLink}
-              to="/paragliding"
+              to="/activities/paragliding"
               sx={styles.button2}
             >
               Види повеќе

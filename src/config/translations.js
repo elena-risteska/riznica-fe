@@ -1,10 +1,18 @@
 export const translations = {
   locations: "Локации",
+  activities: "Активности",
   waterfalls: "Водопади",
   archeology: "Археолошки локалитети",
   caves: "Пештери и карпести формации",
   canyons: "Кањони и клисури",
   landmarks: "Културно-историски знаменитости",
+  hiking: "Планинарење",
+  kayaking: "Кајакарење",
+  paragliding: "Параглајдинг",
+  skiing: "Скијање и сноубординг",
+  mtb: "Планински велосипедизам",
+  camping: "Кампување",
+  horses: "Јавање коњи",
 };
 
 export const subtitles = {
@@ -14,4 +22,11 @@ export const subtitles = {
   caves: "Пештери и карпести формации",
   canyons: "Кањони и клисури",
   landmarks: "Културно-историски знаменитости",
+  hiking: "Планинарење",
+  kayaking: "Кајакарење",
+  paragliding: "Параглајдинг",
+  skiing: "Скијање и сноубординг",
+  mtb: "Планински велосипедизам",
+  camping: "Кампување",
+  horses: "Јавање коњи",
 };
