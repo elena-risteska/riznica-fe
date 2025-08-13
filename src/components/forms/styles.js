@@ -82,7 +82,7 @@ export const registerFields = (hasError) => ({
     minHeight: {
       xs: "14px",
       sm: "16px",
-      md: "18px",
+      md: "28px",
     },
   },
   "& label.Mui-focused": {

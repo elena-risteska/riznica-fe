@@ -13,7 +13,11 @@ const HeaderLocations = ({ title, subtitle, reverse }) => {
     <Box sx={styles.header}>
       <Box sx={styles.text(reverse)}>
         <Typography variant="h2">{title}</Typography>
-        <Typography variant="h6" color="text.secondary">
+        <Typography
+          variant="h6"
+          color="text.secondary"
+          align={reverse ? "left" : "right"}
+        >
           {subtitle}
         </Typography>
       </Box>
