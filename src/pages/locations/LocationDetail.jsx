@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import { Box } from "@mui/material";
 import DefaultLayout from "../../layouts/DefaultLayout";
 import HeaderDetails from "../../components/pages/locations/HeaderDetails";
+import Directions from "../../components/pages/locations/Directions";
 
 const LocationDetail = () => {
   const [details, setDetails] = useState([]);
@@ -18,16 +20,19 @@ const LocationDetail = () => {
   }, []);
   return (
     <DefaultLayout breadcrumbs={true}>
-      <HeaderDetails
-        type={details.type}
-        title={details?.title}
-        location={details?.location}
-        mnv={details?.mnv}
-        height={details?.height}
-        river={details?.river}
-        mountain={details?.mountain}
-        mainInfo={details?.mainInfo}
-      />
+      <Box display="flex" flexDirection="column" gap={8}>
+        <HeaderDetails
+          type={details.type}
+          title={details?.title}
+          location={details?.location}
+          mnv={details?.mnv}
+          height={details?.height}
+          river={details?.river}
+          mountain={details?.mountain}
+          mainInfo={details?.mainInfo}
+        />
+        <Directions mainInfo={details?.mainInfo} />
+      </Box>
     </DefaultLayout>
   );
 };

@@ -26,6 +26,7 @@ const styles = {
     flexDirection: "row",
     justifyContent: "space-around",
     width: "100%",
+    mt: 6,
   },
   yellowBox: {
     display: "flex",
