@@ -10,7 +10,7 @@ const Map = ({ center = [41.9981, 21.4254], zoom = 15, markerData = [] }) => {
       <MapContainer
         center={center}
         zoom={zoom}
-        style={{ height: "100%", width: "100%" }}
+        style={{ width: "100%", height: "100%" }}
       >
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         {markerData.map((marker, index) => (

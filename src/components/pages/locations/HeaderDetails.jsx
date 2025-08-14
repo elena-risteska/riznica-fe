@@ -9,6 +9,7 @@ const HeaderDetails = ({
   height,
   river,
   mountain,
+  coords,
   mainInfo,
 }) => {
   const detailsList = [
@@ -17,6 +18,7 @@ const HeaderDetails = ({
     { label: "Висина на водопадот", value: height },
     { label: "Река", value: river },
     { label: "Планина", value: mountain },
+    { label: "Координати", value: coords },
   ];
   return (
     <Box sx={styles.detailsBox}>

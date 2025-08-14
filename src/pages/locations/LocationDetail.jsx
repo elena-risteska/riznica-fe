@@ -3,6 +3,7 @@ import { Box } from "@mui/material";
 import DefaultLayout from "../../layouts/DefaultLayout";
 import HeaderDetails from "../../components/pages/locations/HeaderDetails";
 import Directions from "../../components/pages/locations/Directions";
+import Map from "../../components/Map";
 
 const LocationDetail = () => {
   const [details, setDetails] = useState([]);
@@ -30,8 +31,20 @@ const LocationDetail = () => {
           river={details?.river}
           mountain={details?.mountain}
           mainInfo={details?.mainInfo}
+          coords={details?.coords}
         />
         <Directions mainInfo={details?.mainInfo} />
+        <Box sx={{ height: 600, px: 15, my: 4 }}>
+          <Map
+            center={[42.17629, 22.39641]}
+            markerData={[
+              {
+                position: [42.17629, 22.39641],
+                text: "Станечки водопад",
+              },
+            ]}
+          />
+        </Box>
       </Box>
     </DefaultLayout>
   );

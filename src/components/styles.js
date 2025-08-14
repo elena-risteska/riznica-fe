@@ -17,7 +17,17 @@ const styles = {
     height: "100vh",
     textAlign: "center",
   },
-  map: { height: "400px", borderRadius: 10, overflow: "hidden", boxShadow: 3 },
+  map: {
+    width: "100%",
+    height: "100%",
+    "& .leaflet-container": {
+      width: "100%",
+      height: "100%",
+    },
+    borderRadius: 10,
+    overflow: "hidden",
+    boxShadow: 3,
+  },
   scroller: {
     display: "flex",
     flexDirection: { xs: "column", md: "row" },
