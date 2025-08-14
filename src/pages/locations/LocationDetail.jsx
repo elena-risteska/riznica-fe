@@ -25,6 +25,8 @@ const LocationDetail = () => {
         mnv={details?.mnv}
         height={details?.height}
         river={details?.river}
+        mountain={details?.mountain}
+        mainInfo={details?.mainInfo}
       />
     </DefaultLayout>
   );

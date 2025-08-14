@@ -1,31 +1,43 @@
 import { Box, Typography } from "@mui/material";
+import styles from "./styles";
 
-const HeaderDetails = ({ title, location, mnv, height, river }) => {
+const HeaderDetails = ({
+  type,
+  title,
+  location,
+  mnv,
+  height,
+  river,
+  mountain,
+  mainInfo,
+}) => {
+  const detailsList = [
+    { label: "Местоположба", value: location },
+    { label: "Надморска височина", value: mnv },
+    { label: "Висина на водопадот", value: height },
+    { label: "Река", value: river },
+    { label: "Планина", value: mountain },
+  ];
   return (
-    <Box sx={{ display: "flex", flexDirection: "row" }}>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          backgroundColor: "#FFE991",
-          p: 4,
-          borderRadius: 4,
-        }}
-      >
-        <Typography variant="h5" mb={4}>
+    <Box sx={styles.detailsBox}>
+      <Box sx={styles.yellowBox}>
+        <Typography variant="h4" mb={4}>
           {title}
         </Typography>
-        <Typography variant="body1" mb={1}>
-          Местоположба: {location}
-        </Typography>
-        <Typography variant="body1" mb={1}>
-          Надморска височина: {mnv}
-        </Typography>
-        <Typography variant="body1" mb={1}>
-          Висина на водопадот: {height}
-        </Typography>
-        <Typography variant="body1" mb={1}>
-          Река: {river}
+        {detailsList.map((item, index) => (
+          <Typography
+            key={index}
+            variant="body1"
+            mb={index !== detailsList.length - 1 ? 1 : 0}
+            fontWeight={600}
+          >
+            {item.label}: {item.value}
+          </Typography>
+        ))}
+      </Box>
+      <Box sx={styles.textBox}>
+        <Typography variant="body1" lineHeight={2}>
+          {mainInfo}
         </Typography>
       </Box>
     </Box>

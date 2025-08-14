@@ -21,5 +21,25 @@ const styles = {
     mt: { xs: 4, md: 0 },
     order: { xs: 2, md: reverse ? 2 : 1 },
   }),
+  detailsBox: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    width: "100%",
+  },
+  yellowBox: {
+    display: "flex",
+    flexDirection: "column",
+    backgroundColor: "#feeda7ff",
+    p: 4,
+    borderRadius: 8,
+    gap: 2,
+  },
+  textBox: {
+    display: "flex",
+    flexDirection: "column",
+    width: "50%",
+    wordSpacing: 10,
+  },
 };
 export default styles;
