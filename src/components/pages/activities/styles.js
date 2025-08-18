@@ -81,5 +81,15 @@ const styles = {
     mx: { xs: "auto", md: 0 },
     gap: 4,
   },
+  redBox: {
+    display: "flex",
+    flexDirection: "column",
+    backgroundColor: "info.main",
+    color: "white",
+    p: 4,
+    borderRadius: 8,
+    gap: 2,
+    width: "35%",
+  },
 };
 export default styles;
