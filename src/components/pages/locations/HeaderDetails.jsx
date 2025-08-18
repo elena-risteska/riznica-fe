@@ -38,7 +38,7 @@ const HeaderDetails = ({
         ))}
       </Box>
       <Box sx={styles.textBox}>
-        <Typography variant="body1" lineHeight={2}>
+        <Typography variant="body1" lineHeight={2} align="right">
           {mainInfo}
         </Typography>
       </Box>

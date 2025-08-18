@@ -37,12 +37,12 @@ const styles = {
     width: {
       xs: 400,
       md: 650,
-      lg: 700,
+      lg: 800,
     },
     height: {
       xs: 650,
       md: 650,
-      lg: 700,
+      lg: 800,
     },
     borderRadius: { xs: "20%", md: "50%" },
     boxShadow: "0 10px 30px rgba(0,0,0,0.2)",

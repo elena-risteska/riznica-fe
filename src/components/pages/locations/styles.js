@@ -24,14 +24,16 @@ const styles = {
   detailsBox: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
     width: "100%",
     mt: 6,
+    alignItems: "center",
   },
   yellowBox: {
     display: "flex",
     flexDirection: "column",
-    backgroundColor: "#feeda7ff",
+    backgroundColor: "primary.main",
+    color: "text.secondary",
     p: 4,
     borderRadius: 8,
     gap: 2,
@@ -41,6 +43,12 @@ const styles = {
     flexDirection: "column",
     width: "50%",
     wordSpacing: 10,
+  },
+  storyBox: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
 };
 export default styles;
