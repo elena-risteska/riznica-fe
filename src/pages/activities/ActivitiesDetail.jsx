@@ -3,6 +3,7 @@ import { Box } from "@mui/material";
 import DefaultLayout from "../../layouts/DefaultLayout";
 import HeaderDetails from "../../components/pages/activities/HeaderDetails";
 import Directions from "../../components/pages/activities/Directions";
+import Map from "../../components/Map";
 
 const ActivitiesDetail = () => {
   const [details, setDetails] = useState([]);
@@ -36,6 +37,22 @@ const ActivitiesDetail = () => {
           coords={details?.coords}
         />
         <Directions text={details?.mainInfo} />
+        <Box sx={{ height: 600, my: 4 }}>
+          <Map
+            center={[41.233258, 20.544555]}
+            zoom={14}
+            markerData={[
+              {
+                position: [41.2432, 20.5333],
+                text: "Вевчанска локва",
+              },
+              {
+                position: [41.223316, 20.55581],
+                text: "Горна Белица",
+              },
+            ]}
+          />
+        </Box>
       </Box>
     </DefaultLayout>
   );
