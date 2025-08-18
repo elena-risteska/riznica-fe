@@ -30,13 +30,11 @@ const HeaderDetails = ({
         flexDirection: "row",
         justifyContent: "space-between",
         width: "100%",
-        px: 8,
-        gap: 6,
         alignItems: "center",
       }}
     >
       <Box sx={{ display: "flex", width: "50%" }}>
-        <Typography variant="body1" lineHeight={2}>
+        <Typography variant="body1" lineHeight={2} align="justify">
           {mainInfo}
         </Typography>
       </Box>
