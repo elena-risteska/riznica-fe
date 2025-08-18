@@ -14,11 +14,11 @@ const HeaderDetails = ({
 }) => {
   const detailsList = [
     { label: "Местоположба", value: location },
+    { label: "Координати", value: coords },
     { label: "Надморска височина", value: mnv },
     { label: "Висина на водопадот", value: height },
     { label: "Река", value: river },
     { label: "Планина", value: mountain },
-    { label: "Координати", value: coords },
   ];
   return (
     <Box sx={styles.detailsBox}>
@@ -38,7 +38,7 @@ const HeaderDetails = ({
         ))}
       </Box>
       <Box sx={styles.textBox}>
-        <Typography variant="body1" lineHeight={2} align="right">
+        <Typography variant="body1" lineHeight={2}>
           {mainInfo}
         </Typography>
       </Box>

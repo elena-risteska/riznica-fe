@@ -25,7 +25,12 @@ const LocationDetail = () => {
   }, []);
   return (
     <DefaultLayout breadcrumbs={true}>
-      <Box display="flex" flexDirection="column" gap={8} px={10}>
+      <Box
+        display="flex"
+        flexDirection="column"
+        gap={{ xs: 2, md: 8 }}
+        px={{ xs: 2, md: 10 }}
+      >
         <HeaderDetails
           type={details.type}
           title={details?.title}

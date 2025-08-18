@@ -17,7 +17,11 @@ const Directions = ({ mainInfo }) => {
         component="img"
         alt="photo1"
         src={photo2}
-        sx={{ width: 300, height: "auto", borderRadius: 8 }}
+        sx={{
+          width: { xs: 300, sm: 500, md: 300 },
+          height: "auto",
+          borderRadius: 8,
+        }}
       />
     </Box>
   );

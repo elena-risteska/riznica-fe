@@ -23,7 +23,7 @@ const styles = {
   }),
   detailsBox: {
     display: "flex",
-    flexDirection: "row",
+    flexDirection: { xs: "column", md: "row" },
     justifyContent: "space-between",
     width: "100%",
     mt: 6,
@@ -41,12 +41,14 @@ const styles = {
   textBox: {
     display: "flex",
     flexDirection: "column",
-    width: "50%",
+    width: { xs: "100%", md: "40%", lg: "60%" },
     wordSpacing: 10,
+    my: { xs: 4, md: 0 },
+    textAlign: "justify",
   },
   storyBox: {
     display: "flex",
-    flexDirection: "row",
+    flexDirection: { xs: "column", md: "row" },
     justifyContent: "space-between",
     alignItems: "center",
   },
