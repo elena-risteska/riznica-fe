@@ -1,6 +1,7 @@
 import React from "react";
 
 export const importHome = () => import("../pages/Home");
+export const importProfile = () => import("../pages/Profile");
 export const importAbout = () => import("../pages/About");
 export const importLogin = () => import("../pages/Login");
 export const importRegister = () => import("../pages/Register");
@@ -19,6 +20,7 @@ export const importActivitiesDetail = () =>
   import("../pages/activities/ActivitiesDetail");
 
 const LazyHome = React.lazy(importHome);
+const LazyProfile = React.lazy(importProfile);
 const LazyLocations = React.lazy(importLocations);
 const LazyLocationCategory = React.lazy(importLocationCategory);
 const LazyLocationDetail = React.lazy(importLocationDetail);
@@ -40,6 +42,12 @@ export const routes = [
     label: "Дома",
     showInNav: true,
     preload: importHome,
+  },
+  {
+    path: "/profile",
+    element: LazyProfile,
+    showInNav: false,
+    preload: importProfile,
   },
   {
     path: "/locations",
