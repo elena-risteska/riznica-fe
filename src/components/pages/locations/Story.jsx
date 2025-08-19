@@ -23,7 +23,7 @@ const Story = ({ text }) => {
         }}
       >
         <Typography variant="h5" align="right" mb={2} mt={{ xs: 10, md: 0 }}>
-          Легенда
+          Приказна
         </Typography>
         <Typography variant="body1" align="justify" lineHeight={2}>
           {text}

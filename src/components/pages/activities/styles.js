@@ -91,5 +91,11 @@ const styles = {
     gap: 2,
     width: "35%",
   },
+  legendBox: {
+    display: "flex",
+    flexDirection: { xs: "column", md: "row" },
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
 };
 export default styles;
