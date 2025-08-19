@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, act } from "react";
 import { Box } from "@mui/material";
 import DefaultLayout from "../../layouts/DefaultLayout";
 import HeaderDetails from "../../components/pages/activities/HeaderDetails";
@@ -6,6 +6,7 @@ import Directions from "../../components/pages/activities/Directions";
 import Map from "../../components/Map";
 import Tour from "../../components/pages/activities/Tour";
 import Legend from "../../components/pages/activities/Legend";
+import ScrollerSegment from "../../components/ScrollerSegment";
 
 const ActivitiesDetail = () => {
   const [details, setDetails] = useState([]);
@@ -57,6 +58,14 @@ const ActivitiesDetail = () => {
         </Box>
         <Tour text1={details?.mainInfo} text2={details?.mainInfo} />
         <Legend text={details?.mainInfo} />
+        <Box>
+          <ScrollerSegment
+            items={activities}
+            visibleItems={4}
+            title="Слични препораки "
+            to="/activities"
+          />
+        </Box>
       </Box>
     </DefaultLayout>
   );
