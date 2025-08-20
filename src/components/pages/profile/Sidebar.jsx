@@ -1,5 +1,24 @@
-import { Box, Typography, Stack, Avatar } from "@mui/material";
+import { Box, Typography, Stack, Avatar, Divider } from "@mui/material";
+import { useState } from "react";
+import InfoForm from "../../forms/InfoForm";
+
 const Sidebar = ({ firstName, lastName, city, bio }) => {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    username: "",
+    email: "",
+    city: "",
+    bio: "",
+  });
+
+  const handleSubmit = async (data) => {
+    try {
+      console.log("Success:", data);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
   return (
     <Box
       sx={{
@@ -7,7 +26,6 @@ const Sidebar = ({ firstName, lastName, city, bio }) => {
         flexDirection: "column",
         gap: 6,
         width: "30%",
-        height: "100vh",
         position: "relative",
         "&::after": {
           content: '""',
@@ -48,6 +66,12 @@ const Sidebar = ({ firstName, lastName, city, bio }) => {
           {bio}
         </Typography>
       </Box>
+      <Divider sx={{ mb: 2, mr: 7 }} />
+      <InfoForm
+        formData={formData}
+        setFormData={setFormData}
+        onSubmit={handleSubmit}
+      />
     </Box>
   );
 };

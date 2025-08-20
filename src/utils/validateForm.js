@@ -1,16 +1,31 @@
 export const validateForm = (formData) => {
   const errors = {};
 
-  if ("fullName" in formData && !formData.fullName?.trim()) {
-    errors.fullName = "Внеси име и презиме";
+  const nameRegex = /^[A-Za-zА-Ша-ш\s]+$/;
+
+  if ("fullName" in formData) {
+    if (!formData.fullName?.trim()) {
+      errors.fullName = "Внеси име и презиме";
+    } else if (!nameRegex.test(formData.fullName.trim())) {
+      errors.fullName =
+        "Името и презимето не смеат да содржат броеви или знаци";
+    }
   }
 
-  if ("firstName" in formData && !formData.firstName?.trim()) {
-    errors.firstName = "Внеси име";
+  if ("firstName" in formData) {
+    if (!formData.firstName?.trim()) {
+      errors.firstName = "Внеси име";
+    } else if (!nameRegex.test(formData.firstName.trim())) {
+      errors.firstName = "Името не смее да содржи броеви или знаци";
+    }
   }
 
-  if ("lastName" in formData && !formData.lastName?.trim()) {
-    errors.lastName = "Внеси презиме";
+  if ("lastName" in formData) {
+    if (!formData.lastName?.trim()) {
+      errors.lastName = "Внеси презиме";
+    } else if (!nameRegex.test(formData.lastName.trim())) {
+      errors.lastName = "Презимето не смее да содржи броеви или знаци";
+    }
   }
 
   if ("username" in formData && !formData.username?.trim()) {
