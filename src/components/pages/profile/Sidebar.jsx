@@ -1,8 +1,11 @@
 import { Box, Typography, Stack, Avatar, Divider } from "@mui/material";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import InfoForm from "../../forms/InfoForm";
+import PrimaryButton from "../../ui/buttons/PrimaryButton";
 
 const Sidebar = ({ firstName, lastName, city, bio }) => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -72,6 +75,19 @@ const Sidebar = ({ firstName, lastName, city, bio }) => {
         setFormData={setFormData}
         onSubmit={handleSubmit}
       />
+      <Divider sx={{ mr: 7 }} />
+      <PrimaryButton
+        onClick={() => navigate("/login")}
+        sx={{ backgroundColor: "primary.main", width: "90%", borderRadius: 4 }}
+      >
+        Одјави се
+      </PrimaryButton>
+      <PrimaryButton
+        onClick={() => navigate("/")}
+        sx={{ backgroundColor: "primary.main", width: "90%", borderRadius: 4 }}
+      >
+        Избриши го профилот
+      </PrimaryButton>
     </Box>
   );
 };
