@@ -27,7 +27,7 @@ const Sidebar = ({ firstName, lastName, city, bio }) => {
       sx={{
         display: "flex",
         flexDirection: "column",
-        gap: 6,
+        gap: 4,
         width: "30%",
         position: "relative",
         "&::after": {
