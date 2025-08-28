@@ -2,8 +2,10 @@ import { Box, Typography } from "@mui/material";
 import { useState } from "react";
 import LoginForm from "../../forms/LoginForm";
 import styles from "./styles";
+import api from "../../../../api";
 
 const LoginBlock = () => {
+  const [apiError, setApiError] = useState("");
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -12,9 +14,29 @@ const LoginBlock = () => {
 
   const handleSubmit = async (data) => {
     try {
-      console.log("Success:", data);
+      setApiError("");
+      const response = await api.post("/auth/login", data);
+
+      console.log("Logged in successfully:", response.data);
+
+      localStorage.setItem("token", response.data.token);
+
+      return { success: true };
     } catch (error) {
-      console.error("Error:", error);
+      let errMsg = "Login failed. Try again.";
+
+      if (error.response?.data) {
+        if (typeof error.response.data === "string") {
+          errMsg = error.response.data;
+        } else if (typeof error.response.data.message === "string") {
+          errMsg = error.response.data.message;
+        } else {
+          errMsg = JSON.stringify(error.response.data);
+        }
+      }
+
+      setApiError(errMsg);
+      return { success: false };
     }
   };
   return (
@@ -29,6 +51,7 @@ const LoginBlock = () => {
         formData={formData}
         setFormData={setFormData}
         onSubmit={handleSubmit}
+        apiError={apiError}
       />
     </Box>
   );

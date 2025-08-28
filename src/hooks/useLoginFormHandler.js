@@ -29,14 +29,17 @@ const useLoginFormHandler = ({ onSubmit, formData, setFormData }) => {
 
     try {
       if (onSubmit) {
-        await onSubmit(formData);
-        console.log("Form data:", formData);
-        navigate("/");
-        return true;
+        const result = await onSubmit(formData);
+
+        if (result?.success) {
+          console.log("Form data:", formData);
+          navigate("/");
+        }
       }
     } catch (err) {
       console.error("Submission error:", err);
-      return false;
+    } finally {
+      setLoading(false);
     }
   };
 

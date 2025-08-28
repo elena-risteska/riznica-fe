@@ -34,7 +34,7 @@ const fields = [
   },
 ];
 
-const LoginForm = ({ onSubmit, formData, setFormData }) => {
+const LoginForm = ({ onSubmit, formData, setFormData, apiError }) => {
   const { errors, loading, handleChange, handleSubmit } = useLoginFormHandler({
     onSubmit,
     formData,
@@ -117,6 +117,11 @@ const LoginForm = ({ onSubmit, formData, setFormData }) => {
             Ја заборави лозинката?
           </Link>
         </Box>
+        {apiError && (
+          <Typography color="white" sx={{ mb: 1, textAlign: "center" }}>
+            {apiError}
+          </Typography>
+        )}
         <PrimaryButton type="submit" sx={styles.submitLogin} disabled={loading}>
           {loading ? (
             <CircularProgress size={24} color="#ffffff" />
