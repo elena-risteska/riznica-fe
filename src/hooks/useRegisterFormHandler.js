@@ -22,12 +22,17 @@ export const useRegisterFormHandler = (formData, setFormData, onSubmit) => {
       setLoading(true);
       try {
         if (onSubmit) {
-          await onSubmit(formData);
-          console.log("Form data:", formData);
-          navigate("/");
+          const result = await onSubmit(formData);
+
+          if (result?.success) {
+            console.log("Form data:", formData);
+            navigate("/");
+          }
         }
       } catch (err) {
         console.error("Submission error:", err);
+      } finally {
+        setLoading(false);
       }
     }
   };

@@ -16,7 +16,7 @@ import PrimaryButton from "../ui/buttons/PrimaryButton";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
-const RegisterForm = ({ onSubmit, formData, setFormData }) => {
+const RegisterForm = ({ onSubmit, formData, setFormData, apiError }) => {
   const [showPassword, setShowPassword] = useState(false);
   const { errors, loading, handleChange, handleSubmit } =
     useRegisterFormHandler(formData, setFormData, onSubmit);
@@ -69,7 +69,11 @@ const RegisterForm = ({ onSubmit, formData, setFormData }) => {
           );
         })}
       </Stack>
-
+      {apiError && (
+        <Typography color="white" sx={{ textAlign: "center" }}>
+          {apiError}
+        </Typography>
+      )}
       <PrimaryButton
         type="submit"
         sx={styles.submitRegister}
