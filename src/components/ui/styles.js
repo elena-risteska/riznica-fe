@@ -15,7 +15,7 @@ const styles = {
 };
 
 const search = (sx = {}) => ({
-  backgroundColor: "#B12C00",
+  backgroundColor: "primary.main",
   borderRadius: "999px",
   input: {
     color: "white",
@@ -23,7 +23,7 @@ const search = (sx = {}) => ({
   },
   "& .MuiFilledInput-root": {
     borderRadius: "999px",
-    backgroundColor: "#B12C00",
+    backgroundColor: "primary.main",
   },
   "& .MuiFilledInput-underline:before, & .MuiFilledInput-underline:after": {
     display: "none",

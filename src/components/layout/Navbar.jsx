@@ -56,6 +56,7 @@ const Navbar = () => {
               sx={styles.primaryInNavbar}
               component={RouterLink}
               to="/login"
+              color="primary"
             >
               Најава
             </PrimaryButton>
@@ -90,7 +91,8 @@ const Navbar = () => {
               component={RouterLink}
               to="/login"
               onClick={toggleDrawer}
-              sx={{ borderRadius: 4 }}
+              sx={{ borderRadius: 4, color: "white" }}
+              color="primary"
             >
               Најава
             </PrimaryButton>

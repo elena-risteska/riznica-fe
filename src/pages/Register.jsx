@@ -41,7 +41,7 @@ const Register = () => {
 
   return (
     <>
-      <BackButton />
+      <BackButton color="primary" />
       <Box sx={styles.registerLayout}>
         <Box sx={styles.circle}>
           <RegisterForm

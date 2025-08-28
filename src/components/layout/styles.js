@@ -63,7 +63,7 @@ export const styles = {
     zIndex: 1300,
     px: 4,
     py: 2,
-    backgroundColor: "#B12C00",
+    backgroundColor: "primary.main",
     borderRadius: "30px 30px 0 0",
     boxShadow: "0px -4px 20px rgba(0,0,0,0.1)",
     display: "flex",
@@ -74,7 +74,7 @@ export const styles = {
     flexDirection: { xs: "column", sm: "row" },
   },
   navbar: {
-    borderRadius: "0 0 30px 30px",
+    // borderRadius: "0 0 30px 30px",
     px: 1,
     backgroundColor: "white",
     position: "sticky",
@@ -123,6 +123,7 @@ export const styles = {
     },
     borderRadius: 4,
     py: 1,
+    backgroundColor: "primary.main",
   },
   primaryInNavbar: {
     display: { xs: "none", md: "flex" },
@@ -130,6 +131,7 @@ export const styles = {
     borderRadius: "1rem",
     py: 1,
     px: 3,
+    color: "white",
   },
   drawer: {
     backgroundColor: "white",
