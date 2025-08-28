@@ -1,7 +1,8 @@
 import React from "react";
+import Profile from "../pages/Profile";
+import ProtectedRoute from "../utils/ProtectedRoute";
 
 export const importHome = () => import("../pages/Home");
-export const importProfile = () => import("../pages/Profile");
 export const importAbout = () => import("../pages/About");
 export const importLogin = () => import("../pages/Login");
 export const importRegister = () => import("../pages/Register");
@@ -20,7 +21,6 @@ export const importActivitiesDetail = () =>
   import("../pages/activities/ActivitiesDetail");
 
 const LazyHome = React.lazy(importHome);
-const LazyProfile = React.lazy(importProfile);
 const LazyLocations = React.lazy(importLocations);
 const LazyLocationCategory = React.lazy(importLocationCategory);
 const LazyLocationDetail = React.lazy(importLocationDetail);
@@ -38,96 +38,99 @@ const LazyNotFound = React.lazy(importNotFound);
 export const routes = [
   {
     path: "/",
-    element: LazyHome,
+    element: <LazyHome />,
     label: "Дома",
     showInNav: true,
     preload: importHome,
   },
   {
     path: "/profile",
-    element: LazyProfile,
+    element: (
+      <ProtectedRoute>
+        <Profile />
+      </ProtectedRoute>
+    ),
     showInNav: false,
-    preload: importProfile,
   },
   {
     path: "/locations",
-    element: LazyLocations,
+    element: <LazyLocations />,
     label: "Локации",
     showInNav: true,
     preload: importLocations,
   },
   {
     path: "/locations/:category",
-    element: LazyLocationCategory,
+    element: <LazyLocationCategory />,
     showInNav: false,
     preload: importLocationCategory,
   },
   {
     path: "/locations/:category/:details",
-    element: LazyLocationDetail,
+    element: <LazyLocationDetail />,
     showInNav: false,
     preload: importLocationDetail,
   },
   {
     path: "/activities",
-    element: LazyActivities,
+    element: <LazyActivities />,
     label: "Активности",
     showInNav: true,
     preload: importActivities,
   },
   {
     path: "/activities/:category",
-    element: LazyActivitiesCategory,
+    element: <LazyActivitiesCategory />,
     showInNav: false,
     preload: importActivitiesCategory,
   },
   {
     path: "/activities/:category/:details",
-    element: LazyActivitiesDetail,
+    element: <LazyActivitiesDetail />,
     showInNav: false,
     preload: importActivitiesDetail,
   },
   {
     path: "/map",
-    element: LazyMap,
+    element: <LazyMap />,
     label: "Мапа",
     showInNav: true,
     preload: importHome,
   },
   {
     path: "/about",
-    element: LazyAbout,
+    element: <LazyAbout />,
     label: "За нас",
     showInNav: true,
     preload: importAbout,
   },
   {
     path: "/login",
-    element: LazyLogin,
+    element: <LazyLogin />,
     showInNav: false,
     preload: importLogin,
   },
   {
     path: "/register",
-    element: LazyRegister,
+    element: <LazyRegister />,
     showInNav: false,
     preload: importRegister,
   },
   {
     path: "/forgot-password",
-    element: LazyForgotPassword,
+    element: <LazyForgotPassword />,
     showInNav: false,
     preload: importForgotPassword,
   },
   {
     path: "/recover-account",
-    element: LazyRecoverAccount,
+    element: <LazyRecoverAccount />,
     showInNav: false,
     preload: importRecoverAccount,
   },
   {
     path: "*",
-    element: LazyNotFound,
+    element: <LazyNotFound />,
     showInNav: false,
     preload: importNotFound,
   },
