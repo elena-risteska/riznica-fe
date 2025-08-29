@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { getLocations } from "../services/homeService";
 import useVisibleItems from "../hooks/useVisibleItems";
 import Banner from "../components/layout/Banner";
 import DefaultLayout from "../layouts/DefaultLayout";
@@ -11,7 +12,6 @@ const Home = () => {
   const [locations, setLocations] = useState([]);
   const [comments, setComments] = useState([]);
   const [activities, setActivities] = useState([]);
-
   const visibleItems = useVisibleItems();
 
   useEffect(() => {
@@ -20,12 +20,21 @@ const Home = () => {
       .then((data) => {
         console.log("Fetched data:", data);
         setComments(data.comments);
-        setLocations(data.locations);
         setActivities(data.activities);
       })
       .catch((err) => {
         console.error("Failed to load data:", err);
       });
+    const fetchData = async () => {
+      try {
+        const locationsData = await getLocations();
+        setLocations(locationsData);
+      } catch (err) {
+        console.error("Failed to load data from api:", err);
+      }
+    };
+
+    fetchData();
   }, []);
 
   return (
@@ -38,13 +47,13 @@ const Home = () => {
         to="/locations"
       />
       <MapHome />
-      <ScrollerSegment
+      {/* <ScrollerSegment
         items={activities}
-        visibleItems={4}
+        visibleItems={visibleItems}
         title="Адреналински активности"
         to="/activities"
-      />
-      <CommentsHome comments={comments} visibleItems={3} />
+      /> */}
+      <CommentsHome comments={comments} visibleItems={visibleItems} />
       <Banner />
     </DefaultLayout>
   );

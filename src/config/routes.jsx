@@ -75,7 +75,7 @@ export const routes = [
     path: "/activities",
     element: <LazyActivities />,
     label: "Активности",
-    showInNav: true,
+    showInNav: false,
     preload: importActivities,
   },
   {
