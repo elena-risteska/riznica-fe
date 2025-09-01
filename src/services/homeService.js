@@ -2,7 +2,11 @@ import api from "../../api";
 
 export const getLocations = async () => {
   const res = await api.get("/locations");
-  return res.data;
+  const locationsWithPath = res.data.map((loc) => ({
+    ...loc,
+    to: `/location/${loc.type}/details`,
+  }));
+  return locationsWithPath;
 };
 
 export const getComments = async () => {

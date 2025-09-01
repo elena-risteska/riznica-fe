@@ -8,7 +8,9 @@ import {
   List,
   Menu,
   MenuItem,
+  useMediaQuery,
 } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import { useLocation, Link as RouterLink } from "react-router-dom";
 import { useState } from "react";
 import { routes } from "../../config/routes";
@@ -21,6 +23,9 @@ const Navbar = () => {
   const { pathname } = useLocation();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
+
+  const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
 
   const navItems = routes.filter((route) => route.showInNav);
 
@@ -43,6 +48,14 @@ const Navbar = () => {
     { label: "Природни реткости", path: "/location/rarity" },
   ];
 
+  const handleOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <>
       <AppBar elevation={5} component="nav" sx={styles.navbar}>
@@ -56,24 +69,31 @@ const Navbar = () => {
               index === 1 ? (
                 <Box
                   key={path}
-                  onMouseEnter={(e) => setAnchorEl(e.currentTarget)}
-                  onMouseLeave={() => setAnchorEl(null)}
+                  onMouseEnter={isDesktop ? handleOpen : undefined}
+                  onMouseLeave={isDesktop ? handleClose : undefined}
+                  sx={{ display: "inline-block" }}
                 >
                   <TextButton
                     isActive={isActiveRoute(path)}
                     sx={{ borderRadius: "1rem" }}
+                    onClick={(e) => {
+                      if (anchorEl) {
+                        handleClose();
+                      } else {
+                        handleOpen(e);
+                      }
+                    }}
                   >
                     {label}
                   </TextButton>
+
                   <Menu
                     anchorEl={anchorEl}
                     open={Boolean(anchorEl)}
-                    onClose={() => setAnchorEl(null)}
-                    disablePortal
+                    onClose={handleClose}
                     disableScrollLock
                     MenuListProps={{
-                      onMouseEnter: () => setAnchorEl(anchorEl),
-                      onMouseLeave: () => setAnchorEl(null),
+                      onClick: handleClose,
                     }}
                     PaperProps={{
                       sx: {
@@ -91,7 +111,6 @@ const Navbar = () => {
                         key={type.path}
                         component={RouterLink}
                         to={type.path}
-                        onClick={() => setAnchorEl(null)}
                         sx={{
                           py: 1.5,
                           borderRadius: "1rem",
