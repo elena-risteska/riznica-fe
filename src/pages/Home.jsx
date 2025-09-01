@@ -11,7 +11,7 @@ import MapHome from "../components/pages/home/MapHome";
 const Home = () => {
   const [locations, setLocations] = useState([]);
   const [comments, setComments] = useState([]);
-  const [activities, setActivities] = useState([]);
+  // const [activities, setActivities] = useState([]);
   const visibleItems = useVisibleItems();
 
   useEffect(() => {
@@ -20,7 +20,7 @@ const Home = () => {
       .then((data) => {
         console.log("Fetched data:", data);
         setComments(data.comments);
-        setActivities(data.activities);
+        // setActivities(data.activities);
       })
       .catch((err) => {
         console.error("Failed to load data:", err);

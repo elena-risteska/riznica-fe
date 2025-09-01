@@ -6,6 +6,8 @@ import {
   IconButton,
   Drawer,
   List,
+  Menu,
+  MenuItem,
 } from "@mui/material";
 import { useLocation, Link as RouterLink } from "react-router-dom";
 import { useState } from "react";
@@ -18,6 +20,7 @@ import TextButton from "../ui/buttons/TextButton";
 const Navbar = () => {
   const { pathname } = useLocation();
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const navItems = routes.filter((route) => route.showInNav);
 
@@ -30,6 +33,14 @@ const Navbar = () => {
     return pathname === path || pathname.startsWith(path + "/");
   };
 
+  const locationTypes = [
+    { label: "Водопади и извори", path: "/locations/waterfalls" },
+    { label: "Археолошки локалитети", path: "/locations/archeology" },
+    { label: "Пештери и карпести формации", path: "/locations/caves" },
+    { label: "Кањони и клисури", path: "/locations/canyons" },
+    { label: "Културно-историски знаменитости", path: "/locations/landmarks" },
+  ];
+
   return (
     <>
       <AppBar elevation={5} component="nav" sx={styles.navbar}>
@@ -37,20 +48,77 @@ const Navbar = () => {
           <Typography sx={styles.riznica} variant="h6">
             Ризница
           </Typography>
+
           <Box sx={styles.menu}>
-            {navItems.map(({ path, label, preload }) => (
-              <TextButton
-                key={path}
-                component={RouterLink}
-                to={path}
-                isActive={isActiveRoute(path)}
-                onMouseEnter={preload}
-                sx={{ borderRadius: "1rem" }}
-              >
-                {label}
-              </TextButton>
-            ))}
+            {navItems.map(({ path, label, preload }, index) =>
+              index === 1 ? (
+                <Box
+                  key={path}
+                  onMouseEnter={(e) => setAnchorEl(e.currentTarget)}
+                  onMouseLeave={() => setAnchorEl(null)}
+                >
+                  <TextButton
+                    isActive={isActiveRoute(path)}
+                    sx={{ borderRadius: "1rem" }}
+                  >
+                    {label}
+                  </TextButton>
+                  <Menu
+                    anchorEl={anchorEl}
+                    open={Boolean(anchorEl)}
+                    onClose={() => setAnchorEl(null)}
+                    disablePortal
+                    disableScrollLock
+                    MenuListProps={{
+                      onMouseEnter: () => setAnchorEl(anchorEl),
+                      onMouseLeave: () => setAnchorEl(null),
+                    }}
+                    PaperProps={{
+                      sx: {
+                        mt: 1,
+                        minWidth: 125,
+                        px: 0.5,
+                        py: 1,
+                        borderRadius: "1rem",
+                        boxShadow: 4,
+                      },
+                    }}
+                  >
+                    {locationTypes.map((type) => (
+                      <MenuItem
+                        key={type.path}
+                        component={RouterLink}
+                        to={type.path}
+                        onClick={() => setAnchorEl(null)}
+                        sx={{
+                          py: 1.5,
+                          borderRadius: "1rem",
+                          "&:hover": {
+                            backgroundColor: "primary.main",
+                            color: "white",
+                          },
+                        }}
+                      >
+                        {type.label}
+                      </MenuItem>
+                    ))}
+                  </Menu>
+                </Box>
+              ) : (
+                <TextButton
+                  key={path}
+                  component={RouterLink}
+                  to={path}
+                  isActive={isActiveRoute(path)}
+                  onMouseEnter={preload}
+                  sx={{ borderRadius: "1rem" }}
+                >
+                  {label}
+                </TextButton>
+              )
+            )}
           </Box>
+
           <Box sx={styles.login}>
             <PrimaryButton
               sx={styles.primaryInNavbar}
@@ -61,6 +129,7 @@ const Navbar = () => {
               Најава
             </PrimaryButton>
           </Box>
+
           <IconButton onClick={toggleDrawer} color="info" sx={styles.menuIcon}>
             <MenuIcon />
           </IconButton>
