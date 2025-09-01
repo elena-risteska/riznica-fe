@@ -6,33 +6,43 @@ import HeaderLocations from "../../components/pages/locations/HeaderLocations";
 import DefaultLayout from "../../layouts/DefaultLayout";
 import PhotoCard from "../../components/ui/cards/PhotoCard";
 import styles from "../styles";
+import api from "../../../api";
 
 const LocationCategory = () => {
-  const [waterfalls, setWaterfalls] = useState([]);
+  const [locations, setLocations] = useState([]);
   const { category } = useParams();
   const title = translations[category] || category;
   const subtitle = subtitles[category] || category;
 
   useEffect(() => {
-    fetch("/mock-data.json")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("Fetched data:", data);
-        setWaterfalls(data.locations);
-      })
-      .catch((err) => {
-        console.error("Failed to load data:", err);
-      });
-  }, []);
+    const fetchLocations = async () => {
+      try {
+        const response = await api.get("/locations");
+
+        const filtered = response.data
+          .filter((loc) => loc.type === category)
+          .map((loc) => ({
+            ...loc,
+            to: `/location/${loc.type}/details`,
+          }));
+
+        setLocations(filtered);
+      } catch (err) {
+        console.error("Failed to load locations:", err);
+      }
+    };
+
+    fetchLocations();
+  }, [category]);
 
   return (
     <DefaultLayout breadcrumbs={true}>
       <HeaderLocations title={title} subtitle={subtitle} reverse={true} />
       <Box sx={styles.cardsGrid}>
         <Grid container spacing={6} justifyContent="center">
-          {waterfalls.map((item) => (
+          {locations.map((item) => (
             <Grid
-              key={item.id}
+              key={item._id}
               item
               xs={12}
               sm={6}
