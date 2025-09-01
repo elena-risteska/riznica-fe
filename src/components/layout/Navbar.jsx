@@ -34,11 +34,13 @@ const Navbar = () => {
   };
 
   const locationTypes = [
-    { label: "Водопади и извори", path: "/locations/waterfalls" },
-    { label: "Археолошки локалитети", path: "/locations/archeology" },
-    { label: "Пештери и карпести формации", path: "/locations/caves" },
-    { label: "Кањони и клисури", path: "/locations/canyons" },
-    { label: "Културно-историски знаменитости", path: "/locations/landmarks" },
+    { label: "Водопади и извори", path: "/location/waterfall" },
+    { label: "Археолошки локалитети", path: "/location/archeology" },
+    { label: "Пештери и карпести формации", path: "/location/cave" },
+    { label: "Кањони и клисури", path: "/location/canyon" },
+    { label: "Културно-историски знаменитости", path: "/location/landmark" },
+    { label: "Езера", path: "/location/lake" },
+    { label: "Природни реткости", path: "/location/rarity" },
   ];
 
   return (

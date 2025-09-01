@@ -4,39 +4,31 @@ import useVisibleItems from "../../hooks/useVisibleItems";
 import ScrollerSegment from "../../components/ScrollerSegment";
 import HeaderLocations from "../../components/pages/locations/HeaderLocations";
 import locations from "../../config/locations";
+import api from "../../../api";
 
 const Locations = () => {
-  const [waterfalls, setWaterfalls] = useState([]);
-  const [archeology, setArcheology] = useState([]);
-  const [caves, setCaves] = useState([]);
-  const [canyons, setCanyons] = useState([]);
-  const [landmarks, setLandmarks] = useState([]);
-
+  const [allLocations, setAllLocations] = useState([]);
   const visibleItems = useVisibleItems();
 
-  const itemsMap = {
-    waterfalls,
-    archeology,
-    caves,
-    canyons,
-    landmarks,
-  };
-
   useEffect(() => {
-    fetch("/mock-data.json")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("Fetched data:", data);
-        setWaterfalls(data.locations);
-        setArcheology(data.locations);
-        setCaves(data.locations);
-        setCanyons(data.locations);
-        setLandmarks(data.locations);
-      })
-      .catch((err) => {
-        console.error("Failed to load data:", err);
-      });
+    const fetchLocations = async () => {
+      try {
+        const response = await api.get("/locations");
+        const locationsWithPath = response.data.map((loc) => ({
+          ...loc,
+          to: `/location/${loc.type}/details`,
+        }));
+        setAllLocations(locationsWithPath);
+      } catch (err) {
+        console.error("Failed to load locations:", err);
+      }
+    };
+    fetchLocations();
   }, []);
+
+  const getLocationsByType = (type) => {
+    return allLocations.filter((loc) => loc.type === type);
+  };
 
   return (
     <DefaultLayout>
@@ -45,10 +37,11 @@ const Locations = () => {
         subtitle="Пребарувај низ бројноста атракции и погледни што се крие во оваа земја"
         reverse={true}
       />
+
       {locations.map(({ title, to, key }) => (
         <ScrollerSegment
           key={to}
-          items={itemsMap[key]}
+          items={getLocationsByType(key)}
           visibleItems={visibleItems}
           title={title}
           to={to}

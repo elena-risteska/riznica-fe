@@ -60,7 +60,7 @@
       "image": null,
       "title": "Водно",
       "description": "Популарна излетничка дестинација во близина на Скопје.",
-      "to": "/locations/waterfalls/vodno"
+      "to": "/location/waterfall/vodno"
     },
     {
       "image": null,
@@ -72,37 +72,37 @@
       "image": null,
       "title": "Галичник",
       "description": "Село познато по традиционалната Галичка свадба и архитектура.",
-      "to": "/locations/caves/galicnik"
+      "to": "/location/cave/galicnik"
     },
     {
       "image": null,
       "title": "Маврово",
       "description": "Национален парк и ски-центар со прекрасно езеро и планински пејзажи.",
-      "to": "/locations/canyons/mavrovo"
+      "to": "/location/canyon/mavrovo"
     },
     {
       "image": null,
       "title": "Кокино",
       "description": "Мегалитска опсерваторија стара над 3.800 години.",
-      "to": "/locations/landmarks/kokino"
+      "to": "/location/landmark/kokino"
     },
     {
       "image": null,
       "title": "Крушево",
       "description": "Највисоко поставениот град во Македонија, со богата историја и традиција.",
-      "to": "/locations/waterfalls/krushevo"
+      "to": "/location/waterfall/krushevo"
     },
     {
       "image": null,
       "title": "Шар Планина",
       "description": "Планински венец познат по своите езера, пасишта и разновиден животински свет.",
-      "to": "/locations/archeology/sar-planina"
+      "to": "/location/archeology/sar-planina"
     },
     {
       "image": null,
       "title": "Берово",
       "description": "Мал град во источна Македонија, познат по свежиот воздух и природните убавини.",
-      "to": "/locations/canyons/berovo"
+      "to": "/location/canyon/berovo"
     }
   ],
   "activities": [

@@ -1,28 +1,38 @@
 const locations = [
   {
     title: "Водопади и извори",
-    to: "/locations/waterfalls",
-    key: "waterfalls",
+    to: "/location/waterfall",
+    key: "waterfall",
   },
   {
     title: "Археолошки локалитети",
-    to: "/locations/archeology",
+    to: "/location/archeology",
     key: "archeology",
   },
   {
     title: "Пештери и карпести формации",
-    to: "/locations/caves",
-    key: "caves",
+    to: "/location/cave",
+    key: "cave",
   },
   {
     title: "Кањони и клисури",
-    to: "/locations/canyons",
-    key: "canyons",
+    to: "/location/canyon",
+    key: "canyon",
   },
   {
     title: "Културно-историски знаменитости",
-    to: "/locations/landmarks",
-    key: "landmarks",
+    to: "/location/landmark",
+    key: "landmark",
+  },
+  {
+    title: "Езера",
+    to: "/location/lake",
+    key: "lake",
+  },
+  {
+    title: "Природни реткости",
+    to: "/location/rarity",
+    key: "rarity",
   },
 ];
 

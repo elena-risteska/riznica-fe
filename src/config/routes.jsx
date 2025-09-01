@@ -53,20 +53,20 @@ export const routes = [
     showInNav: false,
   },
   {
-    path: "/locations",
+    path: "/location",
     element: <LazyLocations />,
     label: "Локации",
     showInNav: true,
     preload: importLocations,
   },
   {
-    path: "/locations/:category",
+    path: "/location/:category",
     element: <LazyLocationCategory />,
     showInNav: false,
     preload: importLocationCategory,
   },
   {
-    path: "/locations/:category/:details",
+    path: "/location/:category/:details",
     element: <LazyLocationDetail />,
     showInNav: false,
     preload: importLocationDetail,

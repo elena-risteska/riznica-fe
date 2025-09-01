@@ -44,7 +44,7 @@ const Home = () => {
         items={locations}
         visibleItems={visibleItems}
         title="Необични локации"
-        to="/locations"
+        to="/location"
       />
       <MapHome />
       {/* <ScrollerSegment
