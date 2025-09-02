@@ -1,28 +1,54 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { Box } from "@mui/material";
+import Loader from "../../components/ui/Loader";
+import useVisibleItems from "../../hooks/useVisibleItems";
 import DefaultLayout from "../../layouts/DefaultLayout";
 import HeaderDetails from "../../components/pages/locations/HeaderDetails";
 import Directions from "../../components/pages/locations/Directions";
 import Map from "../../components/Map";
 import Story from "../../components/pages/locations/Story";
 import ScrollerSegment from "../../components/ScrollerSegment";
+import Tour from "../../components/pages/activities/Tour";
+import api from "../../../api";
 
 const LocationDetail = () => {
+  const { type, id } = useParams();
   const [details, setDetails] = useState([]);
   const [locations, setLocations] = useState([]);
+  const visibleItems = useVisibleItems();
 
   useEffect(() => {
-    fetch("/mock-data.json")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("Fetched data:", data);
-        setDetails(data.details[0]);
-        setLocations(data.locations);
-      })
-      .catch((err) => {
-        console.error("Failed to load data:", err);
-      });
-  }, []);
+    const fetchLocations = async () => {
+      try {
+        const response = await api.get("/locations");
+        const allLocations = response.data;
+
+        const currentLocation = allLocations.find((loc) => loc._id === id);
+        setDetails(currentLocation);
+
+        const similarLocations = allLocations.filter(
+          (loc) => loc.type === type && loc._id !== id
+        );
+        const locationsWithPath = similarLocations.map((loc) => ({
+          ...loc,
+          to: `/location/${loc.type}/${loc._id}`,
+        }));
+        setLocations(locationsWithPath);
+      } catch (err) {
+        console.error("Failed to fetch locations:", err);
+      }
+    };
+
+    fetchLocations();
+  }, [type, id]);
+
+  if (!details) return <Loader />;
+
+  console.log(id, "id");
+  console.log(details, "details");
+  console.log(locations, "locations");
+
   return (
     <DefaultLayout breadcrumbs={true}>
       <Box
@@ -54,13 +80,15 @@ const LocationDetail = () => {
             ]}
           />
         </Box>
+        <Tour text1={details?.mainInfo} text2={details?.mainInfo} />
+
         <Story text={details?.mainInfo} />
         <Box>
           <ScrollerSegment
             items={locations}
-            visibleItems={4}
+            visibleItems={visibleItems}
             title="Слични препораки "
-            to="/locations"
+            to="/location"
           />
         </Box>
       </Box>

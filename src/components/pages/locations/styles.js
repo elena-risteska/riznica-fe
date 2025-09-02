@@ -32,12 +32,13 @@ const styles = {
   yellowBox: {
     display: "flex",
     flexDirection: "column",
-    backgroundColor: "primary.main",
-    color: "text.secondary",
+    border: "15px solid",
+    borderColor: "primary.main",
     p: 4,
-    borderRadius: 8,
+    borderRadius: 10,
     gap: 2,
   },
+
   textBox: {
     display: "flex",
     flexDirection: "column",

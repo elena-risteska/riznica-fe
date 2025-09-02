@@ -60,13 +60,13 @@ export const routes = [
     preload: importLocations,
   },
   {
-    path: "/location/:category",
+    path: "/location/:type",
     element: <LazyLocationCategory />,
     showInNav: false,
     preload: importLocationCategory,
   },
   {
-    path: "/location/:category/:details",
+    path: "/location/:type/:id",
     element: <LazyLocationDetail />,
     showInNav: false,
     preload: importLocationDetail,

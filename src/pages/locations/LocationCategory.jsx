@@ -10,9 +10,9 @@ import api from "../../../api";
 
 const LocationCategory = () => {
   const [locations, setLocations] = useState([]);
-  const { category } = useParams();
-  const title = translations[category] || category;
-  const subtitle = subtitles[category] || category;
+  const { type } = useParams();
+  const title = translations[type] || type;
+  const subtitle = subtitles[type] || type;
 
   useEffect(() => {
     const fetchLocations = async () => {
@@ -20,10 +20,10 @@ const LocationCategory = () => {
         const response = await api.get("/locations");
 
         const filtered = response.data
-          .filter((loc) => loc.type === category)
+          .filter((loc) => loc.type === type)
           .map((loc) => ({
             ...loc,
-            to: `/location/${loc.type}/details`,
+            to: `/location/${loc.type}/${loc._id}`,
           }));
 
         setLocations(filtered);
@@ -33,7 +33,7 @@ const LocationCategory = () => {
     };
 
     fetchLocations();
-  }, [category]);
+  }, [type]);
 
   return (
     <DefaultLayout breadcrumbs={true}>

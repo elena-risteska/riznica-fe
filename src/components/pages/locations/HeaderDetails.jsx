@@ -21,6 +21,11 @@ const HeaderDetails = ({
   ];
   return (
     <Box sx={styles.detailsBox}>
+      <Box sx={styles.textBox}>
+        <Typography variant="body1" lineHeight={2}>
+          {mainInfo}
+        </Typography>
+      </Box>
       <Box sx={styles.yellowBox}>
         <Typography variant="h4" mb={4}>
           {title}
@@ -35,11 +40,6 @@ const HeaderDetails = ({
             {item.label}: {item.value}
           </Typography>
         ))}
-      </Box>
-      <Box sx={styles.textBox}>
-        <Typography variant="body1" lineHeight={2}>
-          {mainInfo}
-        </Typography>
       </Box>
     </Box>
   );
