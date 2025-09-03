@@ -5,6 +5,7 @@ import { ThemeProvider, CssBaseline, GlobalStyles } from "@mui/material";
 import { BrowserRouter } from "react-router-dom";
 import theme from "../src/assets/theme.js";
 import App from "./App.jsx";
+import { UserProvider } from "./UserContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -30,7 +31,9 @@ createRoot(document.getElementById("root")).render(
             },
           }}
         />
-        <App />
+        <UserProvider>
+          <App />
+        </UserProvider>
       </ThemeProvider>
     </BrowserRouter>
   </StrictMode>

@@ -44,7 +44,7 @@ export const routes = [
     preload: importHome,
   },
   {
-    path: "/profile",
+    path: "/profile/:id",
     element: (
       <ProtectedRoute>
         <Profile />

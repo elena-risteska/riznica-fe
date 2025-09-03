@@ -72,14 +72,14 @@ const LocationDetail = () => {
             center={
               details?.coords?.length === 2
                 ? [Number(details.coords[0]), Number(details.coords[1])]
-                : [41.355998, 21.421774]
+                : [41.35599, 21.42177]
             }
             markerData={[
               {
                 position:
                   details?.coords?.length === 2
                     ? [Number(details.coords[0]), Number(details.coords[1])]
-                    : [41.355998, 21.421774],
+                    : [41.35599, 21.42177],
                 text: details?.title || "Локација",
               },
             ]}

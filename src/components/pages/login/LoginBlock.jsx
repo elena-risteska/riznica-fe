@@ -1,10 +1,15 @@
 import { Box, Typography } from "@mui/material";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import LoginForm from "../../forms/LoginForm";
 import styles from "./styles";
 import api from "../../../../api";
+import { UserContext } from "../../../UserContext";
 
 const LoginBlock = () => {
+  const { login } = useContext(UserContext);
+  const navigate = useNavigate();
+
   const [apiError, setApiError] = useState("");
   const [formData, setFormData] = useState({
     email: "",
@@ -17,10 +22,13 @@ const LoginBlock = () => {
       setApiError("");
       const response = await api.post("/auth/login", data);
 
-      console.log("Logged in successfully:", response.data);
+      const { token, user } = response.data;
 
-      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("token", token);
 
+      login(user, token);
+
+      navigate(`/profile/${user.username}`);
       return { success: true };
     } catch (error) {
       let errMsg = "Login failed. Try again.";
@@ -39,6 +47,7 @@ const LoginBlock = () => {
       return { success: false };
     }
   };
+
   return (
     <Box sx={styles.formBox}>
       <Typography sx={styles.heading} variant="h4" gutterBottom>
@@ -56,4 +65,5 @@ const LoginBlock = () => {
     </Box>
   );
 };
+
 export default LoginBlock;

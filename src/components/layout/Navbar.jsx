@@ -12,9 +12,10 @@ import {
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { useLocation, Link as RouterLink } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { routes } from "../../config/routes";
 import { styles } from "./styles";
+import { UserContext } from "../../UserContext";
 import MenuIcon from "@mui/icons-material/Menu";
 import PrimaryButton from "../ui/buttons/PrimaryButton";
 import TextButton from "../ui/buttons/TextButton";
@@ -23,6 +24,7 @@ const Navbar = () => {
   const { pathname } = useLocation();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
+  const { user } = useContext(UserContext);
 
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
@@ -144,10 +146,10 @@ const Navbar = () => {
             <PrimaryButton
               sx={styles.primaryInNavbar}
               component={RouterLink}
-              to="/login"
+              to={user ? `/profile/${user.username}` : "/login"}
               color="primary"
             >
-              Најава
+              {user ? "Профил" : "Најава"}
             </PrimaryButton>
           </Box>
 
