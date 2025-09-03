@@ -4,7 +4,7 @@ export const getLocations = async () => {
   const res = await api.get("/locations");
   const locationsWithPath = res.data.map((loc) => ({
     ...loc,
-    to: `/location/${loc.type}/details`,
+    to: `/location/${loc.type}/${loc._id}`,
   }));
   return locationsWithPath;
 };

@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import styles from "./styles";
-import photo2 from "../../../assets/images/vodopad2.jpg";
+import photo1 from "../../../assets/images/navigator.svg";
 
 const Directions = ({ mainInfo }) => {
   return (
@@ -8,9 +8,9 @@ const Directions = ({ mainInfo }) => {
       <Box
         component="img"
         alt="photo1"
-        src={photo2}
+        src={photo1}
         sx={{
-          width: { xs: 300, sm: 500, md: 300 },
+          width: { xs: 300, sm: 500, md: 400 },
           height: "auto",
           borderRadius: 8,
         }}

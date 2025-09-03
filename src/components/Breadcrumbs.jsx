@@ -30,9 +30,10 @@ const BreadcrumbsComponent = ({ crumbs }) => {
 
       {finalCrumbs.map(({ label, to }, index) => {
         const isLast = index === finalCrumbs.length - 1;
+        const displayLabel = isLast ? "Детали" : label;
         return isLast ? (
           <Typography color="primary" key={to}>
-            {label}
+            {displayLabel}
           </Typography>
         ) : (
           <Link
@@ -42,7 +43,7 @@ const BreadcrumbsComponent = ({ crumbs }) => {
             color="inherit"
             to={to}
           >
-            {label}
+            {displayLabel}
           </Link>
         );
       })}

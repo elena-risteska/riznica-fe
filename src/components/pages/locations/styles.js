@@ -42,7 +42,7 @@ const styles = {
   textBox: {
     display: "flex",
     flexDirection: "column",
-    width: { xs: "100%", md: "40%", lg: "60%" },
+    width: { xs: "100%", md: "40%", lg: "50%" },
     wordSpacing: 10,
     my: { xs: 4, md: 0 },
     textAlign: "justify",
@@ -50,7 +50,7 @@ const styles = {
   storyBox: {
     display: "flex",
     flexDirection: { xs: "column", md: "row" },
-    justifyContent: "space-between",
+    justifyContent: "space-around",
     alignItems: "center",
   },
 };

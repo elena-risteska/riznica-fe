@@ -58,37 +58,43 @@ const LocationDetail = () => {
         px={{ xs: 2, md: 10 }}
       >
         <HeaderDetails
-          type={details.type}
           title={details?.title}
-          location={details?.location}
-          mnv={details?.mnv}
-          height={details?.height}
-          river={details?.river}
-          mountain={details?.mountain}
-          mainInfo={details?.mainInfo}
+          location={details?.place}
+          details={details?.details}
           coords={details?.coords}
+          activities={details?.activities}
+          mainInfo={details?.mainInfo}
         />
-        <Directions mainInfo={details?.mainInfo} />
+        <Directions mainInfo={details?.directions} />
         <Box sx={{ height: 600, my: 4 }}>
           <Map
-            center={[42.17629, 22.39641]}
+            zoom={9}
+            center={
+              details?.coords?.length === 2
+                ? [Number(details.coords[0]), Number(details.coords[1])]
+                : [41.355998, 21.421774]
+            }
             markerData={[
               {
-                position: [42.17629, 22.39641],
-                text: "Станечки водопад",
+                position:
+                  details?.coords?.length === 2
+                    ? [Number(details.coords[0]), Number(details.coords[1])]
+                    : [41.355998, 21.421774],
+                text: details?.title || "Локација",
               },
             ]}
           />
         </Box>
-        <Tour text1={details?.mainInfo} text2={details?.mainInfo} />
+        <Tour text1={details?.hiking} text2={details?.biking} />
 
-        <Story text={details?.mainInfo} />
+        <Story text={details?.legend} />
         <Box>
           <ScrollerSegment
             items={locations}
             visibleItems={visibleItems}
-            title="Слични препораки "
+            title="Слични препораки"
             to="/location"
+            button={false}
           />
         </Box>
       </Box>

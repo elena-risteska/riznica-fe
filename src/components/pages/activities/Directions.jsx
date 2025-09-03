@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import photo from "../../../assets/images/lokva1.jpg";
+import photo from "../../../assets/images/navigator.svg";
 const Directions = ({ text }) => {
   return (
     <Box

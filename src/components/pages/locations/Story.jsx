@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import photo1 from "../../../assets/images/vodopad3.jpg";
+import photo1 from "../../../assets/images/story.svg";
 import styles from "./styles";
 
 const Story = ({ text }) => {

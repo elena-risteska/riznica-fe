@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import photo from "../../../assets/images/lokva4.jpg";
+import photo from "../../../assets/images/navigator.svg";
 import styles from "./styles";
 
 const Legend = ({ text }) => {

@@ -5,7 +5,7 @@ import HorizontalList from "./HorizontalList";
 import PhotoCard from "./ui/cards/PhotoCard";
 import SecondaryButton from "./ui/buttons/SecondaryButton";
 
-const ScrollerSegment = ({ items, visibleItems, title, to }) => {
+const ScrollerSegment = ({ items, visibleItems, title, to, button = true }) => {
   return (
     <Box my={{ xs: 5, md: 10 }}>
       <Box sx={styles.scroller}>
@@ -15,9 +15,11 @@ const ScrollerSegment = ({ items, visibleItems, title, to }) => {
         >
           {title}
         </Typography>
-        <SecondaryButton component={RouterLink} to={to} sx={styles.secondary}>
-          Види повеќе
-        </SecondaryButton>
+        {button && (
+          <SecondaryButton component={RouterLink} to={to} sx={styles.secondary}>
+            Види повеќе
+          </SecondaryButton>
+        )}
       </Box>
       <HorizontalList
         items={items}

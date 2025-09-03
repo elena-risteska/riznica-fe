@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
-import photo1 from "../../../assets/images/lokva3.jpg";
-import photo2 from "../../../assets/images/lokva2.jpg";
+import photo1 from "../../../assets/images/hiking.svg";
+import photo2 from "../../../assets/images/biking.svg";
 
 const Tour = ({ text1, text2 }) => {
   return (
