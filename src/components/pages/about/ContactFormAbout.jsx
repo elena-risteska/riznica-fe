@@ -3,6 +3,7 @@ import { useState } from "react";
 import styles from "../styles";
 import ContactUsForm from "../../forms/ContactUsForm";
 import photo from "../../../assets/images/about2.webp";
+import api from "../../../../api";
 
 const ContactFormAbout = () => {
   const [formData, setFormData] = useState({
@@ -13,11 +14,18 @@ const ContactFormAbout = () => {
 
   const handleSubmit = async (data) => {
     try {
-      console.log("Success:", data);
-    } catch (error) {
-      console.error("Error:", error);
+      const res = await api.post("/requests", {
+        name: data.fullName,
+        email: data.email,
+        message: data.message,
+      });
+
+      console.log("Request saved:", res.data);
+    } catch (err) {
+      console.error("Failed to submit request", err);
     }
   };
+
   return (
     <Box sx={styles.contactFormBox}>
       <Box sx={{ order: { xs: 2, md: 1 } }}>
@@ -36,4 +44,5 @@ const ContactFormAbout = () => {
     </Box>
   );
 };
+
 export default ContactFormAbout;

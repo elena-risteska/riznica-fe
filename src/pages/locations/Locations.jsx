@@ -16,7 +16,7 @@ const Locations = () => {
         const response = await api.get("/locations");
         const locationsWithPath = response.data.map((loc) => ({
           ...loc,
-          to: `/location/${loc.type}/details`,
+          to: `/location/${loc.type}/${loc._id}`,
         }));
         setAllLocations(locationsWithPath);
       } catch (err) {

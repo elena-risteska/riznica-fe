@@ -18,6 +18,7 @@ export const UserProvider = ({ children }) => {
         })
         .then((res) => setUser(res.data))
         .catch(() => {
+          setUser(null);
           setToken(null);
           localStorage.removeItem("token");
         });
@@ -25,12 +26,8 @@ export const UserProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    if (token) {
-      localStorage.setItem("token", token);
-    } else {
-      localStorage.removeItem("token");
-      setUser(null);
-    }
+    if (token) localStorage.setItem("token", token);
+    else localStorage.removeItem("token");
   }, [token]);
 
   const login = (userData, token) => {

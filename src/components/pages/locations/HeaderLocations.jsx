@@ -21,13 +21,13 @@ const HeaderLocations = ({ title, subtitle, reverse }) => {
           {subtitle}
         </Typography>
       </Box>
-      <Box sx={styles.searchBar(reverse)}>
+      {/* <Box sx={styles.searchBar(reverse)}>
         <SearchBar
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           onSubmit={handleSearch}
         />
-      </Box>
+      </Box> */}
     </Box>
   );
 };
