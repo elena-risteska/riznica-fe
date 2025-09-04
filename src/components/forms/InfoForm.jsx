@@ -2,8 +2,6 @@ import { useState } from "react";
 import {
   Box,
   TextField,
-  Typography,
-  MenuItem,
   Snackbar,
   Alert,
   CircularProgress,
@@ -28,26 +26,17 @@ const InfoForm = ({ formData, setFormData, onSubmit }) => {
     setOpenSnackbar,
   });
 
-  const cities = [
-    { value: "skopje", label: "Скопје" },
-    { value: "bitola", label: "Битола" },
-    { value: "ohrid", label: "Охрид" },
-    { value: "stip", label: "Штип" },
-    { value: "tetovo", label: "Тетово" },
-  ];
-
   return (
     <>
       <Box component="form" onSubmit={handleSubmit} maxWidth="300px">
-        {InfoFormFields.map(
+        {InfoFormFields.filter((field) => field.name !== "city").map(
           ({ name, label, type, multiline, rows, boxMargin, icon }) => {
-            const isCity = name === "city";
             const field = (
               <TextField
                 key={name}
                 name={name}
                 label={label}
-                type={isCity ? undefined : type}
+                type={type}
                 fullWidth
                 size="small"
                 multiline={multiline}
@@ -62,15 +51,7 @@ const InfoForm = ({ formData, setFormData, onSubmit }) => {
                     <InputAdornment position="start">{icon}</InputAdornment>
                   ) : null,
                 }}
-                select={isCity}
-              >
-                {isCity &&
-                  cities.map((c) => (
-                    <MenuItem key={c.value} value={c.value}>
-                      {c.label}
-                    </MenuItem>
-                  ))}
-              </TextField>
+              />
             );
             return boxMargin ? <Box key={name}>{field}</Box> : field;
           }

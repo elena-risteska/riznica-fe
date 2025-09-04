@@ -1,7 +1,5 @@
 import PersonIcon from "@mui/icons-material/Person";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import EmailIcon from "@mui/icons-material/Email";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
 
 const InfoFormFields = [
   {
@@ -21,17 +19,6 @@ const InfoFormFields = [
     label: "Корисничко име",
     type: "text",
     icon: <AccountCircleIcon sx={{ color: "primary.main" }} />,
-  },
-  {
-    name: "email",
-    label: "Електронска пошта",
-    type: "email",
-    icon: <EmailIcon sx={{ color: "primary.main" }} />,
-  },
-  {
-    name: "city",
-    label: "Град",
-    icon: <LocationOnIcon sx={{ color: "primary.main" }} />,
   },
   {
     name: "bio",
