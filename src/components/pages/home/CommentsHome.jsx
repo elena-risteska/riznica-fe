@@ -2,12 +2,14 @@ import { Box, Typography } from "@mui/material";
 import HorizontalList from "../../HorizontalList";
 import CommentCard from "../../ui/cards/CommentCard";
 
-const CommentsHome = ({ comments, visibleItems }) => {
+const CommentsHome = ({ comments, visibleItems, text = true }) => {
   return (
     <Box>
-      <Typography variant="h5" px={{ xs: 1.5, sm: 7.5 }}>
-        Сподели го и твоето искуство
-      </Typography>
+      {text && (
+        <Typography variant="h5" px={{ xs: 1.5, sm: 7.5 }}>
+          {text}
+        </Typography>
+      )}
       <HorizontalList
         items={comments}
         visibleItems={visibleItems}

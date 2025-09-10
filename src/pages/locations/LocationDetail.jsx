@@ -1,8 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { Box } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Paper,
+  Button,
+  Modal,
+  TextField,
+  IconButton,
+  Avatar,
+} from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 import Loader from "../../components/ui/Loader";
-import useVisibleItems from "../../hooks/useVisibleItems";
 import DefaultLayout from "../../layouts/DefaultLayout";
 import HeaderDetails from "../../components/pages/locations/HeaderDetails";
 import Directions from "../../components/pages/locations/Directions";
@@ -11,12 +21,22 @@ import Story from "../../components/pages/locations/Story";
 import ScrollerSegment from "../../components/ScrollerSegment";
 import Tour from "../../components/pages/activities/Tour";
 import api from "../../../api";
+import { UserContext } from "../../UserContext";
+import PrimaryButton from "../../components/ui/buttons/PrimaryButton";
+import { color } from "framer-motion";
 
 const LocationDetail = () => {
   const { type, id } = useParams();
-  const [details, setDetails] = useState([]);
+  const { user } = useContext(UserContext);
+  const [details, setDetails] = useState(null);
   const [locations, setLocations] = useState([]);
-  const visibleItems = useVisibleItems();
+  const [comments, setComments] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [newComment, setNewComment] = useState("");
+  const [editCommentId, setEditCommentId] = useState(null);
+  const [editCommentText, setEditCommentText] = useState("");
+
+  const visibleItems = 3;
 
   useEffect(() => {
     const fetchLocations = async () => {
@@ -43,20 +63,57 @@ const LocationDetail = () => {
     fetchLocations();
   }, [type, id]);
 
-  if (!details) return <Loader />;
+  const fetchComments = async () => {
+    try {
+      const res = await api.get(`/comments/${id}`);
+      setComments(res.data);
+    } catch (err) {
+      console.error("Failed to fetch comments:", err);
+    }
+  };
 
-  console.log(id, "id");
-  console.log(details, "details");
-  console.log(locations, "locations");
+  useEffect(() => {
+    if (id) fetchComments();
+  }, [id]);
+
+  const handleAddComment = async (e) => {
+    e.preventDefault();
+    try {
+      await api.post(`/comments/${id}`, { text: newComment });
+      setNewComment("");
+      setOpen(false);
+      fetchComments();
+    } catch (err) {
+      console.error("Failed to add comment:", err);
+    }
+  };
+
+  const handleEditComment = async (e) => {
+    e.preventDefault();
+    try {
+      await api.put(`/comments/${editCommentId}`, { text: editCommentText });
+      setEditCommentId(null);
+      setEditCommentText("");
+      fetchComments();
+    } catch (err) {
+      console.error("Failed to edit comment:", err);
+    }
+  };
+
+  const handleDeleteComment = async (commentId) => {
+    try {
+      await api.delete(`/comments/${commentId}`);
+      fetchComments();
+    } catch (err) {
+      console.error("Failed to delete comment:", err);
+    }
+  };
+
+  if (!details) return <Loader />;
 
   return (
     <DefaultLayout breadcrumbs={true}>
-      <Box
-        display="flex"
-        flexDirection="column"
-        gap={{ xs: 2, md: 8 }}
-        px={{ xs: 2, md: 10 }}
-      >
+      <Box display="flex" flexDirection="column" gap={6} px={10}>
         <HeaderDetails
           title={details?.title}
           location={details?.place}
@@ -65,7 +122,9 @@ const LocationDetail = () => {
           activities={details?.activities}
           mainInfo={details?.mainInfo}
         />
+
         <Directions mainInfo={details?.directions} />
+
         <Box sx={{ height: 600, my: 4 }}>
           <Map
             zoom={9}
@@ -85,10 +144,163 @@ const LocationDetail = () => {
             ]}
           />
         </Box>
-        <Tour text1={details?.hiking} text2={details?.biking} />
 
+        <Tour text1={details?.hiking} text2={details?.biking} />
         <Story text={details?.legend} />
-        <Box>
+
+        <Box mt={10} px={6}>
+          <Box
+            display="flex"
+            justifyContent="flex-end"
+            alignItems="center"
+            mb={2}
+          >
+            <PrimaryButton
+              sx={{
+                width: "20%",
+                color: "white",
+                backgroundColor: "primary.main",
+                borderRadius: 4,
+              }}
+              onClick={() => setOpen(true)}
+            >
+              Остави коментар
+            </PrimaryButton>
+          </Box>
+
+          {comments.length > 0 ? (
+            comments.map((c) => (
+              <Paper
+                key={c._id}
+                sx={{ p: 2, mb: 2, borderRadius: 2 }}
+                elevation={1}
+              >
+                <Box display="flex" gap={2}>
+                  <Box
+                    display="flex"
+                    flexDirection="column"
+                    alignItems="center"
+                    minWidth={80}
+                  >
+                    <Avatar sx={{ bgcolor: "primary.main", mb: 1 }}>
+                      {(c.user?.username || c.user?.firstName || "А")
+                        .charAt(0)
+                        .toUpperCase()}
+                    </Avatar>
+                    <Typography variant="caption" textAlign="center">
+                      {c.user?.username ||
+                        `${c.user?.firstName || ""} ${
+                          c.user?.lastName || ""
+                        }` ||
+                        "Анонимен"}
+                    </Typography>
+                    <Typography variant="caption" color="text.secondary">
+                      {new Date(c.createdAt).toLocaleDateString("mk-MK")}
+                    </Typography>
+                  </Box>
+
+                  <Box flexGrow={1}>
+                    <Typography variant="body1" sx={{ mb: 1 }}>
+                      {c.text}
+                    </Typography>
+
+                    {user && c.user === user._id && (
+                      <Box>
+                        <IconButton
+                          size="small"
+                          onClick={() => {
+                            setEditCommentId(c._id);
+                            setEditCommentText(c.text);
+                          }}
+                        >
+                          <EditIcon fontSize="small" />
+                        </IconButton>
+                        <IconButton
+                          size="small"
+                          onClick={() => handleDeleteComment(c._id)}
+                        >
+                          <DeleteIcon fontSize="small" />
+                        </IconButton>
+                      </Box>
+                    )}
+                  </Box>
+                </Box>
+              </Paper>
+            ))
+          ) : (
+            <Typography variant="body2" color="text.secondary">
+              Нема коментари за оваа локација.
+            </Typography>
+          )}
+        </Box>
+
+        <Modal open={open} onClose={() => setOpen(false)}>
+          <Box
+            component="form"
+            onSubmit={handleAddComment}
+            sx={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              bgcolor: "background.paper",
+              p: 4,
+              borderRadius: 2,
+              width: { xs: "90%", sm: 400 },
+              display: "flex",
+              flexDirection: "column",
+              gap: 2,
+            }}
+          >
+            <Typography variant="h6">Остави коментар</Typography>
+            <TextField
+              label="Коментар"
+              multiline
+              rows={4}
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+              required
+            />
+            <Button type="submit" variant="contained">
+              Испрати
+            </Button>
+          </Box>
+        </Modal>
+
+        <Modal open={!!editCommentId} onClose={() => setEditCommentId(null)}>
+          <Box
+            component="form"
+            onSubmit={handleEditComment}
+            sx={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              bgcolor: "background.paper",
+              p: 4,
+              borderRadius: 2,
+              width: { xs: "90%", sm: 400 },
+              display: "flex",
+              flexDirection: "column",
+              gap: 2,
+            }}
+          >
+            <Typography variant="h6">Измени коментар</Typography>
+            <TextField
+              label="Коментар"
+              multiline
+              rows={4}
+              value={editCommentText}
+              onChange={(e) => setEditCommentText(e.target.value)}
+              required
+            />
+            <Button type="submit" variant="contained">
+              Зачувај
+            </Button>
+          </Box>
+        </Modal>
+
+        <Box mt={4}>
           <ScrollerSegment
             items={locations}
             visibleItems={visibleItems}

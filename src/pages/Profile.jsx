@@ -4,12 +4,10 @@ import { Link as RouterLink } from "react-router-dom";
 import DefaultLayout from "../layouts/DefaultLayout";
 import Sidebar from "../components/pages/profile/Sidebar";
 import PhotoCard from "../components/ui/cards/PhotoCard";
-import CommentCard from "../components/ui/cards/CommentCard";
 import api from "../../api";
 
 const Profile = () => {
   const [favorites, setFavorites] = useState([]);
-  const [comments, setComments] = useState([]);
 
   useEffect(() => {
     const fetchFavorites = async () => {
@@ -21,16 +19,7 @@ const Profile = () => {
       }
     };
 
-    const fetchComments = async () => {
-      try {
-        setComments([]);
-      } catch (err) {
-        console.error("Failed to load comments:", err);
-      }
-    };
-
     fetchFavorites();
-    fetchComments();
   }, []);
 
   return (
@@ -69,7 +58,7 @@ const Profile = () => {
                 <Box
                   key={loc._id}
                   component={RouterLink}
-                  to={`/locations/${loc._id}`}
+                  to={`/location/${loc.type}/${loc._id}`}
                   sx={{
                     textDecoration: "none",
                     width: 250,
@@ -84,25 +73,6 @@ const Profile = () => {
                 Немате додадено омилени локации.
               </Typography>
             )}
-          </Box>
-
-          <Box>
-            <Typography variant="h6" gutterBottom my={4}>
-              Оставени коментари
-            </Typography>
-            <Grid container spacing={3}>
-              {comments.length > 0 ? (
-                comments.map((comment) => (
-                  <Grid item xs={12} sm={6} md={6} key={comment._id}>
-                    <CommentCard {...comment} />
-                  </Grid>
-                ))
-              ) : (
-                <Typography variant="body2" color="text.secondary">
-                  Немате оставено коментари.
-                </Typography>
-              )}
-            </Grid>
           </Box>
         </Box>
       </Box>
