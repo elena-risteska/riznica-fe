@@ -261,9 +261,16 @@ const LocationDetail = () => {
               onChange={(e) => setNewComment(e.target.value)}
               required
             />
-            <Button type="submit" variant="contained">
+            <PrimaryButton
+              type="submit"
+              sx={{
+                backgroundColor: "primary.main",
+                color: "white",
+                borderRadius: 3,
+              }}
+            >
               Испрати
-            </Button>
+            </PrimaryButton>
           </Box>
         </Modal>
 
@@ -294,9 +301,12 @@ const LocationDetail = () => {
               onChange={(e) => setEditCommentText(e.target.value)}
               required
             />
-            <Button type="submit" variant="contained">
+            <PrimaryButton
+              type="submit"
+              sx={{ backgroundColor: "primary.main", color: "white" }}
+            >
               Зачувај
-            </Button>
+            </PrimaryButton>
           </Box>
         </Modal>
 
