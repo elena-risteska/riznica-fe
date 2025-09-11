@@ -3,6 +3,7 @@ import Profile from "../pages/Profile";
 import ProtectedRoute from "../utils/ProtectedRoute";
 
 export const importHome = () => import("../pages/Home");
+export const importMapPage = () => import("../pages/MapPage");
 export const importAbout = () => import("../pages/About");
 export const importLogin = () => import("../pages/Login");
 export const importRegister = () => import("../pages/Register");
@@ -21,13 +22,13 @@ export const importActivitiesDetail = () =>
   import("../pages/activities/ActivitiesDetail");
 
 const LazyHome = React.lazy(importHome);
+const LazyMapPage = React.lazy(importMapPage);
 const LazyLocations = React.lazy(importLocations);
 const LazyLocationCategory = React.lazy(importLocationCategory);
 const LazyLocationDetail = React.lazy(importLocationDetail);
 const LazyActivities = React.lazy(importActivities);
 const LazyActivitiesCategory = React.lazy(importActivitiesCategory);
 const LazyActivitiesDetail = React.lazy(importActivitiesDetail);
-const LazyMap = React.lazy(importHome);
 const LazyAbout = React.lazy(importAbout);
 const LazyLogin = React.lazy(importLogin);
 const LazyRegister = React.lazy(importRegister);
@@ -92,7 +93,7 @@ export const routes = [
   },
   {
     path: "/map",
-    element: <LazyMap />,
+    element: <LazyMapPage />,
     label: "Мапа",
     showInNav: true,
     preload: importHome,

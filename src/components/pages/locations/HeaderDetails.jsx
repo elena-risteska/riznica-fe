@@ -4,7 +4,6 @@ import {
   Chip,
   Snackbar,
   Alert,
-  Button,
   Modal,
   TextField,
 } from "@mui/material";
@@ -45,6 +44,7 @@ const HeaderDetails = ({
     details: details?.join("\n") || "",
     coords: coords?.join(",") || "",
     activities: activities?.join("\n") || "",
+    images: [],
   });
 
   useEffect(() => {
@@ -62,7 +62,6 @@ const HeaderDetails = ({
     }
   }, [locationID, user?.role]);
 
-  // --- Favorite toggle ---
   const handleToggleFavorite = async () => {
     setIsLoading(true);
     try {
@@ -88,23 +87,49 @@ const HeaderDetails = ({
     }
   };
 
-  // --- Edit form handlers ---
   const handleEditChange = (e) => {
-    const { name, value } = e.target;
-    setEditData((prev) => ({ ...prev, [name]: value }));
+    const { name, value, files } = e.target;
+    if (files) {
+      setEditData((prev) => ({ ...prev, images: files }));
+    } else {
+      setEditData((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleEditSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const payload = {
-        ...editData,
-        details: editData.details.split("\n"),
-        activities: editData.activities.split("\n"),
-        coords: editData.coords.split(",").map(Number),
-      };
 
-      await api.put(`/locations/${locationID}`, payload);
+    try {
+      const formData = new FormData();
+      formData.append("title", editData.title);
+      formData.append("description", editData.description);
+      formData.append("mainInfo", editData.mainInfo);
+      formData.append("directions", editData.directions);
+      formData.append("hiking", editData.hiking);
+      formData.append("biking", editData.biking);
+      formData.append("legend", editData.legend);
+      formData.append("place", editData.place);
+      formData.append("type", editData.type);
+
+      editData.details
+        .split("\n")
+        .forEach((d) => formData.append("details", d));
+      editData.activities
+        .split("\n")
+        .forEach((a) => formData.append("activities", a));
+      editData.coords
+        .split(",")
+        .map(Number)
+        .forEach((c) => formData.append("coords", c));
+
+      Array.from(editData.images).forEach((file) =>
+        formData.append("images", file)
+      );
+
+      await api.put(`/locations/${locationID}`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
       setOpenEditModal(false);
       setSnackbarMessage("Локацијата е успешно изменета!");
       setSnackbarSeverity("success");
@@ -117,7 +142,6 @@ const HeaderDetails = ({
     }
   };
 
-  // --- Delete location ---
   const handleDelete = async () => {
     if (!confirm("Дали сте сигурни дека сакате да ја избришете оваа локација?"))
       return;
@@ -137,7 +161,6 @@ const HeaderDetails = ({
   return (
     <Box sx={styles.detailsBox}>
       <Box sx={styles.textBox}>
-        {/* Role-based buttons */}
         {user?.role === "user" && (
           <PrimaryButton
             sx={{
@@ -148,10 +171,6 @@ const HeaderDetails = ({
               borderRadius: 4,
               width: "30%",
               mb: 2,
-              "&:hover": {
-                backgroundColor: !isFavorite ? "primary.dark" : "transparent",
-                borderColor: isFavorite ? "primary.dark" : "transparent",
-              },
             }}
             onClick={handleToggleFavorite}
             disabled={isLoading}
@@ -179,7 +198,7 @@ const HeaderDetails = ({
             </PrimaryButton>
             <PrimaryButton
               sx={{
-                backgroundColor: "info.main",
+                backgroundColor: "error.main",
                 color: "white",
                 borderRadius: 4,
                 width: "30%",
@@ -281,6 +300,13 @@ const HeaderDetails = ({
               fullWidth
             />
           ))}
+
+          <input
+            type="file"
+            name="images"
+            multiple
+            onChange={handleEditChange}
+          />
 
           <PrimaryButton
             type="submit"
