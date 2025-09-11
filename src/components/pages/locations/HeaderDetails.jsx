@@ -1,5 +1,8 @@
-import { Box, Typography, Chip } from "@mui/material";
+import { Box, Typography, Chip, Snackbar, Alert } from "@mui/material";
+import { useState, useEffect } from "react";
 import styles from "./styles";
+import api from "../../../../api";
+import PrimaryButton from "../../ui/buttons/PrimaryButton";
 
 const HeaderDetails = ({
   title,
@@ -8,14 +11,85 @@ const HeaderDetails = ({
   coords,
   activities,
   mainInfo,
+  locationID,
 }) => {
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarSeverity, setSnackbarSeverity] = useState("success");
+  const [isLoading, setIsLoading] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  useEffect(() => {
+    const fetchFavorites = async () => {
+      try {
+        const res = await api.get("/users/favorites");
+        if (res.data.some((fav) => fav._id === locationID)) {
+          setIsFavorite(true);
+        }
+      } catch (err) {
+        console.error("Failed to fetch favorites:", err);
+      }
+    };
+    fetchFavorites();
+  }, [locationID]);
+
+  const handleToggleFavorite = async () => {
+    setIsLoading(true);
+    try {
+      if (isFavorite) {
+        await api.delete(`/users/favorites/${locationID}`);
+        setIsFavorite(false);
+        setSnackbarMessage("Локацијата е отстранета од омилени!");
+        setSnackbarSeverity("info");
+      } else {
+        await api.post(`/users/favorites/${locationID}`);
+        setIsFavorite(true);
+        setSnackbarMessage("Локацијата е додадена во омилени!");
+        setSnackbarSeverity("success");
+      }
+      setOpenSnackbar(true);
+    } catch (err) {
+      console.error("Failed to toggle favorite:", err);
+      setSnackbarMessage("Грешка при зачувување на омилени.");
+      setSnackbarSeverity("error");
+      setOpenSnackbar(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <Box sx={styles.detailsBox}>
       <Box sx={styles.textBox}>
+        <PrimaryButton
+          sx={{
+            color: isFavorite ? "primary.main" : "white",
+            backgroundColor: !isFavorite ? "primary.main" : "transparent",
+            border: isFavorite ? "5px solid" : "none",
+            borderColor: isFavorite ? "primary.main" : "transparent",
+            borderRadius: 4,
+            width: "30%",
+            mb: 10,
+            "&:hover": {
+              backgroundColor: !isFavorite ? "primary.dark" : "transparent",
+              borderColor: isFavorite ? "primary.dark" : "transparent",
+            },
+          }}
+          onClick={handleToggleFavorite}
+          disabled={isLoading}
+        >
+          {isLoading
+            ? "Се зачувува..."
+            : isFavorite
+            ? "Омилена"
+            : "Додај во омилени"}
+        </PrimaryButton>
+
         <Typography variant="body1" lineHeight={2}>
           {mainInfo}
         </Typography>
       </Box>
+
       <Box sx={styles.yellowBox}>
         <Typography variant="h4" mb={4}>
           {title}
@@ -50,6 +124,27 @@ const HeaderDetails = ({
           ))}
         </Box>
       </Box>
+
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={4000}
+        onClose={() => setOpenSnackbar(false)}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      >
+        <Alert
+          onClose={() => setOpenSnackbar(false)}
+          severity={snackbarSeverity}
+          variant="filled"
+          sx={{
+            width: "100%",
+            borderRadius: 4,
+            boxShadow: 3,
+            fontWeight: 500,
+          }}
+        >
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };

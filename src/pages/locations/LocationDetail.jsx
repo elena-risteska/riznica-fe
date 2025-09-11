@@ -10,6 +10,7 @@ import {
   IconButton,
   Avatar,
 } from "@mui/material";
+import { UserContext } from "../../UserContext";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Loader from "../../components/ui/Loader";
@@ -21,9 +22,7 @@ import Story from "../../components/pages/locations/Story";
 import ScrollerSegment from "../../components/ScrollerSegment";
 import Tour from "../../components/pages/activities/Tour";
 import api from "../../../api";
-import { UserContext } from "../../UserContext";
 import PrimaryButton from "../../components/ui/buttons/PrimaryButton";
-import { color } from "framer-motion";
 
 const LocationDetail = () => {
   const { type, id } = useParams();
@@ -121,6 +120,7 @@ const LocationDetail = () => {
           coords={details?.coords}
           activities={details?.activities}
           mainInfo={details?.mainInfo}
+          locationID={id}
         />
 
         <Directions mainInfo={details?.directions} />
@@ -204,7 +204,7 @@ const LocationDetail = () => {
                       {c.text}
                     </Typography>
 
-                    {user && c.user === user._id && (
+                    {user && c.user?._id === user._id && (
                       <Box>
                         <IconButton
                           size="small"
