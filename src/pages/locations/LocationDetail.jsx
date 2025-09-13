@@ -155,7 +155,6 @@ const LocationDetail = () => {
         <Tour text1={details?.hiking} text2={details?.biking} />
         <Story text={details?.legend} />
 
-        {/* Image grid above comments */}
         {details.images && details.images.length > 0 && (
           <Box
             display="flex"

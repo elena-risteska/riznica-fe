@@ -30,8 +30,13 @@ const PhotoCard = ({ images, title, description, to, loading = false }) => {
         component="img"
         image={imageUrl}
         alt={title}
+        onError={(e) => {
+          e.target.onerror = null;
+          e.target.src = fallback;
+        }}
         sx={photoStyle(!loading)}
       />
+
       <CardContent>
         {!loading ? (
           <Typography variant="h6" component="div" gutterBottom>
