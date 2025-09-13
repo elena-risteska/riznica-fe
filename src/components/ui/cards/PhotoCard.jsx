@@ -9,10 +9,17 @@ import { useNavigate } from "react-router-dom";
 import { styles, photoStyle } from "./styles";
 import fallback from "../../../assets/images/image-fallback.svg";
 
-const PhotoCard = ({ image, title, description, to, loading = false }) => {
+const PhotoCard = ({ images, title, description, to, loading = false }) => {
   const navigate = useNavigate();
 
   const handleClick = () => navigate(to);
+
+  const imageUrl =
+    images && images.length > 0
+      ? images[0].startsWith("http")
+        ? images[0]
+        : `http://localhost:5000/${images[0]}`
+      : fallback;
 
   return (
     <Card onClick={handleClick} role="button" sx={styles.photoCard}>
@@ -21,7 +28,7 @@ const PhotoCard = ({ image, title, description, to, loading = false }) => {
       )}
       <CardMedia
         component="img"
-        image={image || fallback}
+        image={imageUrl}
         alt={title}
         sx={photoStyle(!loading)}
       />

@@ -155,6 +155,44 @@ const LocationDetail = () => {
         <Tour text1={details?.hiking} text2={details?.biking} />
         <Story text={details?.legend} />
 
+        {/* Image grid above comments */}
+        {details.images && details.images.length > 0 && (
+          <Box
+            display="flex"
+            flexWrap="wrap"
+            gap={2}
+            mb={4}
+            justifyContent="flex-start"
+          >
+            {details.images.map((img, index) => (
+              <Box
+                key={index}
+                component="img"
+                src={
+                  img.startsWith("http") ? img : `http://localhost:5000/${img}`
+                }
+                alt={`Location image ${index + 1}`}
+                sx={{
+                  width: "400px",
+                  height: "auto",
+                  borderRadius: 2,
+                  cursor: "pointer",
+                  transition: "0.3s",
+                  "&:hover": { transform: "scale(1.02)" },
+                }}
+                onClick={() =>
+                  window.open(
+                    img.startsWith("http")
+                      ? img
+                      : `http://localhost:5000/${img}`,
+                    "_blank"
+                  )
+                }
+              />
+            ))}
+          </Box>
+        )}
+
         <Box mt={10} px={6}>
           <Box
             display="flex"

@@ -18,6 +18,7 @@ const Home = () => {
     const fetchData = async () => {
       try {
         const locationsData = await getLocations();
+        console.log(locationsData, "loc");
         setLocations(locationsData);
 
         const commentsRes = await api.get("/comments");
@@ -27,7 +28,7 @@ const Home = () => {
           username: c.user?.username || "Анонимен",
           comment: c.text,
           photo: c.user?.photo || null,
-          post: c, // in case your comment navigation hook needs full comment
+          post: c,
           user: c.user,
         }));
         setComments(mappedComments);

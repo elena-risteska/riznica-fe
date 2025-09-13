@@ -107,6 +107,8 @@ const HeaderDetails = ({
 
     try {
       const formData = new FormData();
+
+      // Text fields
       formData.append("title", editData.title);
       formData.append("description", editData.description);
       formData.append("mainInfo", editData.mainInfo);
@@ -118,18 +120,23 @@ const HeaderDetails = ({
       formData.append("region", editData.region);
       formData.append("type", editData.type);
 
-      formData.append(
-        "details",
-        JSON.stringify(editData.details.split("\n").filter((d) => d.trim()))
-      );
-      formData.append(
-        "activities",
-        JSON.stringify(editData.activities.split("\n").filter((a) => a.trim()))
-      );
+      // Details & activities as individual fields, not JSON
+      editData.details
+        .split("\n")
+        .filter((d) => d.trim())
+        .forEach((d) => formData.append("details", d));
 
-      Array.from(editData.images).forEach((file) =>
-        formData.append("images", file)
-      );
+      editData.activities
+        .split("\n")
+        .filter((a) => a.trim())
+        .forEach((a) => formData.append("activities", a));
+
+      // Images
+      if (editData.images && editData.images.length > 0) {
+        Array.from(editData.images).forEach((file) =>
+          formData.append("images", file)
+        );
+      }
 
       await api.put(`/locations/${locationID}`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
