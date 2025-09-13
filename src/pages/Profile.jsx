@@ -1,4 +1,4 @@
-import { Box, Typography, Grid, Button, Modal, TextField } from "@mui/material";
+import { Box, Typography, Modal, TextField } from "@mui/material";
 import { useEffect, useState, useContext } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import DefaultLayout from "../layouts/DefaultLayout";
@@ -22,9 +22,9 @@ const Profile = () => {
     images: [],
     place: "",
     details: [],
-    coords: [],
     activities: [],
     type: "",
+    region: "",
   });
 
   const { user } = useContext(UserContext);
@@ -51,25 +51,11 @@ const Profile = () => {
 
   const handleArrayChange = (e, field) => {
     const value = e.target.value.split(",").map((v) => v.trim());
-    setNewLocation((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
-  };
-
-  const handleCoordsChange = (e) => {
-    const value = e.target.value.split(",").map(Number);
-    setNewLocation((prev) => ({
-      ...prev,
-      coords: value,
-    }));
+    setNewLocation((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleImagesChange = (e) => {
-    setNewLocation((prev) => ({
-      ...prev,
-      images: e.target.files,
-    }));
+    setNewLocation((prev) => ({ ...prev, images: e.target.files }));
   };
 
   const handleSubmit = async (e) => {
@@ -77,17 +63,22 @@ const Profile = () => {
 
     try {
       const formData = new FormData();
+
       Object.keys(newLocation).forEach((key) => {
         if (key === "images") {
           for (let i = 0; i < newLocation.images.length; i++) {
-            formData.append("images", newLocation.images[i]);
+            formData.append("images[]", newLocation.images[i]);
           }
-        } else if (["details", "activities", "coords"].includes(key)) {
-          formData.append(key, JSON.stringify(newLocation[key]));
+        } else if (["details", "activities"].includes(key)) {
+          formData.append(key, JSON.stringify(newLocation[key] || []));
         } else {
-          formData.append(key, newLocation[key]);
+          formData.append(key, newLocation[key] || "");
         }
       });
+
+      for (let pair of formData.entries()) {
+        console.log(pair[0], pair[1]);
+      }
 
       await api.post("/locations", formData, {
         headers: { "Content-Type": "multipart/form-data" },
@@ -105,7 +96,6 @@ const Profile = () => {
         images: [],
         place: "",
         details: [],
-        coords: [],
         activities: [],
         type: "",
       });
@@ -179,46 +169,57 @@ const Profile = () => {
               </Typography>
 
               {[
-                "Наслов",
-                "Краток опис",
-                "Главен текст",
-                "Насоки",
-                "Планинарење",
-                "Велосипедизам",
-                "Приказна",
-                "Место",
-                "Тип",
-              ].map((field) => (
+                { label: "Наслов", name: "title" },
+                { label: "Краток опис", name: "description" },
+                { label: "Главен текст", name: "mainInfo" },
+                { label: "Насоки", name: "directions" },
+                { label: "Планинарење", name: "hiking" },
+                { label: "Велосипедизам", name: "biking" },
+                { label: "Приказна", name: "legend" },
+                { label: "Место", name: "place" },
+                { label: "Тип", name: "type" },
+              ].map(({ label, name }) => (
                 <TextField
-                  key={field}
-                  label={field}
-                  name={field}
-                  value={newLocation[field]}
+                  key={name}
+                  label={label}
+                  name={name}
+                  value={newLocation[name]}
                   onChange={handleChange}
                   required
                 />
               ))}
 
               <TextField
-                label="Детали"
+                label="Детали (одделени со запирка)"
                 value={newLocation.details.join(", ")}
                 onChange={(e) => handleArrayChange(e, "details")}
               />
               <TextField
-                label="Активности"
+                label="Активности (одделени со запирка)"
                 value={newLocation.activities.join(", ")}
                 onChange={(e) => handleArrayChange(e, "activities")}
               />
               <TextField
-                label="Координати"
-                value={newLocation.coords.join(",")}
-                onChange={handleCoordsChange}
+                label="Регион"
+                name="region"
+                value={newLocation.region}
+                onChange={handleChange}
+                required
               />
-              <input type="file" multiple onChange={handleImagesChange} />
 
-              <Button type="submit" variant="contained">
+              <input
+                type="file"
+                multiple
+                accept="image/*"
+                onChange={handleImagesChange}
+              />
+
+              <PrimaryButton
+                type="submit"
+                sx={{ backgroundColor: "primary.main", color: "white", mt: 2 }}
+              >
                 Додај
-              </Button>
+              </PrimaryButton>
             </Box>
           </Modal>
 

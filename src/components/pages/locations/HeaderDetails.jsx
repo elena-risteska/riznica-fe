@@ -15,12 +15,18 @@ import { UserContext } from "../../../UserContext";
 
 const HeaderDetails = ({
   title,
+  description,
+  directions,
+  hiking,
+  biking,
+  legend,
   location,
   details,
-  coords,
   activities,
   mainInfo,
   locationID,
+  region,
+  type,
 }) => {
   const { user } = useContext(UserContext);
 
@@ -33,16 +39,16 @@ const HeaderDetails = ({
   const [openEditModal, setOpenEditModal] = useState(false);
   const [editData, setEditData] = useState({
     title: title || "",
-    description: "",
+    description: description || "",
     mainInfo: mainInfo || "",
-    directions: "",
-    hiking: "",
-    biking: "",
-    legend: "",
+    directions: directions || "",
+    hiking: hiking || "",
+    biking: biking || "",
+    legend: legend || "",
     place: location || "",
-    type: "",
+    region: region || "",
+    type: type || "",
     details: details?.join("\n") || "",
-    coords: coords?.join(",") || "",
     activities: activities?.join("\n") || "",
     images: [],
   });
@@ -109,18 +115,17 @@ const HeaderDetails = ({
       formData.append("biking", editData.biking);
       formData.append("legend", editData.legend);
       formData.append("place", editData.place);
+      formData.append("region", editData.region);
       formData.append("type", editData.type);
 
-      editData.details
-        .split("\n")
-        .forEach((d) => formData.append("details", d));
-      editData.activities
-        .split("\n")
-        .forEach((a) => formData.append("activities", a));
-      editData.coords
-        .split(",")
-        .map(Number)
-        .forEach((c) => formData.append("coords", c));
+      formData.append(
+        "details",
+        JSON.stringify(editData.details.split("\n").filter((d) => d.trim()))
+      );
+      formData.append(
+        "activities",
+        JSON.stringify(editData.activities.split("\n").filter((a) => a.trim()))
+      );
 
       Array.from(editData.images).forEach((file) =>
         formData.append("images", file)
@@ -222,11 +227,9 @@ const HeaderDetails = ({
         <Typography variant="body1" mb={1} fontWeight={600}>
           Местоположба: {location}
         </Typography>
-        {coords?.length === 2 && (
-          <Typography variant="body1" mb={1} fontWeight={600}>
-            Координати: {coords[0]}, {coords[1]}
-          </Typography>
-        )}
+        <Typography variant="body1" mb={1} fontWeight={600}>
+          Регион: {region}
+        </Typography>
         {details?.map((item, index) => (
           <Typography
             key={index}
@@ -275,27 +278,27 @@ const HeaderDetails = ({
           </Typography>
 
           {[
-            "title",
-            "description",
-            "mainInfo",
-            "directions",
-            "hiking",
-            "biking",
-            "legend",
-            "place",
-            "type",
-            "details",
-            "coords",
-            "activities",
-          ].map((field) => (
+            { label: "Наслов", name: "title" },
+            { label: "Краток опис", name: "description" },
+            { label: "Главен текст", name: "mainInfo" },
+            { label: "Насоки", name: "directions" },
+            { label: "Планинарење", name: "hiking" },
+            { label: "Велосипедизам", name: "biking" },
+            { label: "Приказна", name: "legend" },
+            { label: "Место", name: "place" },
+            { label: "Регион", name: "region" },
+            { label: "Тип", name: "type" },
+            { label: "Детали", name: "details" },
+            { label: "Активности", name: "activities" },
+          ].map(({ label, name }) => (
             <TextField
-              key={field}
-              label={field}
-              name={field}
-              value={editData[field]}
+              key={name}
+              label={label}
+              name={name}
+              value={editData[name]}
               onChange={handleEditChange}
-              multiline={["details", "coords", "activities"].includes(field)}
-              rows={["details", "activities"].includes(field) ? 3 : 1}
+              multiline={["details", "activities"].includes(name)}
+              rows={["details", "activities"].includes(name) ? 3 : 1}
               required
               fullWidth
             />
@@ -331,7 +334,12 @@ const HeaderDetails = ({
           onClose={() => setOpenSnackbar(false)}
           severity={snackbarSeverity}
           variant="filled"
-          sx={{ width: "100%", borderRadius: 4, boxShadow: 3, fontWeight: 500 }}
+          sx={{
+            width: "100%",
+            borderRadius: 4,
+            boxShadow: 3,
+            fontWeight: 500,
+          }}
         >
           {snackbarMessage}
         </Alert>

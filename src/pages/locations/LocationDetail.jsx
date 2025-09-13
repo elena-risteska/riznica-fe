@@ -4,7 +4,6 @@ import {
   Box,
   Typography,
   Paper,
-  Button,
   Modal,
   TextField,
   IconButton,
@@ -26,7 +25,7 @@ import PrimaryButton from "../../components/ui/buttons/PrimaryButton";
 
 const LocationDetail = () => {
   const { type, id } = useParams();
-  const { user } = useContext(UserContext);
+  const { userId, user } = useContext(UserContext);
   const [details, setDetails] = useState(null);
   const [locations, setLocations] = useState([]);
   const [comments, setComments] = useState([]);
@@ -36,7 +35,8 @@ const LocationDetail = () => {
   const [editCommentText, setEditCommentText] = useState("");
 
   const visibleItems = 3;
-
+  console.log("User ID:", userId);
+  console.log("Full user object:", user);
   useEffect(() => {
     const fetchLocations = async () => {
       try {
@@ -115,6 +115,13 @@ const LocationDetail = () => {
       <Box display="flex" flexDirection="column" gap={6} px={10}>
         <HeaderDetails
           title={details?.title}
+          description={details?.description}
+          directions={details?.directions}
+          region={details?.region}
+          type={details?.type}
+          hiking={details?.hiking}
+          biking={details?.biking}
+          legend={details?.legend}
           location={details?.place}
           details={details?.details}
           coords={details?.coords}
@@ -169,64 +176,81 @@ const LocationDetail = () => {
           </Box>
 
           {comments.length > 0 ? (
-            comments.map((c) => (
-              <Paper
-                key={c._id}
-                sx={{ p: 2, mb: 2, borderRadius: 2 }}
-                elevation={1}
-              >
-                <Box display="flex" gap={2}>
-                  <Box
-                    display="flex"
-                    flexDirection="column"
-                    alignItems="center"
-                    minWidth={80}
-                  >
-                    <Avatar sx={{ bgcolor: "primary.main", mb: 1 }}>
-                      {(c.user?.username || c.user?.firstName || "А")
-                        .charAt(0)
-                        .toUpperCase()}
-                    </Avatar>
-                    <Typography variant="caption" textAlign="center">
-                      {c.user?.username ||
-                        `${c.user?.firstName || ""} ${
-                          c.user?.lastName || ""
-                        }` ||
-                        "Анонимен"}
-                    </Typography>
-                    <Typography variant="caption" color="text.secondary">
-                      {new Date(c.createdAt).toLocaleDateString("mk-MK")}
-                    </Typography>
-                  </Box>
+            comments.map((c) => {
+              console.log(
+                "Comment user ID:",
+                c.user?._id,
+                "Current user ID:",
+                user?._id
+              );
 
-                  <Box flexGrow={1}>
-                    <Typography variant="body1" sx={{ mb: 1 }}>
-                      {c.text}
-                    </Typography>
+              const canEdit =
+                user && c.user?._id?.toString() === user._id?.toString();
 
-                    {user && c.user?._id === user._id && (
-                      <Box>
-                        <IconButton
-                          size="small"
-                          onClick={() => {
-                            setEditCommentId(c._id);
-                            setEditCommentText(c.text);
-                          }}
-                        >
-                          <EditIcon fontSize="small" />
-                        </IconButton>
-                        <IconButton
-                          size="small"
-                          onClick={() => handleDeleteComment(c._id)}
-                        >
-                          <DeleteIcon fontSize="small" />
-                        </IconButton>
-                      </Box>
-                    )}
+              return (
+                <Paper
+                  key={c._id}
+                  sx={{ p: 2, mb: 2, borderRadius: 2 }}
+                  elevation={1}
+                >
+                  <Box display="flex" gap={2}>
+                    <Box
+                      display="flex"
+                      flexDirection="column"
+                      alignItems="center"
+                      minWidth={80}
+                    >
+                      <Avatar sx={{ bgcolor: "primary.main", mb: 1 }}>
+                        {(c.user?.username || c.user?.firstName || "А")
+                          .charAt(0)
+                          .toUpperCase()}
+                      </Avatar>
+                      <Typography variant="caption" textAlign="center">
+                        {c.user?.username ||
+                          `${c.user?.firstName || ""} ${
+                            c.user?.lastName || ""
+                          }` ||
+                          "Анонимен"}
+                      </Typography>
+                      <Typography variant="caption" color="text.secondary">
+                        {new Date(c.createdAt).toLocaleDateString("mk-MK")}
+                      </Typography>
+                    </Box>
+
+                    <Box
+                      flexGrow={1}
+                      display="flex"
+                      justifyContent="space-between"
+                      alignItems="center"
+                    >
+                      <Typography variant="body1">{c.text}</Typography>
+
+                      {canEdit && (
+                        <Box display="flex" flexDirection="column" ml={2}>
+                          <IconButton
+                            size="small"
+                            onClick={() => {
+                              setEditCommentId(c._id);
+                              setEditCommentText(c.text);
+                            }}
+                            color="primary"
+                          >
+                            <EditIcon fontSize="small" />
+                          </IconButton>
+                          <IconButton
+                            size="small"
+                            onClick={() => handleDeleteComment(c._id)}
+                            color="primary"
+                          >
+                            <DeleteIcon fontSize="small" />
+                          </IconButton>
+                        </Box>
+                      )}
+                    </Box>
                   </Box>
-                </Box>
-              </Paper>
-            ))
+                </Paper>
+              );
+            })
           ) : (
             <Typography variant="body2" color="text.secondary">
               Нема коментари за оваа локација.

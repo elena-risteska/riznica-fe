@@ -162,6 +162,7 @@ const MapPage = () => {
                         ? [Number(loc.coords[0]), Number(loc.coords[1])]
                         : null,
                     text: loc.title,
+                    redirectTo: `/location/${loc.type}/${loc._id}`,
                   }))
                 : []
             }
