@@ -4,12 +4,16 @@ export function useCommentNavigation(loading, post, user) {
   const navigate = useNavigate();
 
   const onCardClick = () => {
-    if (!loading && post) navigate(post);
+    if (!loading && post && post.location) {
+      navigate(`/location/${post.location.type}/${post.location._id}`);
+    }
   };
 
   const onUserClick = (e) => {
     e.stopPropagation();
-    if (!loading && user) navigate(user);
+    if (!loading && user) {
+      navigate(`/profile/${user._id}`);
+    }
   };
 
   return { onCardClick, onUserClick };

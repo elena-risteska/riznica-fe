@@ -140,7 +140,7 @@ const MapPage = () => {
           <PrimaryButton
             onClick={handleSearch}
             sx={{
-              mt: 2,
+              mt: 4,
               backgroundColor: "primary.main",
               color: "white",
               borderRadius: 3,

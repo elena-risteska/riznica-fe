@@ -4,11 +4,14 @@ import useVisibleItems from "../hooks/useVisibleItems";
 import Banner from "../components/layout/Banner";
 import DefaultLayout from "../layouts/DefaultLayout";
 import HeaderHome from "../components/pages/home/HeaderHome";
-import ScrollerSegment from "../components/ScrollerSegment";
 import MapHome from "../components/pages/home/MapHome";
+import CommentsHome from "../components/pages/home/CommentsHome";
+import api from "../../api";
+import ScrollerSegment from "../components/ScrollerSegment";
 
 const Home = () => {
   const [locations, setLocations] = useState([]);
+  const [comments, setComments] = useState([]);
   const visibleItems = useVisibleItems();
 
   useEffect(() => {
@@ -16,6 +19,18 @@ const Home = () => {
       try {
         const locationsData = await getLocations();
         setLocations(locationsData);
+
+        const commentsRes = await api.get("/comments");
+        const mappedComments = commentsRes.data.map((c) => ({
+          firstName: c.user?.firstName || "",
+          lastName: c.user?.lastName || "",
+          username: c.user?.username || "Анонимен",
+          comment: c.text,
+          photo: c.user?.photo || null,
+          post: c, // in case your comment navigation hook needs full comment
+          user: c.user,
+        }));
+        setComments(mappedComments);
       } catch (err) {
         console.error("Failed to load data from api:", err);
       }
@@ -27,15 +42,27 @@ const Home = () => {
   return (
     <DefaultLayout>
       <HeaderHome />
+
       <ScrollerSegment
         items={locations}
         visibleItems={visibleItems}
         title="Необични локации"
         to="/location"
       />
+
       <MapHome />
+
+      {comments.length > 0 && (
+        <CommentsHome
+          comments={comments}
+          visibleItems={visibleItems}
+          text="Коментари од корисници"
+        />
+      )}
+
       <Banner />
     </DefaultLayout>
   );
 };
+
 export default Home;
